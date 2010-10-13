@@ -15,7 +15,7 @@ Feature: Start task
 		And I should see a timer entry field
 
 	 Scenario: I start a task while in the middle of another task
-		Given I am on the task timer page for "Do laundry
+		Given I am on the task timer page for "Do laundry"
 		And I go back to the dashboard
 		When I click “Start” for "Do homework"
 		Then I should see "Error: Finish your present task first"
