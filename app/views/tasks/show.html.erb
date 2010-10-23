@@ -1,0 +1,23 @@
+<p>
+  <b>Description:</b>
+  <%=h @task.description %>
+</p>
+
+<p>
+  <b>Duration:</b>
+  <%=h @task.duration %>
+</p>
+
+<p>
+  <b>Owner:</b>
+  <%=h @task.owner %>
+</p>
+
+<p>
+  <b>Is finished:</b>
+  <%=h @task.is_finished %>
+</p>
+
+
+<%= link_to 'Edit', edit_task_path(@task) %> |
+<%= link_to 'Back', tasks_path %>

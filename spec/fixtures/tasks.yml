@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  description: MyString
+  duration: 2010-10-23 04:07:46
+  owner: 1
+  is_finished: false
+
+two:
+  description: MyString
+  duration: 2010-10-23 04:07:46
+  owner: 1
+  is_finished: false

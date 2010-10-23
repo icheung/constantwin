@@ -1,0 +1,27 @@
+require 'spec_helper'
+
+describe "/tasks/index.html.erb" do
+  include TasksHelper
+
+  before(:each) do
+    assigns[:tasks] = [
+      stub_model(Task,
+        :description => "value for description",
+        :owner => 1,
+        :is_finished => false
+      ),
+      stub_model(Task,
+        :description => "value for description",
+        :owner => 1,
+        :is_finished => false
+      )
+    ]
+  end
+
+  it "renders a list of tasks" do
+    render
+    response.should have_tag("tr>td", "value for description".to_s, 2)
+    response.should have_tag("tr>td", 1.to_s, 2)
+    response.should have_tag("tr>td", false.to_s, 2)
+  end
+end

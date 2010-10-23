@@ -1,0 +1,109 @@
+  [4;36;1mTask Create (0.7ms)[0m   [0;1mINSERT INTO "tasks" ("duration", "created_at", "updated_at", "description", "is_finished", "owner") VALUES(NULL, '2010-10-23 11:10:31', '2010-10-23 11:10:31', NULL, NULL, NULL)[0m
+
+
+Processing TasksController#destroy (for 0.0.0.0 at 2010-10-23 04:10:31) [DELETE]
+  Parameters: {"id"=>"37"}
+Redirected to http://test.host/tasks
+Completed in 8ms (DB: 1) | 302 Found [http://test.host/tasks/37]
+
+
+Processing TasksController#destroy (for 0.0.0.0 at 2010-10-23 04:10:31) [DELETE]
+  Parameters: {"id"=>"1"}
+Redirected to http://test.host/tasks
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/tasks/1]
+
+
+Processing TasksController#update (for 0.0.0.0 at 2010-10-23 04:10:31) [PUT]
+  Parameters: {"id"=>"37", "task"=>{"these"=>"params"}}
+Rendering template within layouts/tasks
+Rendering tasks/edit
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/tasks/37?task%5Bthese%5D=params]
+
+
+Processing TasksController#update (for 0.0.0.0 at 2010-10-23 04:10:31) [PUT]
+  Parameters: {"id"=>"1"}
+Rendering template within layouts/tasks
+Rendering tasks/edit
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/tasks/1]
+
+
+Processing TasksController#update (for 0.0.0.0 at 2010-10-23 04:10:31) [PUT]
+  Parameters: {"id"=>"1"}
+Rendering template within layouts/tasks
+Rendering tasks/edit
+Completed in 4ms (View: 3, DB: 0) | 200 OK [http://test.host/tasks/1]
+
+
+Processing TasksController#update (for 0.0.0.0 at 2010-10-23 04:10:31) [PUT]
+  Parameters: {"id"=>"37", "task"=>{"these"=>"params"}}
+Rendering template within layouts/tasks
+Rendering tasks/edit
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/tasks/37?task%5Bthese%5D=params]
+
+
+Processing TasksController#update (for 0.0.0.0 at 2010-10-23 04:10:31) [PUT]
+  Parameters: {"id"=>"1"}
+Redirected to http://test.host/tasks/1007
+Completed in 4ms (DB: 0) | 302 Found [http://test.host/tasks/1]
+
+
+Processing TasksController#update (for 0.0.0.0 at 2010-10-23 04:10:31) [PUT]
+  Parameters: {"id"=>"1"}
+Redirected to http://test.host/tasks/1008
+Completed in 3ms (DB: 0) | 302 Found [http://test.host/tasks/1]
+
+
+Processing TasksController#create (for 0.0.0.0 at 2010-10-23 04:10:32) [POST]
+  Parameters: {"task"=>{"these"=>"params"}}
+Rendering template within layouts/tasks
+Rendering tasks/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/tasks?task%5Bthese%5D=params]
+
+
+Processing TasksController#create (for 0.0.0.0 at 2010-10-23 04:10:32) [POST]
+  Parameters: {"task"=>{}}
+Rendering template within layouts/tasks
+Rendering tasks/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/tasks?]
+
+
+Processing TasksController#create (for 0.0.0.0 at 2010-10-23 04:10:32) [POST]
+  Parameters: {"task"=>{"these"=>"params"}}
+Redirected to http://test.host/tasks/1011
+Completed in 3ms (DB: 0) | 302 Found [http://test.host/tasks?task%5Bthese%5D=params]
+
+
+Processing TasksController#create (for 0.0.0.0 at 2010-10-23 04:10:32) [POST]
+  Parameters: {"task"=>{}}
+Redirected to http://test.host/tasks/1012
+Completed in 3ms (DB: 0) | 302 Found [http://test.host/tasks?]
+
+
+Processing TasksController#edit (for 0.0.0.0 at 2010-10-23 04:10:32) [GET]
+  Parameters: {"id"=>"37"}
+Rendering template within layouts/tasks
+Rendering tasks/edit
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/tasks/37/edit]
+
+
+Processing TasksController#new (for 0.0.0.0 at 2010-10-23 04:10:32) [GET]
+Rendering template within layouts/tasks
+Rendering tasks/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/tasks/new]
+
+
+Processing TasksController#show (for 0.0.0.0 at 2010-10-23 04:10:32) [GET]
+  Parameters: {"id"=>"37"}
+Rendering template within layouts/tasks
+Rendering tasks/show
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/tasks/37]
+
+
+Processing TasksController#index (for 0.0.0.0 at 2010-10-23 04:10:32) [GET]
+Rendering template within layouts/tasks
+Rendering tasks/index
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/tasks]
+Rendering tasks/edit.html.erb
+Rendering tasks/new.html.erb
+Rendering tasks/index.html.erb
+Rendering tasks/show.html.erb
