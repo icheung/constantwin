@@ -80,4 +80,10 @@ class TasksController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def start_task
+    @task = Task.find(params[:id])
+    @task.update_attributes(:started_at => Time.now)
+    render :text => "#{Time.now}"
+  end
 end
