@@ -41,7 +41,7 @@ describe Task do
 
   it "should not create a task with 'started_at' already set" do
     @already_started = @valid_task_attributes
-    @already_started[:started_at] = Time.parse("2000-01-01 0:00 AM")
+    @already_started[:started_at] = Time.now
     Task.new(@already_started).should_not be_valid
   end
 
