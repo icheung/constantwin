@@ -1,0 +1,5 @@
+# Ignore the following files:
+development.sqlite3
+test.sqlite3
+development.log
+test.log
