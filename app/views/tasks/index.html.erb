@@ -19,11 +19,10 @@
       <% if task.started_at %>  
         <%= Time.at(task.duration - Time.at(Time.now - task.started_at) - 9.hours).strftime('%H:%M') %> 
       <% else %>  
-        <%= link_to_remote 'Start', :update => "task_#{task.id}", :url => {:action=>'start_task', :id=> task.id} %>  
+        <%= link_to 'Start', start_task_path %>  
       <% end %>  
     </td>  
     <td><%= link_to 'Show', task %></td>
- 		<td><%= link_to 'Start', start_task_path %></td>
     <td><%= link_to 'Edit', edit_task_path(task) %></td>
     <td><%= link_to 'Destroy', task, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
