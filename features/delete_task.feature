@@ -7,7 +7,6 @@ Feature: Delete a task
 		Given I am logged in as "sample@email.com"
 		And I have a task with description "Do laundry"
 		
-
 	 Scenario: I delete the task
 	 	Given I have not started on the task, "Do laundry"
 		And I am on the dashboard
