@@ -1,5 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.connect '/tasks/start', :controller => "tasks", :action => "start", :as=>:start
+  
   map.resources :tasks
+  #,:member => {:start => :get}
 
   # The priority is based upon order of creation: first created -> highest priority.
 

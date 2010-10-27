@@ -50,6 +50,5 @@ end
       task_id = @user.tasks[0].id
       @user.destroy
       lambda {Task.find(task_id)}.should raise_error(ActiveRecord::RecordNotFoundError)
-  end
-
+  end 
 end
