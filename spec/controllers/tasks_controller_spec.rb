@@ -127,5 +127,11 @@ describe TasksController do
       response.should redirect_to(tasks_url)
     end
   end
-
+  
+  describe "when starting a task" do
+    it "should take the user to the start task page" do
+      get :start
+      response.should render_template('start')
+    end
+  end
 end

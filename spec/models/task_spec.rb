@@ -58,5 +58,4 @@ describe Task do
     @user.destroy
     lambda {Task.find(task_id)}.should raise_error(ActiveRecord::RecordNotFoundError)
   end
-
 end
