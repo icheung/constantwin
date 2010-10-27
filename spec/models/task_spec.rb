@@ -6,12 +6,13 @@ describe Task do
       :description => "value for description",
       :duration => Time.now,
       :owner => 1,
-      :is_finished => false
+      :is_finished => false,
+      :started_at => nil
     }
   end
 
   it "should create a new instance given valid attributes" do
-    Task.create!(@valid_task_attributes)
+    Task.create(@valid_task_attributes).should be_true
   end
 
   it "should not create a task instance without a description" do
@@ -36,7 +37,13 @@ describe Task do
     @short_time = @valid_task_attributes
     @short_time[:duration] = Time.parse("2000-01-01 0:00 AM")
     Task.new(@short_time).should_not be_valid
-end
+  end
+
+  it "should not create a task with 'started_at' already set" do
+    @already_started = @valid_task_attributes
+    @already_started[:started_at] = Time.parse("2000-01-01 0:00 AM")
+    Task.new(@already_started).should_not be_valid
+  end
 
   it "should not create a task instance that is already tagged 'finished'" do
     @finished_already = @valid_task_attributes

@@ -3,7 +3,7 @@ Feature: Add new task
   I want to be able to add a new task
   So that I can deal with it later
 
-  #Background:
+  Background:
     #Given I am logged in as "sample@email.com"
 
   Scenario: Add a task to a blank dashboard and visualize it
