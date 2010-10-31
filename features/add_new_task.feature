@@ -11,7 +11,6 @@ Feature: Add new task
     #And the to-do list for today is blank
     When I follow "New task"
     And I fill in "Description" with "Do laundry"
-    And I fill in "Owner" with "0"
     And I press "Create"
     Then I should see "Do laundry"
     #Then I should see a task entry with description “Do laundry”
@@ -31,7 +30,6 @@ Feature: Add new task
     #And my to-do list for today is full
     And I follow "New task"
     And I fill in "Description" with "Do laundry"
-    And I fill in "Owner" with "0"
     And I press "Create"
     #Then I should see "Error: Too many tasks!"
     Then I should not see "Do laundry"
