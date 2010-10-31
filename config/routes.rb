@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.start_task '/tasks/start', :controller => "tasks", :action => "start"
+  map.add_time '/tasks/:id/add_time', :controller => "tasks", :action => "add_time"
   map.connect 'tasks/start', :controller => 'tasks', :action => 'start'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'

@@ -19,6 +19,11 @@ class Task < ActiveRecord::Base
     self.duration = 15 unless self.duration
     self.user_id = 1 unless self.user_id
   end
+
+  def add_time(amount_of_time)
+    self.duration += amount_of_time.minutes
+    self.save!
+  end
   
   # special validations checks
 

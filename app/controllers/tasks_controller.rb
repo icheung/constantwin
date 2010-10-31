@@ -86,6 +86,10 @@ class TasksController < ApplicationController
     @task.update_attributes(:started_at => Time.now)
     render :text => "#{Time.now}"
   end
+
+  def add_time
+    @task = Task.find(params[:id])
+  end
   
   def start
     # @task = Task.find(params[:id])
