@@ -53,7 +53,7 @@ describe Task do
       @task = @user.tasks.create! @valid_task_attributes
       task_id = @user.tasks[0].id
       @user.destroy
-      lambda {Task.find(task_id)}.should raise_error(ActiveRecord::RecordNotFoundError)
+      lambda {Task.find(task_id)}.should raise_error(::ActiveRecord::RecordNotFound)
     end
   end
 

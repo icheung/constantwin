@@ -8,6 +8,8 @@ class Task < ActiveRecord::Base
   belongs_to :user
   before_validation :default_values
 
+  belongs_to :user
+
   def initialize(params=nil)
     super
   end
