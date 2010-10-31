@@ -28,7 +28,7 @@ class Task < ActiveRecord::Base
   # special validations checks
 
   def new_task_cannot_have_no_owner
-    errors.add(:task, "cannot have no owner!") if
+    errors.add(:task, "must have an owner!") if
       user_id == nil
   end
 
