@@ -7,11 +7,6 @@
     <%= f.label :description %><br />
     <%= f.text_field :description %>
   </p>
-
-  <p>
-    <%= f.label :duration %><br />
-    <%= datetime_select :task, :duration, :discard_year=>true, :discard_month=>true, :discard_day=>true %>
-  </p>
   
   <p>
     <%= f.submit 'Create' %>

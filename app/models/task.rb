@@ -16,7 +16,7 @@ class Task < ActiveRecord::Base
   def default_values
     self.is_finished = false unless self.is_finished
     self.started_at = nil unless self.started_at
-    self.duration = Time.now unless self.duration
+    self.duration = 15 unless self.duration
     self.user_id = 1 unless self.user_id
   end
   
