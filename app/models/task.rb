@@ -20,7 +20,7 @@ class Task < ActiveRecord::Base
   end
 
   def add_time(amount_of_time)
-    self.duration += amount_of_time.minutes
+    self.duration += amount_of_time # shouldn't be amount_of_time.minutes b/c its an int
     self.save!
   end
   
