@@ -4,8 +4,8 @@ Feature: Break task down
   So that I can finish tasks that are bite-sized chunks of what they used to be
 
   Background:
-    Given I am logged in as "sample@email.com"
-    # And logged into breaking down page
+    #Given I am logged in as "sample@email.com"
+    #And I am on the task breaking down page
     And I have task with description "Do laundry"
     And I started the task, "Do laundry"
     And I am on the task timer page for "Do laundry"
