@@ -2,13 +2,9 @@ class Task < ActiveRecord::Base
   validates_presence_of :description
   validates_presence_of :duration
   validates_presence_of :owner
-<<<<<<< HEAD
   validates_presence_of :is_finished, :if => "#{:is_finished}"
   validates_length_of :description, :allow_blank => false, :allow_nil => false, :minimum => 5, :too_short => "Task Description must be at least 5 characters long!"
-=======
-  validates_length_of :description, :allow_blank => false, :allow_nil => false, :minimum => 5, :too_short => "Task description must be at least 5 characters long!"
   validate :new_task_cannot_have_no_owner, :duration_cannot_be_less_than_5_minutes, :new_task_cannot_be_already_started, :new_task_cannot_be_already_finished
->>>>>>> 357e03cf128599f7d530fde2418706da3f39cd32
 
   belongs_to :user
 
