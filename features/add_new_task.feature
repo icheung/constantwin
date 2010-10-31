@@ -8,9 +8,10 @@ Feature: Add new task
 
   Scenario: Add a task to a blank dashboard and visualize it
     Given I am on the dashboard
-    When I follow "New task"
+    And I follow "New task"
     And I fill in "Description" with "Do laundry"
     And I press "Create"
+    When I go to the dashboard
     Then I should see "Do laundry"
     #And there should only be one task on the to-do list for today
 
