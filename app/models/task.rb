@@ -33,8 +33,7 @@ class Task < ActiveRecord::Base
 
   def duration_cannot_be_less_than_5_minutes
     errors.add(:task, "duration has to last over 5 minutes!") if
-      duration == nil or
-      (duration.hour == 0 and duration.min < 5)
+      duration != nil && (duration.hour == 0 and duration.min < 5)
   end
 
   def new_task_cannot_be_already_started
