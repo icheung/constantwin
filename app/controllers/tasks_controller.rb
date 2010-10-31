@@ -92,8 +92,12 @@ class TasksController < ApplicationController
   end
   
   def start
+    # @task = Task.find(params[:id])
+    @task = Task.find(params[:task_id])
+
     respond_to do |format|
-      format.html # start.html.erb
+      format.html # show.html.erb
+      format.xml  { render :xml => @task }
     end
   end
   
