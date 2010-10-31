@@ -3,8 +3,15 @@
   <%=h @task.description %>
 </p>
 
-<p>
-  <%= button_to "Complete Task", { :action => :update, :id => @task.id, :is_finished => true } %>
-</p>
+<% form_for @task, :url => { :action => 'start_task', :id => @task.id } do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :duration %><br />
+    <%= f.text_field :duration %>
+  </p>
+  <p>
+    <%= f.submit 'Start!' %>
+  </p>
+<% end %>
 
 <%= link_to 'Back', tasks_path %>

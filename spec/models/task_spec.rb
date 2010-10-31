@@ -5,7 +5,7 @@ describe Task do
     @valid_task_attributes = {
       :description => "value for description",
       # :duration => Time.now, no need b/c duration not set until task starts
-      :owner => 1,
+      :user_id => 1,
       :is_finished => false,
       :started_at => nil
     }

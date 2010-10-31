@@ -84,8 +84,11 @@ class TasksController < ApplicationController
 
   def start_task
     @task = Task.find(params[:id])
-    @task.update_attributes(:started_at => Time.now)
-    render :text => "#{Time.now}"
+    if @task.update_attributes(params[:task]) and @task.update_attribute(:started_at, Time.now)
+      redirect_to(tasks_url)
+    else
+      format.html { render :action => 'start' }
+    end
   end
 
   def add_time
