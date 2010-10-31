@@ -130,7 +130,7 @@ describe TasksController do
   
   describe "when starting a task" do
     it "should take the user to the start task page" do
-      get :start
+      get :start, :id => "1"
       response.should render_template('start')
     end
   end
