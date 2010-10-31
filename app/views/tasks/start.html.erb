@@ -3,4 +3,8 @@
   <%=h @task.description %>
 </p>
 
+<p>
+  <%= button_to "Complete Task", { :action => :update, :id => @task.id, :is_finished => true } %>
+</p>
+
 <%= link_to 'Back', tasks_path %>

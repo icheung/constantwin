@@ -4,7 +4,7 @@ class Task < ActiveRecord::Base
   validates_presence_of :user_id
   validates_presence_of :is_finished, :if => "#{:is_finished}"
   validates_length_of :description, :allow_blank => false, :allow_nil => false, :minimum => 5, :too_short => "Task Description must be at least 5 characters long!"
-  validate :new_task_cannot_have_no_owner, :duration_cannot_be_less_than_5_minutes, :new_task_cannot_be_already_started, :new_task_cannot_be_already_finished
+  validate :new_task_cannot_have_no_owner, :new_task_cannot_be_already_started, :new_task_cannot_be_already_finished#, :duration_cannot_be_less_than_5_minutes
   belongs_to :user
   before_validation :default_values
 
@@ -31,11 +31,11 @@ class Task < ActiveRecord::Base
       user_id == nil
   end
 
-  def duration_cannot_be_less_than_5_minutes
-    errors.add(:task, "duration has to last over 5 minutes!") if
-      duration == nil or
-      (duration.hour == 0 and duration.min < 5)
-  end
+  #def duration_cannot_be_less_than_5_minutes
+    #errors.add(:task, "duration has to last over 5 minutes!") if
+      #duration == nil or
+      #(duration.hour == 0 and duration.min < 5)
+  #end
 
   def new_task_cannot_be_already_started
     errors.add(:task, "cannot be already started!") if
