@@ -57,6 +57,7 @@ class TasksController < ApplicationController
   # PUT /tasks/1.xml
   def update
     @task = Task.find(params[:id])
+    puts @task
 
     respond_to do |format|
       if @task.update_attributes(params[:task])
