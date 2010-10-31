@@ -1,5 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.start_task '/tasks/start', :controller => "tasks", :action => "start"
+  map.add_time '/tasks/:id/add_time', :controller => "tasks", :action => "add_time"
   map.resources :tasks
 
   # The priority is based upon order of creation: first created -> highest priority.

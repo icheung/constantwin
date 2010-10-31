@@ -16,6 +16,10 @@ class Task < ActiveRecord::Base
     self.started_at = nil unless self.started_at
   end
 
+  def add_time(amount_of_time)
+    self.duration += amount_of_time.minutes
+    self.save!
+  end
   
   # special validations checks
 
