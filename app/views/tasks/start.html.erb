@@ -6,7 +6,7 @@
 <% form_for @task, :url => { :action => 'start_task', :id => @task.id } do |f| %>
   <%= f.error_messages %>
   <p>
-    <%= f.label :duration %><br />
+    <%= f.label "#{:duration} in minutes" %><br />
     <%= f.text_field :duration %>
   </p>
   <p>
