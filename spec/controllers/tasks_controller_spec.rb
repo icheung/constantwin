@@ -130,8 +130,10 @@ describe TasksController do
   
   describe "when starting a task" do
     it "should take the user to the start task page" do
-      get :start, :id => "1"
-      response.should render_template('start')
+      Task.stub(:find).with("1").and_return(mock_task)
+      get :start, :task_id => "1"
+      assigns[:task].should equal(mock_task)
+      #response.should redirect_to("/tasks/start?task_id=1")
     end
   end
 end
