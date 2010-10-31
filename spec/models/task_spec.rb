@@ -4,7 +4,7 @@ describe Task do
   before(:each) do
     @valid_task_attributes = {
       :description => "value for description",
-      :duration => Time.now,
+      :duration => 40,
       :owner => 1,
       :is_finished => false,
       :started_at => nil
@@ -35,7 +35,7 @@ describe Task do
 
   it "should not create a task instance with a duration of less than 5 minutes" do
     @short_time = @valid_task_attributes
-    @short_time[:duration] = Time.parse("2000-01-01 0:00 AM")
+    @short_time[:duration] = 4
     Task.new(@short_time).should_not be_valid
   end
 
