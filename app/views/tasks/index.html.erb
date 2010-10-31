@@ -13,7 +13,7 @@
   <tr>
     <td><%=h task.description %></td>
     <td><%=h task.duration.strftime('%I:%M') %></td>
-    <td><%=h task.owner %></td>
+    <td><%=h task.user_id %></td>
     <td><%=h task.is_finished %></td>
     <td>  
       <% if task.started_at %>  

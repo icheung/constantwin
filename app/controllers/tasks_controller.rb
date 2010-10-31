@@ -88,7 +88,7 @@ class TasksController < ApplicationController
   end
   
   def start
-    #@task = Task.find(params[:id])
+    # @task = Task.find(params[:id])
     @task = Task.find(params[:task_id])
 
     respond_to do |format|
