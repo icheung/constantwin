@@ -86,4 +86,11 @@ class TasksController < ApplicationController
     @task.update_attributes(:started_at => Time.now)
     render :text => "#{Time.now}"
   end
+  
+  def start
+    respond_to do |format|
+      format.html # start.html.erb
+    end
+  end
+  
 end

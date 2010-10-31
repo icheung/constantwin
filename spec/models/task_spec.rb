@@ -41,7 +41,7 @@ describe Task do
 
   it "should not create a task with 'started_at' already set" do
     @already_started = @valid_task_attributes
-    @already_started[:started_at] = Time.parse("2000-01-01 0:00 AM")
+    @already_started[:started_at] = Time.now
     Task.new(@already_started).should_not be_valid
   end
 
@@ -52,11 +52,10 @@ describe Task do
   end
 
   it "should destroy task when user is destroyed" do
-      @user = User.create! @valid_user_attributes
-      @task = @user.tasks.create! @valid_task_attributes
-      task_id = @user.tasks[0].id
-      @user.destroy
-      lambda {Task.find(task_id)}.should raise_error(ActiveRecord::RecordNotFoundError)
+    @user = User.create! @valid_user_attributes
+    @task = @user.tasks.create! @valid_task_attributes
+    task_id = @user.tasks[0].id
+    @user.destroy
+    lambda {Task.find(task_id)}.should raise_error(ActiveRecord::RecordNotFoundError)
   end
-
 end
