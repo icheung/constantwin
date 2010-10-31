@@ -15,13 +15,14 @@
     <td><%=h task.duration %></td>
     <td><%=h task.user_id %></td>
     <td><%=h task.is_finished %></td>
-    <td>  
-      <% if task.started_at %>  
-        <%= task.duration - Time.at(Time.now - task.started_at.to_time).min %> 
-      <% else %>  
-        <%= link_to 'Start', {:action => "start", :task_id => task.id} %>  
-      <% end %>  
-    </td>  
+    <td>
+      <% if task.started_at %>
+        <%= task.duration - Time.at(Time.now - task.started_at.to_time).min %>
+      <% else %>
+        <%= link_to 'Start', {:action => "start", :task_id => task.id} %>
+      <% end %>
+      min
+    </td>
     <td><%= link_to 'Add time', add_time_path(task) %></td>
     <td><%= link_to 'Edit', edit_task_path(task) %></td>
     <td><%= link_to 'Delete', task, :confirm => 'Are you sure?', :method => :delete %></td>
