@@ -8,31 +8,55 @@ Feature: Add new task
 
   Scenario: Add a task to a blank dashboard and visualize it
     Given I am on the dashboard
-    #And the to-do list for today is blank
     When I follow "New task"
     And I fill in "Description" with "Do laundry"
     And I press "Create"
     Then I should see "Do laundry"
-    #Then I should see a task entry with description “Do laundry”
     #And there should only be one task on the to-do list for today
 
   Scenario: Add a task while in the middle of another task
-    Given I am on a task timer page
+    Given I am on the dashboard
+    And I follow "New task"
+    And I fill in "Description" with "Random task"
+    And I press "Create"
+    And I go to the dashboard
+    And I follow "Start" #for "Random task"
+    And I should be on the task timer page
+    And I should see "Random task"
     When I go to the dashboard
     And I follow "New task"
     And I fill in "Description" with "Do laundry"
-    And I fill in "Owner" with "0"
     And I press "Create"
     Then I should see "Do laundry"
 
   Scenario: Add more tasks than alotted for one day
     Given I am on the dashboard
-    #And my to-do list for today is full
+    # And I add 5 different tasks (max the daily task limit)
     And I follow "New task"
+    And I fill in "Description" with "Task 1"
+    And I press "Create"
+    And I follow "Back"
+    And I follow "New task"
+    And I fill in "Description" with "Task 2"
+    And I press "Create"
+    And I follow "Back"
+    And I follow "New task"
+    And I fill in "Description" with "Task 3"
+    And I press "Create"
+    And I follow "Back"
+    And I follow "New task"
+    And I fill in "Description" with "Task 4"
+    And I press "Create"
+    And I follow "Back"
+    And I follow "New task"
+    And I fill in "Description" with "Task 5"
+    And I press "Create"
+    And I follow "Back"
+    When I follow "New task"
     And I fill in "Description" with "Do laundry"
     And I press "Create"
-    #Then I should see "Error: Too many tasks!"
-    Then I should not see "Do laundry"
+    Then I should see "Error: Too many tasks!"
+    And I should not see "Do laundry"
 
   #Given there is a calendar with current date October 7, 2010
   #And I am currently on this date
