@@ -9,6 +9,14 @@ describe Task do
       :is_finished => false,
       :started_at => nil
     }
+
+    @valid_user_attributes = {
+      :name => "The Boss",
+      :login => "theboss",
+      :email => "constantwin@email.com",
+      :password => "12345abcde",
+      :password_confirmation => "12345abcde"
+    }
   end
 
   describe "when creating a new task" do
