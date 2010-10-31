@@ -19,7 +19,7 @@
       <% if task.started_at %>  
         <%= Time.at(task.duration - Time.at(Time.now - task.started_at) - 9.hours).strftime('%H:%M') %> 
       <% else %>  
-        <%= link_to 'Start', start_task_path %>  
+				<%= link_to 'Start', {:action => "start", :task_id => task.id} %>  
       <% end %>  
     </td>  
     <td><%= link_to 'Show', task %></td>
