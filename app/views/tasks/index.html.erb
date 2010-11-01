@@ -1,3 +1,12 @@
+
+<script type="text/javascript">
+function startTimer(elementId) {   
+   new Ajax.PeriodicalUpdater(elementId, '/tasks/time_left/' + elementId.charAt(elementId.length - 1), {
+     method: 'get', frequency: 30, decay: 1
+   });
+}
+</script>
+
 <h1>Listing tasks</h1>
 
 <table>
@@ -15,14 +24,14 @@
     <td><%=h task.duration %></td>
     <td><%=h task.user_id %></td>
     <td><%=h task.is_finished %></td>
-    <td>
-      <% if task.started_at %>
-        <%= task.duration - Time.at(Time.now - task.started_at.to_time).min %>
-      <% else %>
-        <%= link_to 'Start', {:action => "start", :task_id => task.id} %>
-      <% end %>
-      min
-    </td>
+    <td>  
+      <% if task.started_at %>  
+        <div id="timer<%=h task.id %>"><%= task.duration - Time.at(Time.now - task.started_at.to_time).min %></div>
+        <script type="text/javascript">startTimer("timer" + <%=h task.id %>);</script>
+      <% else %>  
+        <%= link_to 'Start', {:action => "start", :task_id => task.id} %>  
+      <% end %>  
+    </td>  
     <td><%= link_to 'Add time', add_time_path(task) %></td>
     <td><%= link_to 'Edit', edit_task_path(task) %></td>
     <td><%= link_to 'Delete', task, :confirm => 'Are you sure?', :method => :delete %></td>
@@ -34,3 +43,4 @@
 <br />
 
 <%= link_to 'New task', new_task_path %>
+

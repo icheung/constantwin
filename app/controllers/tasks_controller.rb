@@ -91,6 +91,11 @@ class TasksController < ApplicationController
     end
   end
 
+  def time_left
+    task = Task.find(params[:id])
+    render :text => task.duration - Time.at(Time.now - task.started_at.to_time).min
+  end
+
   def add_time
     @task = Task.find(params[:id])
   end
