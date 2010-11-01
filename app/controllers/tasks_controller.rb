@@ -60,7 +60,6 @@ class TasksController < ApplicationController
   # PUT /tasks/1.xml
   def update
     @task = Task.find(params[:id])
-    puts @task
 
     respond_to do |format|
       if @task.update_attributes(params[:task])
@@ -110,11 +109,10 @@ class TasksController < ApplicationController
   end
   
   def start
-    # @task = Task.find(params[:id])
     @task = Task.find(params[:task_id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # start.html.erb
       format.xml  { render :xml => @task }
     end
   end
