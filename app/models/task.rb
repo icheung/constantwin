@@ -18,10 +18,11 @@ class Task < ActiveRecord::Base
     self.started_at = nil unless self.started_at
     self.duration = 15 unless self.duration
     self.user_id = 1 unless self.user_id
+    self.added_time = 0 unless self.added_time
   end
 
   def add_time(amount_of_time)
-    self.duration += amount_of_time.minutes
+    self.duration += amount_of_time.minute * 3
     self.save!
   end
   

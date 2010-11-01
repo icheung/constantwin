@@ -1,9 +1,9 @@
 <p>How much time would YOU like to add?</p>
 
-<% form_for(Task.find(params[:id])) do |f| %>
+<% form_for Task.find(params[:id]) do |f| %>
   <p>
     <%= f.label 'Time to add (in min)' %>
-    <%= f.text_field :duration %>
+    <%= f.text_field :added_time %>
   </p>
   
   <p> 

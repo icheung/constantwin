@@ -1,6 +1,9 @@
 class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.xml
+
+  before_filter :update_duration, :only => :show
+
   def index
     @tasks = Task.all
 
@@ -89,6 +92,12 @@ class TasksController < ApplicationController
 
   def add_time
     @task = Task.find(params[:id])
+    puts "=====================>>>>>>" + @task.added_time.to_s
+
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => task }
+    end
   end
   
   def start
@@ -99,6 +108,13 @@ class TasksController < ApplicationController
       format.html # show.html.erb
       format.xml  { render :xml => @task }
     end
+  end
+
+  def update_duration
+    @task = Task.find(params[:id])
+    @task.duration = @task.duration + @task.added_time
+    @task.added_time = 0
+    @task.save!
   end
   
 end
