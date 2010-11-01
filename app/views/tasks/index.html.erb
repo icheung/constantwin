@@ -1,11 +1,14 @@
 <script type="text/javascript">
-function startTimer(elementID) {
-  new Ajax.PeriodicalUpdater(elementID, '/tasks/time_left/' + elementID.substring(5).toString(), {
-    method: 'get', frequency: 30, decay: 1
-  });
-}
+  function startTimer(elementID) {
+    var ajax_updater = new Ajax.PeriodicalUpdater(
+      elementID,
+      '/tasks/time_left/' + elementID.substring(5).toString(),
+      { method: 'get', frequency: 30, decay: 1 }
+    );
+  }
 </script>
-Note to self: when timer <= 0, redirect user to /tasks/fail
+
+TODO: Ajax.PeriodicalUpdater doesn't stop after timer runs out.
 
 <h1>Listing tasks</h1>
 

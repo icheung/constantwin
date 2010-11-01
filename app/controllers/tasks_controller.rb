@@ -95,12 +95,14 @@ class TasksController < ApplicationController
 
   def time_left
     task = Task.find(params[:id])
-    render :text => task.duration - Time.at(Time.now - task.started_at.to_time).min
+    remaining = task.duration - Time.at(Time.now - task.started_at.to_time).min
+    if remaining > 0: render :text => remaining
+    else redirect_to :action => 'fail', :id => task.id
+    end
   end
 
   def add_time
     @task = Task.find(params[:id])
-    puts "=====================>>>>>>" + @task.added_time.to_s
 
     respond_to do |format|
       format.html
@@ -125,6 +127,8 @@ class TasksController < ApplicationController
   end
   
   def fail
+    puts 'id is ------------> ' + params[:id]
+    @task = Task.find(params[:id])
   end
   
 end
