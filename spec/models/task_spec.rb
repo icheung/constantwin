@@ -4,10 +4,18 @@ describe Task do
   before(:each) do
     @valid_task_attributes = {
       :description => "value for description",
-      :duration => Time.now,
-      :owner => 1,
+      # :duration => Time.now, no need b/c duration not set until task starts
+      :user_id => 1,
       :is_finished => false,
       :started_at => nil
+    }
+
+    @valid_user_attributes = {
+      :name => "The Boss",
+      :login => "theboss",
+      :email => "constantwin@email.com",
+      :password => "12345abcde",
+      :password_confirmation => "12345abcde"
     }
   end
 
@@ -45,20 +53,19 @@ describe Task do
       @task = @user.tasks.create! @valid_task_attributes
       task_id = @user.tasks[0].id
       @user.destroy
-      lambda {Task.find(task_id)}.should raise_error(ActiveRecord::RecordNotFoundError)
+      lambda {Task.find(task_id)}.should raise_error(::ActiveRecord::RecordNotFound)
     end
   end
 
   describe "when starting a task" do
     it "task should not start without given a duration" do
       @no_time_set = @valid_task_attributes
-      @no_time_set[:duration] = nil
       @no_time_set_task = Task.new(@no_time_set)
       lambda {@no_time_set_task.start}.should raise_error
     end
     it "task duration should not be given a duration of less than 5 minutes" do
       @short_time = @valid_task_attributes
-      @short_time[:duration] = Time.parse("2000-01-01 0:00 AM")
+      @short_time[:duration] = 5
       @short_time_task = Task.new(@short_time)
       lambda {@short_time_task.start}.should raise_error
     end

@@ -60,6 +60,7 @@ class TasksController < ApplicationController
   # PUT /tasks/1.xml
   def update
     @task = Task.find(params[:id])
+    puts @task
 
     respond_to do |format|
       if @task.update_attributes(params[:task])
@@ -86,8 +87,16 @@ class TasksController < ApplicationController
 
   def start_task
     @task = Task.find(params[:id])
-    @task.update_attributes(:started_at => Time.now)
-    render :text => "#{Time.now}"
+    if @task.update_attributes(params[:task]) and @task.update_attribute(:started_at, Time.now)
+      redirect_to(tasks_url)
+    else
+      format.html { render :action => 'start' }
+    end
+  end
+
+  def time_left
+    task = Task.find(params[:id])
+    render :text => task.duration - Time.at(Time.now - task.started_at.to_time).min
   end
 
   def add_time
@@ -115,6 +124,9 @@ class TasksController < ApplicationController
     @task.duration = @task.duration + @task.added_time
     @task.added_time = 0
     @task.save!
+  end
+  
+  def fail
   end
   
 end

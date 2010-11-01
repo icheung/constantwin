@@ -3,4 +3,15 @@
   <%=h @task.description %>
 </p>
 
+<% form_for @task, :url => { :action => 'start_task', :id => @task.id } do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label "#{:duration} in minutes" %><br />
+    <%= f.text_field :duration %>
+  </p>
+  <p>
+    <%= f.submit 'Start!' %>
+  </p>
+<% end %>
+
 <%= link_to 'Back', tasks_path %>

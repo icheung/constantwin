@@ -7,7 +7,7 @@ describe "/tasks/new.html.erb" do
     assigns[:task] = stub_model(Task,
       :new_record? => true,
       :description => "value for description",
-      :owner => 1,
+      :user_id => 1,
       :is_finished => false
     )
   end
