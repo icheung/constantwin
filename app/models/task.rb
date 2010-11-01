@@ -8,13 +8,12 @@ class Task < ActiveRecord::Base
   belongs_to :user
   before_validation :default_values
 
-  belongs_to :user
-
   def initialize(params=nil)
     super
   end
 
   def default_values
+    self.user_id = 0 unless self.user_id  # needs to belong to users, handle this later
     self.is_finished = false unless self.is_finished
     self.started_at = nil unless self.started_at
     # self.duration = 15 unless self.duration   # no need since we are not validating presence of duration
