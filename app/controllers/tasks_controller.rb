@@ -105,4 +105,7 @@ class TasksController < ApplicationController
     end
   end
   
+  def fail
+  end
+  
 end
