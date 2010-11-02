@@ -10,8 +10,12 @@
 <p>
   You could try to break your original task down into smaller pieces <em>(ex. "clean up room" would turn into 1) clear desk 2) make the bed)</em>:
   <div>
-    <% flash[:error] if flash[:error] %>
+    <% if flash[:error] %>
+      <span id="errorExplanation"><%= flash[:error] %></span>
+      <br /><br />
+    <% end %>
     <% form_tag :action => "add_tasks" do %>
+      <%= hidden_field_tag "id", @task.id %>
       <%= text_field_tag "first" %>
       <br />
       <%= text_field_tag "second" %>

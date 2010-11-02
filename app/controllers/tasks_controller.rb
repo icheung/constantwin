@@ -132,6 +132,7 @@ class TasksController < ApplicationController
   
   def add_tasks   # Breaking it down.
     # Generalize this later.
+    id = params[:id]
     subtask1 = params[:first]
     subtask2 = params[:second]
     
@@ -142,6 +143,7 @@ class TasksController < ApplicationController
       redirect_to(tasks_url)
     else
       flash[:error] = "Failed to save subtasks."
+      redirect_to :action => "fail", :id => id
     end
   end
   
