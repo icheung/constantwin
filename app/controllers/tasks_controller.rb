@@ -120,10 +120,11 @@ class TasksController < ApplicationController
   end
 
   def update_duration
-    @task = Task.find(params[:id])
-    @task.duration = @task.duration + @task.added_time
-    @task.added_time = 0
-    @task.save!
+    task = Task.find(params[:id])
+    task.update_attribute(:duration, task.duration + task.added_time)
+    task.update_attribute(:added_time, 0)
+    task.save!
+    render :text => "Task duration updated"
   end
   
   def fail

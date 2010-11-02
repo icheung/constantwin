@@ -17,8 +17,8 @@ describe "/tasks/edit.html.erb" do
 
     response.should have_tag("form[action=#{task_path(@task)}][method=post]") do
       with_tag('input#task_description[name=?]', "task[description]")
-      with_tag('input#task_owner[name=?]', "task[owner]")
-      with_tag('input#task_is_finished[name=?]', "task[is_finished]")
+      #with_tag('input#task_user_id[name=?]', "task[user_id]")
+      #with_tag('input#task_is_finished[name=?]', "task[is_finished]")
     end
   end
 end
