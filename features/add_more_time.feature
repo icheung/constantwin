@@ -9,11 +9,11 @@ Feature: Add more time
     And I follow "New task"
     And I fill in "Description" with "Do laundry"
     And I press "Create"
-    And I go to the task timer page #for "Do laundry"
 
-  Scenario: I see the options when time runs out for the task
-    Given the time runs out
-    Then I should see "Add time", "Divide and Conquer", and "Delegate task to friend"
+  #Scenario: I see the options when time runs out for the task
+    #Given I am on the dashboard
+    #And time runs out (or Time left is 0)
+    #Then I should see "add more time" and "break your original task down"
 
   Scenario: I click on Add time
     Given the time runs out    
