@@ -137,4 +137,10 @@ describe TasksController do
       #response.should redirect_to("/tasks/start?task_id=1")
     end
   end
+
+  describe "when adding time to a task" do
+    it "should be funky funky fresh" do
+      tasks(:one).description.should == "funky"
+    end
+  end
 end
