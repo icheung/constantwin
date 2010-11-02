@@ -7,7 +7,8 @@ describe Task do
       # :duration => Time.now, no need b/c duration not set until task starts
       :user_id => 1,
       :is_finished => false,
-      :started_at => nil
+      :started_at => nil,
+      :added_time => 0
     }
 
     @valid_user_attributes = {
@@ -71,4 +72,18 @@ describe Task do
     end
   end
 
+  describe "when adding time to a task" do
+    it "should initialize the add_time field to 0" do
+      @dummy_task = Task.new @valid_task_attributes
+      @dummy_task.added_time.should == 0
+    end
+
+    it "should add 5 minutes when the add_time field is set to 5" do
+      @dummy_task = Task.new @valid_task_attributes
+      @dummy_task.duration = 10
+      @dummy_task.added_time = 5
+      @dummy_task.add_time(@dummy_task.added_time)
+      @dummy_task.duration.should == 15
+    end
+  end
 end
