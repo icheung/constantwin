@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.xml
 
-  before_filter :update_duration, :only => :show
+  #before_filter :update_duration, :only => :show
 
   def index
     @tasks = Task.all
