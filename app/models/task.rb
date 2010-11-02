@@ -4,7 +4,7 @@ class Task < ActiveRecord::Base
   validates_presence_of :user_id
   validates_presence_of :is_finished, :if => "#{:is_finished}"
   validates_length_of :description, :allow_blank => false, :allow_nil => false, :minimum => 5, :too_short => "Task Description must be at least 5 characters long!"
-  validate :new_task_cannot_have_no_owner, :new_task_cannot_be_already_finished, :new_task_cannot_be_already_started, :duration_cannot_be_less_than_5_minutes
+  validate :new_task_cannot_be_already_finished, :new_task_cannot_be_already_started, :duration_cannot_be_less_than_5_minutes #:new_task_cannot_have_no_owner,
   belongs_to :user
   before_validation :default_values
 
@@ -13,7 +13,7 @@ class Task < ActiveRecord::Base
   end
 
   def default_values
-    self.user_id = 1 unless self.user_id  # needs to belong to users, handle this later, maybe use self.user.id instead?
+    self.user_id = 1 unless self.user_id==false  # needs to belong to users, handle this later, maybe use self.user.id instead?
     self.is_finished = false unless self.is_finished
     self.duration = 15 unless self.duration
     self.added_time = 0 unless self.added_time
