@@ -1,0 +1,26 @@
+(in /Users/icheung/constant_win/constantwin)
+.................................................................................................................................................................................................................................................................F..F.........F.................
+
+1)
+'/tasks/edit.html.erb renders the edit task form' FAILED
+Expected at least 1 element matching "input#task_owner[name='task[owner]']", found 0.
+<false> is not true.
+./spec/views/tasks/edit.html.erb_spec.rb:20:
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/assertions/selector_assertions.rb:315:in `assert_select'
+./spec/views/tasks/edit.html.erb_spec.rb:18:
+
+2)
+'/tasks/index.html.erb renders a list of tasks' FAILED
+2.
+<false> is not true.
+./spec/views/tasks/index.html.erb_spec.rb:25:
+
+3)
+NoMethodError in 'TasksController when adding time to a task should be funky funky fresh'
+undefined method `tasks' for #<Spec::Rails::Example::ControllerExampleGroup::Subclass_1::Subclass_9:0x103461b90>
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/test_process.rb:511:in `method_missing'
+./spec/controllers/tasks_controller_spec.rb:143:
+
+Finished in 1.886122 seconds
+
+288 examples, 3 failures
