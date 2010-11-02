@@ -5,6 +5,16 @@
       '/tasks/time_left/' + elementID.substring(5).toString(),
       { method: 'get', frequency: 30, decay: 1 }
     );
+    setInterval('checkTime("' + elementID.substring(5).toString() + '")', 5000);
+  }
+  function checkTime(taskId) {
+    var timeLeft = parseInt(document.getElementById('timer' + taskId).innerHTML);
+    if (timeLeft <= 0) {
+      fail(taskId);
+    }
+  }
+  function fail(taskId) {
+      window.location = '/tasks/fail/' + taskId;
   }
 </script>
 
@@ -27,10 +37,15 @@
     <td><%=h task.is_finished %></td>
     <td>  
       <% if task.started_at %>  
-        <div id="timer<%=h task.id %>">
-          <%= task.duration - Time.at(Time.now - task.started_at.to_time).min %>
-        </div>
-        <script type="text/javascript">startTimer('<%=h "timer" + task.id.to_s %>');</script>
+        <% if task.duration - Time.at(Time.now - task.started_at.to_time).min > 0 %>
+          <div id="timer<%=h task.id %>">
+            <%= task.duration - Time.at(Time.now - task.started_at.to_time).min %>
+          </div>
+          <script type="text/javascript">startTimer('<%=h "timer" + task.id.to_s %>');</script>
+        <% else %>
+          <script type="text/javascript">//window.location="/tasks/fail/<%= task.id %>"</script>
+          0
+        <% end %>
       <% else %>
         <%= link_to 'Start', {:action => "start", :task_id => task.id} %>
       <% end %>
