@@ -15,14 +15,14 @@ Feature: Start task
     And I press "Create"
 
   Scenario: I start the task
-    Given I am on the dashboard
-    When I click “Start” #for "Do laundry"
-    Then I should be on the task timer page
-    And I should see "Do laundry"
-    And I should see a timer entry field
+  	Given I am on the dashboard
+  	When I press “Start” for "Do laundry"
+  	Then I should be on the task timer page
+  	And I should see "Do laundry"
+  	And I should see a timer entry field
 
   Scenario: I start a task while in the middle of another task
-    Given I am on the task timer page
+ 		Given I am on the task timer page
     And I see "Do laundry"
     When I go back to the dashboard
     And I click “Start” #for "Do homework"
