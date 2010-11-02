@@ -15,7 +15,6 @@ class Task < ActiveRecord::Base
   def default_values
     self.user_id = 0 unless self.user_id  # needs to belong to users, handle this later
     self.is_finished = false unless self.is_finished
-    self.started_at = nil unless self.started_at
     self.duration = 15 unless self.duration
     self.user_id = 1 unless self.user_id
     self.added_time = 0 unless self.added_time
