@@ -1,12 +1,31 @@
+<script type="text/javascript">
+  function breakDown() {
+    alert(1);
+  }
+</script>
+
 <p>
-  <b>ZOMG!  You failed to complete the task!</b>
+  <strong>ZOMG!  You failed to complete the task!</strong>
 </p>
 <p>
-  You should try one of the following actions:
+  You could try to break your original task down into smaller pieces <em>(ex. "clean up room" would turn into 1) clear desk 2) make the bed)</em>:
+  <div>
+    <% if flash[:error] %>
+      <span id="errorExplanation"><%= flash[:error] %></span>
+      <br /><br />
+    <% end %>
+    <% form_tag :action => "add_tasks" do %>
+      <%= hidden_field_tag "id", @task.id %>
+      <%= text_field_tag "first" %>
+      <br />
+      <%= text_field_tag "second" %>
+      <br />
+      <%= submit_tag "Break it down!" %>
+    <% end %>
+  </div>
 </p>
-<ul>
-  <li>Break it down</li>
-  <li>Add more time</li>
-</ul>
+<p>
+  Or you could <%= link_to 'add more time.', add_time_path(@task) %>
+</p>
 
 <%= link_to 'Back', tasks_path %>

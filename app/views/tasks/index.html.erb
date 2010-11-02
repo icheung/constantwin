@@ -5,14 +5,36 @@
       '/tasks/time_left/' + elementID.substring(5).toString(),
       { method: 'get', frequency: 30, decay: 1 }
     );
+    setInterval('checkTime("' + elementID.substring(5).toString() + '")', 5000);
+  }
+  function checkTime(taskId) {
+    var timeLeft = parseInt(document.getElementById('timer' + taskId).innerHTML);
+    if (timeLeft <= 0) {
+      fail(taskId);
+    }
+  }
+  function fail(taskId) {
+    window.location = '/tasks/fail/' + taskId;
+  }
+  function checkOff(taskId) {
+    new Ajax.Request('/tasks/finish/' + taskId, { method: 'post' });
+    taskDescription = $$('#taskEntry' + taskId + ' td')[0];
+    if (taskDescription.className.indexOf('done') == -1) {
+      taskDescription.className += ', done';
+    }
+    else {
+      taskDescription.className = taskDescription.className.replace('done', '');
+    }
   }
 </script>
 
-TODO: Ajax.PeriodicalUpdater doesn't stop after timer runs out.
+<style type="text/css">
+.done { text-decoration: line-through; color: #999; }
+</style>
 
 <h1>Listing tasks</h1>
 
-<table>
+<table id="tasksTable">
   <tr>
     <th>Description</th>
     <th>Duration</th>
@@ -22,25 +44,29 @@ TODO: Ajax.PeriodicalUpdater doesn't stop after timer runs out.
   </tr>
 
 <% @tasks.each do |task| %>
-  <tr>
-    <td><%=h task.description %></td>
+  <tr id="taskEntry<%= task.id %>">
+    <td <%= 'class = "done"' if task.is_finished %>><%=h task.description %></td>
     <td><%=h task.duration %></td>
     <td><%=h task.user_id %></td>
     <td><%=h task.is_finished %></td>
     <td>  
       <% if task.started_at %>  
-        <div id="timer<%=h task.id %>">
-          <%= task.duration - Time.at(Time.now - task.started_at.to_time).min %>
-        </div>
-        <script type="text/javascript">startTimer('<%=h "timer" + task.id.to_s %>');</script>
+        <% if task.duration - Time.at(Time.now - task.started_at.to_time).min > 0 %>
+          <div id="timer<%=h task.id %>">
+            <%= task.duration - Time.at(Time.now - task.started_at.to_time).min %>
+          </div>
+          <script type="text/javascript">startTimer('<%=h "timer" + task.id.to_s %>');</script>
+        <% else %>
+          <script type="text/javascript">//window.location="/tasks/fail/<%= task.id %>"</script>
+          0
+        <% end %>
       <% else %>
         <%= link_to 'Start', {:action => "start", :task_id => task.id} %>
       <% end %>
     </td>
-    <td><%= link_to 'Add time', add_time_path(task) %></td>
     <td><%= link_to 'Edit', edit_task_path(task) %></td>
     <td><%= link_to 'Delete', task, :confirm => 'Are you sure?', :method => :delete %></td>
-    <td><%= check_box_tag 'finished' %></td>
+    <td><input id="checkbox<%= task.id %>" type="checkbox" onclick="checkOff(<%=task.id%>)" <%= 'checked' if task.is_finished %>" /></td>
   </tr>
 <% end %>
 </table>
