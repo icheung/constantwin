@@ -147,4 +147,14 @@ class TasksController < ApplicationController
     end
   end
   
+  def finish
+    task = Task.find(params[:id])
+    if task.is_finished
+      task.update_attribute(:is_finished, false)
+    else
+      task.update_attribute(:is_finished, true)
+    end
+    render :text => 'Task updated'
+  end
+  
 end

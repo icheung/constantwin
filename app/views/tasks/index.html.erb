@@ -14,13 +14,27 @@
     }
   }
   function fail(taskId) {
-      window.location = '/tasks/fail/' + taskId;
+    window.location = '/tasks/fail/' + taskId;
+  }
+  function checkOff(taskId) {
+    new Ajax.Request('/tasks/finish/' + taskId, { method: 'post' });
+    taskDescription = $$('#taskEntry' + taskId + ' td')[0];
+    if (taskDescription.className.indexOf('done') == -1) {
+      taskDescription.className += ', done';
+    }
+    else {
+      taskDescription.className = taskDescription.className.replace('done', '');
+    }
   }
 </script>
 
+<style type="text/css">
+.done { text-decoration: line-through; color: #999; }
+</style>
+
 <h1>Listing tasks</h1>
 
-<table>
+<table id="tasksTable">
   <tr>
     <th>Description</th>
     <th>Duration</th>
@@ -30,8 +44,8 @@
   </tr>
 
 <% @tasks.each do |task| %>
-  <tr>
-    <td><%=h task.description %></td>
+  <tr id="taskEntry<%= task.id %>">
+    <td <%= 'class = "done"' if task.is_finished %>><%=h task.description %></td>
     <td><%=h task.duration %></td>
     <td><%=h task.user_id %></td>
     <td><%=h task.is_finished %></td>
@@ -52,7 +66,7 @@
     </td>
     <td><%= link_to 'Edit', edit_task_path(task) %></td>
     <td><%= link_to 'Delete', task, :confirm => 'Are you sure?', :method => :delete %></td>
-    <td><%= check_box_tag 'finished' %></td>
+    <td><input id="checkbox<%= task.id %>" type="checkbox" onclick="checkOff(<%=task.id%>)" <%= 'checked' if task.is_finished %>" /></td>
   </tr>
 <% end %>
 </table>
