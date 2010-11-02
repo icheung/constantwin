@@ -37,7 +37,6 @@ TODO: Ajax.PeriodicalUpdater doesn't stop after timer runs out.
         <%= link_to 'Start', {:action => "start", :task_id => task.id} %>
       <% end %>
     </td>
-    <td><%= link_to 'Add time', add_time_path(task) %></td>
     <td><%= link_to 'Edit', edit_task_path(task) %></td>
     <td><%= link_to 'Delete', task, :confirm => 'Are you sure?', :method => :delete %></td>
     <td><%= check_box_tag 'finished' %></td>

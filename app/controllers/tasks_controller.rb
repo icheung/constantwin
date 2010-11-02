@@ -97,7 +97,7 @@ class TasksController < ApplicationController
     task = Task.find(params[:id])
     remaining = task.duration - Time.at(Time.now - task.started_at.to_time).min
     if remaining > 0: render :text => remaining
-    else redirect_to :action => 'fail', :id => task.id
+    else render :text => 0
     end
   end
 
@@ -127,8 +127,22 @@ class TasksController < ApplicationController
   end
   
   def fail
-    puts 'id is ------------> ' + params[:id]
     @task = Task.find(params[:id])
+  end
+  
+  def add_tasks   # Breaking it down.
+    # Generalize this later.
+    subtask1 = params[:first]
+    subtask2 = params[:second]
+    
+    task1 = Task.new(:description => subtask1, :duration => 15)
+    task2 = Task.new(:description => subtask2, :duration => 15)
+    
+    if task1.save and task2.save
+      redirect_to(tasks_url)
+    else
+      flash[:error] = "Failed to save subtasks."
+    end
   end
   
 end
