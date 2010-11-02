@@ -9,6 +9,7 @@ body, p, ol, ul, td {
 
 p {
  margin:0px;
+ width:auto;
 }
 
 table {
@@ -16,8 +17,10 @@ table {
 }
 
 div#table_container {
+  padding-top:10px;
   margin-left:22%;
   margin-right:22%;
+  text-align:center;
 }
 
 div#task_done {

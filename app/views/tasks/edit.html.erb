@@ -1,5 +1,5 @@
 <h1>Editing task</h1>
-
+<div id="table_container">
 <% form_for(@task) do |f| %>
   <%= f.error_messages %>
 
@@ -13,3 +13,4 @@
 <% end %>
 
 <%= link_to 'Back', tasks_path %>
+</div>
