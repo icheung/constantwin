@@ -1,9 +1,48 @@
-body { background-color: #fff; color: #333; }
+body { background-color: #fff; color: #333; margin:0px;}
 
 body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size:   13px;
   line-height: 18px;
+  background:#A9F16C;
+}
+
+p {
+ margin:0px;
+}
+
+table {
+  text-align:center;
+}
+
+div#table_container {
+  padding-left:25%;
+}
+
+div#task_done {
+  background:green;
+}
+
+div#task_not_done {
+  background:red;
+}
+
+h1 {
+  background:#67E300;
+  padding-top:0.67em;
+  padding-bottom:0.67em;
+  margin:0px;
+  text-align:center;
+  font-size:32px;
+}
+
+td {
+  border-style:solid;
+  border-width:1px;
+  border-color:black;
+  padding:5px,10px;
+  padding-left:10px;
+  padding-right:10px
 }
 
 pre {
