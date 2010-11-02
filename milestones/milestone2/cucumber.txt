@@ -1,0 +1,210 @@
+(in /home/bt/Documents/constantwin)
+Using the default profile...
+.........UU--.................U--U.........U-UUUU-U...........U-------UUUU-U-UU-UUUUUU-UUU-UU-UU-UUU-UUU-UUU-UUUUUUUUUUU-U-UUUU-U-UUU-UU--........U-UU....U-U-U........UUU....UUU-UUU-UUU-UUUUUU-UUU-U-UU-UUUUUU-UU-UUUUUUU-UUUUUUU-
+
+24 scenarios (23 undefined, 1 passed)
+198 steps (43 skipped, 105 undefined, 50 passed)
+0m0.976s
+
+You can implement step definitions for undefined steps with these snippets:
+
+Given /^I see "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I click "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I click “Start” \#for "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should see a timer entry field$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^the second task should not be started$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I am logged in as "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I click on "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should be logged out$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I follow "([^"]*)" \#for "([^"]*)"$/ do |arg1, arg2|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^my email is "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I am not logged in$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^there is no account registered to "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I entered all fields in the form$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I submit my form$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should have an account registered with my email$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^there is already an account registered to "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I attempt to sign in$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should not be signed in$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^my password entry is wrong$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^my password entry is correct$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should be signed in$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should see my dashboard$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I have a task with description "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I have started the task "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^the task "([^"]*)" should not end prematurely$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^the time runs out$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I click “Start” \#for "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I enter "([^"]*)" minutes in the timer entry field$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should have "([^"]*)" minutes to complete my task$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^the task should not be started$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I click on “Add time”$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should see a form for adding more time\.$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I fill in (\d+) more minutes$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^there should be (\d+) more minutes left on my task$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I have task with description "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I started the task, "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^the time runs out$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I click on “Divide and Conquer”$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should see a form for breaking down my tasks\.$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should see two field entries for entering tasks$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I click on “Divide and Conquer”$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I enter only one subtask$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^there should be no new tasks$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I enter two subtasks, "([^"]*)" and "([^"]*)"$/ do |arg1, arg2|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^the "([^"]*)" task should be removed from task list$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^"Wash clothes should be on task list$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^"([^"]*)" should be on task list$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I type two subtasks, "([^"]*)" and "([^"]*)"$/ do |arg1, arg2|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should see another entry field$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I enter three subtasks, "([^"]*)" and "([^"]*)"$/ do |arg1, arg2|
+  pending # express the regexp above with the code you wish you had
+end
+

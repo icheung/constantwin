@@ -138,9 +138,9 @@ describe TasksController do
     end
   end
 
-  describe "when adding time to a task" do
-    it "should be funky funky fresh" do
-      tasks(:one).description.should == "funky"
-    end
-  end
+  #describe "when adding time to a task" do
+    #it "should be funky funky fresh" do
+      #tasks(:one).description.should == "funky"
+    #end
+  #end
 end
