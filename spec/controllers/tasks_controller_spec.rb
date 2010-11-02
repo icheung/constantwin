@@ -17,6 +17,7 @@ describe TasksController do
   describe "GET show" do
     it "assigns the requested task as @task" do
       Task.stub(:find).with("37").and_return(mock_task)
+      Task.stub(:duration)
       get :show, :id => "37"
       assigns[:task].should equal(mock_task)
     end
