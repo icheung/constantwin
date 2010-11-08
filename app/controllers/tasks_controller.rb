@@ -8,7 +8,6 @@ class TasksController < ApplicationController
     @tasks = Task.find(:all, :conditions => {:is_finished => false}).sort_by {|t| t.created_at}
     @finished_tasks = Task.find(:all, :conditions => {:is_finished => true}).sort_by {|t| t.created_at}
     @tasks.concat(@finished_tasks)
-    # @tasks = Task.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -126,11 +125,27 @@ class TasksController < ApplicationController
   end
 
   def update_duration
-    task = Task.find(params[:id])
-    task.update_attribute(:duration, task.duration + task.added_time)
-    task.update_attribute(:added_time, 0)
-    task.save!
+    @task = Task.find(params[:id])
+    @task.update_attributes(params[:task])
+    @task.duration += @task.added_time
+    @task.added_time = 0
+    @task.save
+
+    # lines commented out b/c they don't work
+    # task.update_attribute(:duration, task.duration + task.added_time)
+    # task.update_attribute(:added_time, 0)
     render :text => "Task duration updated"
+    '''
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to(@task) }
+        format.xml  { render :xml => @task, :location => @task }
+      else
+        format.html { render :action => "add_time" }
+        format.xml  { render :xml => @task.errors, :status => :unprocessable_entity }
+      end
+    end
+    '''
   end
   
   def fail
@@ -142,13 +157,14 @@ class TasksController < ApplicationController
     id = params[:id]
     subtask1 = params[:first]
     subtask2 = params[:second]
-    
-    task1 = Task.new(:description => subtask1, :duration => 15)
-    task2 = Task.new(:description => subtask2, :duration => 15)
+
+    task1 = Task.new(:description => subtask1)
+    task2 = Task.new(:description => subtask2)
     
     if task1.save and task2.save
       redirect_to(tasks_url)
     else
+      [task1, task2].each {|t| t.destroy} # prevents accidental task creation
       flash[:error] = "Failed to save subtasks."
       redirect_to :action => "fail", :id => id
     end

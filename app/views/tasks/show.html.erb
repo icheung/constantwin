@@ -7,12 +7,12 @@
 
 <p>
   <b>Duration:</b>
-  <%=h @task.duration %>
+  <%=h "#{@task.duration} minutes" %>
 </p>
 
 <p>
   <b>Owner:</b>
-  <%=h @task.user_id %>
+  <%=h "#{@task.user_id} (#{@task.user.name})" %>
 </p>
 
 <p>

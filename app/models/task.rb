@@ -37,9 +37,16 @@ class Task < ActiveRecord::Base
       duration != nil && (duration.hour == 0 and duration.min < 5)
   end
 
+  # may be useful later
+  def added_time_cannot_be_of_invalid_format
+    errors.add(:task, "added time has to be an integer!") unless
+      added_time.instance_of?(Fixnum)
+  end
+
+  
   def new_task_cannot_be_already_started
     errors.add(:task, "cannot be already started!") if
-      started_at != nil
+      started_at != nil and created_at.nil?
   end
 
   def new_task_cannot_be_already_finished

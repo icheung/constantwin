@@ -2,7 +2,9 @@
 <div id="table_container">
 <p>How much time would YOU like to add?</p>
 
-<% form_for Task.find(params[:id]) do |f| %>
+<% form_for(@task, :url => update_duration_path(@task)) do |f| %>
+  <%= f.error_messages %>
+
   <p>
     <%= f.label 'Time to add (in min)' %>
     <%= f.text_field :added_time %>
