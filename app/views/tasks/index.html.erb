@@ -80,7 +80,7 @@
     <td><%= link_to 'Add time', add_time_path(task) %></td>
     <td><%= link_to 'Edit', edit_task_path(task) %></td>
     <td><%= link_to 'Delete', task, :confirm => 'Are you sure?', :method => :delete %></td>
-    <td><input id="checkbox<%= task.id %>" type="checkbox" onclick="checkOff(<%=task.id%>)" <%= 'checked' if task.is_finished %>" /></td>
+    <td><input id="checkbox<%= task.id %>" type="checkbox" onclick="checkOff(<%=task.id%>)" <%= "checked disabled" if task.is_finished %> /></td>
   </tr>
 <% end %>
 </table>
