@@ -17,6 +17,7 @@ class Task < ActiveRecord::Base
     self.is_finished = false unless self.is_finished
     self.duration = 15 unless self.duration
     self.added_time = 0 unless self.added_time
+    self.started_at = nil unless self.started_at
   end
 
   def add_time(amount_of_time)
