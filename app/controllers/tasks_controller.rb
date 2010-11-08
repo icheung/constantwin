@@ -5,7 +5,10 @@ class TasksController < ApplicationController
   #before_filter :update_duration, :only => :show
 
   def index
-    @tasks = Task.all
+    @tasks = Task.find(:all, :conditions => {:is_finished => false}).sort_by {|t| t.created_at}
+    @finished_tasks = Task.find(:all, :conditions => {:is_finished => true}).sort_by {|t| t.created_at}
+    @tasks.concat(@finished_tasks)
+    # @tasks = Task.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -95,9 +98,12 @@ class TasksController < ApplicationController
 
   def time_left
     task = Task.find(params[:id])
-    remaining = task.duration - Time.at(Time.now - task.started_at.to_time).min
-    if remaining > 0: render :text => remaining
-    else render :text => 0
+    if task.is_finished: render :text => '-'
+    else
+      remaining = task.duration - Time.at(Time.now - task.started_at.to_time).min
+      if remaining > 0: render :text => remaining
+      else render :text => 0
+      end
     end
   end
 

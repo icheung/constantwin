@@ -17,7 +17,7 @@
     window.location = '/tasks/fail/' + taskId;
   }
   function checkOff(taskId) {
-    new Ajax.Request('/tasks/finish/' + taskId, { method: 'post' });
+    new Ajax.Request('/tasks/finish/' + taskId, { method: 'post' })
     taskDescription = $$('#taskEntry' + taskId + ' td')[0];
     if (taskDescription.className.indexOf('done') == -1) {
       taskDescription.className += ', done';
@@ -60,8 +60,10 @@
         <div id="task_not_done"><br/></div>
       <% end %>
     </td>
-    <td>  
-      <% if task.started_at %>  
+    <td>
+      <% if task.is_finished %>
+      -
+      <% elsif task.started_at %>  
         <% if task.duration - Time.at(Time.now - task.started_at.to_time).min > 0 %>
           <div id="timer<%=h task.id %>">
             <%= task.duration - Time.at(Time.now - task.started_at.to_time).min %>
