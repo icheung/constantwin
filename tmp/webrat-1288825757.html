@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Tasks: start</title>
+  <link href="/stylesheets/scaffold.css?1288734318" media="screen" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/prototype.js?1287880724" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1287880724" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1287880724" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1287880724" type="text/javascript"></script>
+<script src="/javascripts/application.js?1287880724" type="text/javascript"></script></head>
+<body>
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans&subset=latin' rel='stylesheet' type='text/css'>
+
+<p style="color: green"></p>
+
+<h1>Let's start a task!</h1>
+<div id="table_container">
+<p>
+  <b>Task to start:</b>
+  Do laundry
+</p>
+
+<form action="/tasks/start_task/13" class="edit_task" id="edit_task_13" method="post"><div style="margin:0;padding:0;display:inline"><input name="_method" type="hidden" value="put" /></div>
+  
+  <p>
+    <label for="task_duration in minutes">Duration in minutes</label><br />
+    <input id="task_duration" name="task[duration]" size="30" type="text" value="15" />
+  </p>
+  <p>
+    <input id="task_submit" name="commit" type="submit" value="Start!" />
+  </p>
+</form>
+
+<a href="/tasks">Back</a>
+</div>
+
+
+</body>
+</html>

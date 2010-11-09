@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Tasks: index</title>
+  <link href="/stylesheets/scaffold.css?1288734318" media="screen" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/prototype.js?1287880724" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1287880724" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1287880724" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1287880724" type="text/javascript"></script>
+<script src="/javascripts/application.js?1287880724" type="text/javascript"></script></head>
+<body>
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans&subset=latin' rel='stylesheet' type='text/css'>
+
+<p style="color: green"></p>
+
+<script type="text/javascript">
+  function startTimer(elementID) {
+    var ajax_updater = new Ajax.PeriodicalUpdater(
+      elementID,
+      '/tasks/time_left/' + elementID.substring(5).toString(),
+      { method: 'get', frequency: 30, decay: 1 }
+    );
+    setInterval('checkTime("' + elementID.substring(5).toString() + '")', 5000);
+  }
+  function checkTime(taskId) {
+    var timeLeft = parseInt(document.getElementById('timer' + taskId).innerHTML);
+    if (timeLeft <= 0) {
+      fail(taskId);
+    }
+  }
+  function fail(taskId) {
+    window.location = '/tasks/fail/' + taskId;
+  }
+  function checkOff(taskId) {
+    new Ajax.Request('/tasks/finish/' + taskId, { method: 'post' });
+    taskDescription = $$('#taskEntry' + taskId + ' td')[0];
+    if (taskDescription.className.indexOf('done') == -1) {
+      taskDescription.className += ', done';
+    }
+    else {
+      taskDescription.className = taskDescription.className.replace('done', '');
+    }
+  }
+</script>
+
+<style type="text/css">
+.done { text-decoration: line-through; color: #999; }
+</style>
+
+<h1>
+  <img alt="Turtle" src="/images/turtle.gif?1288733867" />
+  Constant Win
+</h1>
+
+<div id="table_container">
+<table id="tasksTable">
+  <tr>
+    <th>Description</th>
+    <th>Duration</th>
+    <th>Owner</th>
+    <th>Finished?</th>
+    <th>Time left</th>
+    <th>Add time</th>
+  </tr>
+
+
+  <tr id="taskEntry3">
+    <td >Do laundry</td>
+    <td>15</td>
+    <td>1</td>
+    <td>
+      
+        <div id="task_not_done"><br/></div>
+      
+    </td>
+    <td>  
+      
+        <a href="/tasks/start?task_id=3">Start</a>
+      
+    </td>
+    <td><a href="/tasks/3/add_time">Add time</a></td>
+    <td><a href="/tasks/3/edit">Edit</a></td>
+    <td><a href="/tasks/3" onclick="if (confirm('Are you sure?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);f.submit(); };return false;">Delete</a></td>
+    <td><input id="checkbox3" type="checkbox" onclick="checkOff(3)" " /></td>
+  </tr>
+
+  <tr id="taskEntry4">
+    <td >Do homework</td>
+    <td>15</td>
+    <td>1</td>
+    <td>
+      
+        <div id="task_not_done"><br/></div>
+      
+    </td>
+    <td>  
+      
+        <a href="/tasks/start?task_id=4">Start</a>
+      
+    </td>
+    <td><a href="/tasks/4/add_time">Add time</a></td>
+    <td><a href="/tasks/4/edit">Edit</a></td>
+    <td><a href="/tasks/4" onclick="if (confirm('Are you sure?')) { var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);f.submit(); };return false;">Delete</a></td>
+    <td><input id="checkbox4" type="checkbox" onclick="checkOff(4)" " /></td>
+  </tr>
+
+</table>
+
+<br />
+
+<a href="/tasks/new">New task</a>
+</div>
+
+
+</body>
+</html>
