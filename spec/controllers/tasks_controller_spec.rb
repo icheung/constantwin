@@ -143,4 +143,12 @@ describe TasksController do
       #tasks(:one).description.should == "funky"
     #end
   #end
+  #
+  describe "when finishing a task" do
+    it "should update the time_left field to -" do
+      Task.stub(:find).with("37").and_return(mock_task)
+      mock_task.should_receive(:update_attributes).with({'these' => 'params'})
+      put :finish, :id => "37", :task => {:these => 'params'}
+    end
+  end
 end

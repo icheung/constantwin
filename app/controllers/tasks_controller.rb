@@ -148,8 +148,13 @@ class TasksController < ApplicationController
     '''
   end
   
+<<<<<<< Updated upstream
   def fail
     @task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
+=======
+  def fail
+    @task = Task.find(params[:id], :conditions => {:user_id => @current_user.id})
+>>>>>>> Stashed changes
   end
   
   def add_tasks   # Breaking it down.
@@ -162,6 +167,7 @@ class TasksController < ApplicationController
     task2 = @current_user.tasks.new(:description => subtask2)
     
     if task1.save and task2.save
+      Task.find(params[:id]).delete
       redirect_to(tasks_url)
     else
       [task1, task2].each {|t| t.destroy} # prevents accidental task creation
