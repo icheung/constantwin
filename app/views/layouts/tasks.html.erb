@@ -12,7 +12,8 @@
 <link href='http://fonts.googleapis.com/css?family=Droid+Sans&subset=latin' rel='stylesheet' type='text/css'>
 
 <p style="color: green"><%= notice %></p>
-
+<%= "Current User: #{@current_user.login}" %>
+<%= link_to 'Log out', logout_path %>
 <%= yield %>
 
 </body>
