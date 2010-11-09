@@ -33,6 +33,19 @@ Rails::Initializer.run do |config|
   config.active_record.observers = :user_observer
   config.active_record.observers = :task_observer
 
+  # THIS IS TO SET UP THE MAILER TO GET MAIL MAILING; CURRENT SETTINGS ARE FOR GMAIL
+  # ADD/REMOVE EMAIL AND PASSWD AS DEEMED
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :enable_starttls_auto => true,
+    :address => 'smtp.gmail.com',
+    :port => '587',
+    :authentication => :plain,
+    :domain => 'constantwin.heroku.com',
+    :user_name => '',
+    :password => ''
+  }
+  
   # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
   # Run "rake -D time" for a list of tasks for finding time zone names.
   config.time_zone = 'UTC'

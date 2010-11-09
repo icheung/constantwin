@@ -1,9 +1,16 @@
 class UserMailer < ActionMailer::Base
+  
+  def welcome_email(user)
+    setup_email(user)
+    @url  = "http://example.com/login"
+    @subject += "Welcome to Constant Win!"
+  end
+  
   def signup_notification(user)
     setup_email(user)
     @subject    += 'Please activate your new account'
   
-    @body[:url]  = "http://YOURSITE/activate/#{user.activation_code}"
+    @body[:url]  = "http://localhost:3000/activate/#{user.activation_code}"
   
   end
   
@@ -17,7 +24,7 @@ class UserMailer < ActionMailer::Base
     def setup_email(user)
       @recipients  = "#{user.email}"
       @from        = "ADMINEMAIL"
-      @subject     = "[YOURSITE] "
+      @subject     = "[CONSTANT WIN] "
       @sent_on     = Time.now
       @body[:user] = user
     end
