@@ -8,8 +8,8 @@ class TasksController < ApplicationController
   #before_filter :update_duration, :only => :show
 
   def index
-    @tasks = Task.find(:all, :conditions => {:user_id => @current_user.id, :is_finished => false}).sort_by {|t| t.created_at}
-    @finished_tasks = Task.find(:all, :conditions => {:user_id => @current_user.id, :is_finished => true}).sort_by {|t| t.created_at}
+    @tasks = Task.find_all_by_user_id(@current_user.id, :conditions => {:is_finished => false}).sort_by {|t| t.created_at}
+    @finished_tasks = Task.find_all_by_user_id(@current_user.id, :conditions => {:is_finished => true}).sort_by {|t| t.created_at}
     @tasks.concat(@finished_tasks)
 
     respond_to do |format|
@@ -21,7 +21,7 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.xml
   def show
-    @task = Task.find(params[:id], :conditions => {:user_id => @current_user.id})
+    @task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -42,7 +42,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
-    @task = Task.find(params[:id], :conditions => {:user_id => @current_user.id})
+    @task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
   end
 
   # POST /tasks
@@ -64,7 +64,7 @@ class TasksController < ApplicationController
   # PUT /tasks/1
   # PUT /tasks/1.xml
   def update
-    @task = Task.find(params[:id], :conditions => {:user_id => @current_user.id})
+    @task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
 
     respond_to do |format|
       if @task.update_attributes(params[:task])
@@ -80,7 +80,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.xml
   def destroy
-    @task = Task.find(params[:id])
+    @task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
     @task.destroy
 
     respond_to do |format|
@@ -90,7 +90,7 @@ class TasksController < ApplicationController
   end
 
   def start_task
-    @task = Task.find(params[:id], :conditions => {:user_id => @current_user.id})
+    @task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
     if @task.update_attributes(params[:task]) and @task.update_attribute(:started_at, Time.now)
       redirect_to(tasks_url)
     else
@@ -99,7 +99,7 @@ class TasksController < ApplicationController
   end
 
   def time_left
-    task = Task.find(params[:id], :conditions => {:user_id => @current_user.id})
+    task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
     if task.started_at.nil? or task.is_finished: render :text => '-'
     else
       remaining = task.duration - Time.at(Time.now - task.started_at.to_time).min
@@ -110,7 +110,7 @@ class TasksController < ApplicationController
   end
 
   def add_time
-    @task = Task.find(params[:id], :conditions => {:user_id => @current_user.id})
+    @task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
 
     respond_to do |format|
       format.html
@@ -119,7 +119,7 @@ class TasksController < ApplicationController
   end
   
   def start
-    @task = Task.find(params[:task_id], :conditions => {:user_id => @current_user.id})
+    @task = Task.find_by_id_and_user_id(params[:task_id], @current_user.id)
 
     respond_to do |format|
       format.html # start.html.erb
@@ -128,7 +128,7 @@ class TasksController < ApplicationController
   end
 
   def update_duration
-    @task = Task.find(params[:id], :conditions => {:user_id => @current_user.id})
+    @task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
     @task.update_attributes(params[:task])
     @task.duration += @task.added_time
     @task.added_time = 0
@@ -149,7 +149,7 @@ class TasksController < ApplicationController
   end
   
   def fail
-    @task = Task.find(params[:id], :conditions => {:user_id => @current_user.id})
+    @task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
   end
   
   def add_tasks   # Breaking it down.
@@ -171,7 +171,7 @@ class TasksController < ApplicationController
   end
   
   def finish
-    task = Task.find(params[:id], :conditions => {:user_id => @current_user.id})
+    task = Task.find_by_id_and_user_id(params[:id], :user_id => @current_user.id)
     task.update_attribute(:is_finished, true)
     render :text => 'Task updated'
   end
