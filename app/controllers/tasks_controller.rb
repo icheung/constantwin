@@ -148,13 +148,8 @@ class TasksController < ApplicationController
     '''
   end
   
-<<<<<<< Updated upstream
   def fail
     @task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
-=======
-  def fail
-    @task = Task.find(params[:id], :conditions => {:user_id => @current_user.id})
->>>>>>> Stashed changes
   end
   
   def add_tasks   # Breaking it down.
