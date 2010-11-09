@@ -149,7 +149,7 @@ class TasksController < ApplicationController
   end
   
   def fail
-    @task = Task.find(params[:id]), :conditions => {:user_id => @current_user.id}
+    @task = Task.find(params[:id], :conditions => {:user_id => @current_user.id})
   end
   
   def add_tasks   # Breaking it down.

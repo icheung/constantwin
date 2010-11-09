@@ -6,29 +6,24 @@ Feature: Add new task
   Background:
     #Given I am logged in as "sample@email.com"
 
+  @wip
   Scenario: Add a task to a blank dashboard and visualize it
     Given I am on the dashboard
-    And I follow "New task"
-    And I fill in "Description" with "Do laundry"
-    And I press "Create"
-    When I go to the dashboard
-    Then I should see "Do laundry"
+    And I log in as "test" with password "testaccount"
+    #Then show me the page
+    #When I add a new task called "Do laundry"
+    #Then I should see "Do laundry"
     #And there should only be one task on the to-do list for today
 
   Scenario: Add a task while in the middle of another task
     Given I am on the dashboard
-    And I follow "New task"
-    And I fill in "Description" with "Random task"
-    And I press "Create"
-    And I go to the dashboard
+    When I add a new task called "Random task"
     And I follow "Start" #for "Random task"
     And I should be on the task timer page
     And I should see "Random task"
     When I go to the dashboard
-    And I follow "New task"
-    And I fill in "Description" with "Do laundry"
-    And I press "Create"
-    Then I should see "Do laundry"
+    When I add a new task called "Another random task"
+    Then I should see "Another random task"
 
   #Scenario: Add more tasks than alotted for one day
   #  Given I am on the dashboard
