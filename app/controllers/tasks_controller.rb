@@ -162,6 +162,7 @@ class TasksController < ApplicationController
     task2 = @current_user.tasks.new(:description => subtask2)
     
     if task1.save and task2.save
+      Task.find(params[:id]).delete
       redirect_to(tasks_url)
     else
       [task1, task2].each {|t| t.destroy} # prevents accidental task creation

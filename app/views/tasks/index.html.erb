@@ -21,9 +21,11 @@
     taskDescription = $$('#taskEntry' + taskId + ' td')[0];
     if (taskDescription.className.indexOf('done') == -1) {
       taskDescription.className += ', done';
+      ajax_updater.stop();
     }
     else {
       taskDescription.className = taskDescription.className.replace('done', '');
+      ajax_updater.stop();
     }
   }
 </script>
