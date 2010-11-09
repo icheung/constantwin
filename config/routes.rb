@@ -4,12 +4,16 @@ ActionController::Routing::Routes.draw do |map|
   map.add_time '/tasks/:id/add_time', :controller => "tasks", :action => "add_time"
   map.update_duration '/tasks/:id/update_duration', :controller => "tasks", :action => "update_duration"
   map.connect 'tasks/start', :controller => 'tasks', :action => 'start'
+
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.register '/register', :controller => 'users', :action => 'create'
   map.signup '/signup', :controller => 'users', :action => 'new'
-  map.resources :users
-
+  map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
+  
+  map.resources :users, :member => {:suspend => :put,
+                                    :unsuspend => :put,
+                                    :purge => :delete }
   map.resource :session
 
   map.start_task '/tasks/start/:id', :controller => 'tasks', :action => 'start', :id => /\d/

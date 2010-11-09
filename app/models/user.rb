@@ -71,9 +71,9 @@ class User < ActiveRecord::Base
     write_attribute :email, (value ? value.downcase : nil)
   end
 
-    protected
-      def make_activation_code
-            self.activation_code = self.class.make_token
-      end
+protected
+  def make_activation_code
+    self.activation_code = self.class.make_token
+  end
   
 end

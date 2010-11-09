@@ -1,4 +1,7 @@
 class TasksController < ApplicationController
+
+  before_filter :login_required
+  
   # GET /tasks
   # GET /tasks.xml
 
@@ -97,7 +100,7 @@ class TasksController < ApplicationController
 
   def time_left
     task = Task.find(params[:id])
-    if task.is_finished: render :text => '-'
+    if task.started_at.nil? or task.is_finished: render :text => '-'
     else
       remaining = task.duration - Time.at(Time.now - task.started_at.to_time).min
       if remaining > 0: render :text => remaining
@@ -131,9 +134,6 @@ class TasksController < ApplicationController
     @task.added_time = 0
     @task.save
 
-    # lines commented out b/c they don't work
-    # task.update_attribute(:duration, task.duration + task.added_time)
-    # task.update_attribute(:added_time, 0)
     render :text => "Task duration updated"
     '''
     respond_to do |format|
@@ -165,7 +165,7 @@ class TasksController < ApplicationController
       redirect_to(tasks_url)
     else
       [task1, task2].each {|t| t.destroy} # prevents accidental task creation
-      flash[:error] = "Failed to save subtasks."
+      flash[:error] = "You need to create at least two subtasks or add more time!"
       redirect_to :action => "fail", :id => id
     end
   end

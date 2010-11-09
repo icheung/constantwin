@@ -40,9 +40,10 @@
 <div id="table_container">
 <table id="tasksTable">
   <tr>
+    <th>ID</th>
     <th>Description</th>
-    <th>Duration</th>
     <th>Owner ID</th>
+    <th>Duration</th>
     <th>Finished?</th>
     <th>Time left</th>
     <th>Add time</th>
@@ -50,9 +51,11 @@
 
 <% @tasks.each do |task| %>
   <tr id="taskEntry<%= task.id %>">
+    <td><%= task.id %></td>
     <td <%= 'class = "done"' if task.is_finished %>><%=h task.description %></td>
-    <td><%=h task.duration %></td>
     <td><%=h task.user_id %></td>
+    <td><%=h task.duration %></td>
+
     <td>
       <% if task.is_finished %>
         <div id="task_done"><br/></div>
@@ -60,28 +63,26 @@
         <div id="task_not_done"><br/></div>
       <% end %>
     </td>
+
     <td>
-      <% if task.is_finished %>
-      -
-      <% elsif task.started_at %>
-        <% time_left = task.duration - Time.at(Time.now - task.started_at.to_time).min %>
-        <% if time_left > 0 %>
-          <div id="timer<%=h task.id %>">
-            <%= time_left %>
-          </div>
-          <script type="text/javascript">startTimer('<%=h "timer" + task.id.to_s %>');</script>
-        <% else %>
-          <script type="text/javascript">//window.location="/tasks/fail/<%= task.id %>"</script>
-          0
-        <% end %>
-      <% else %>
+      <% if task.started_at.nil?%>
         <%= link_to 'Start', {:action => "start", :task_id => task.id} %>
+      <% elsif task.is_finished? %>
+        -
+      <% else %>
+        <div id="timer<%=h task.id %>"></div>
+        <script type="text/javascript">startTimer('<%=h "timer" + task.id.to_s %>');</script>
       <% end %>
     </td>
-    <td><%= task.is_finished? ? '-' : link_to('Add time', add_time_path(task)) %></td>
+
+    <td><%= (task.started_at.nil? or task.is_finished?) ? '-' : link_to('Add time', add_time_path(task)) %></td>
+
     <td><%= link_to 'Edit', edit_task_path(task) %></td>
+
     <td><%= link_to 'Delete', task, :confirm => 'Are you sure?', :method => :delete %></td>
-    <td><input id="checkbox<%= task.id %>" type="checkbox" onclick="checkOff(<%=task.id%>)" <%= "checked disabled" if task.is_finished %> /></td>
+
+    <td><input id="checkbox<%= task.id %>" type="checkbox" onclick="checkOff(<%=task.id%>)" <%= "checked" if task.is_finished %> <%= "disabled" if task.is_finished or task.started_at.nil? %>/></td>
+
   </tr>
 <% end %>
 </table>
