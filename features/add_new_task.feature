@@ -4,19 +4,19 @@ Feature: Add new task
   So that I can deal with it later
 
   Background:
-    #Given I am logged in as "sample@email.com"
+    Given I sign up as "test" with email "test@test.com" and password "testaccount"
+    And I log in as "test" with password "testaccount"
 
   @wip
   Scenario: Add a task to a blank dashboard and visualize it
     Given I am on the dashboard
-    And I log in as "test" with password "testaccount"
     #Then show me the page
-    #When I add a new task called "Do laundry"
-    #Then I should see "Do laundry"
-    #And there should only be one task on the to-do list for today
+    When I add a new task called "Do laundry"
+    Then I should see "Do laundry"
 
   Scenario: Add a task while in the middle of another task
     Given I am on the dashboard
+    And I log in as "test" with password "testaccount"
     When I add a new task called "Random task"
     And I follow "Start" #for "Random task"
     And I should be on the task timer page
