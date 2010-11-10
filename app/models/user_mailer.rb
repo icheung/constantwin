@@ -4,6 +4,7 @@ class UserMailer < ActionMailer::Base
     setup_email(user)
     @url  = "http://example.com/login"
     @subject += "Welcome to Constant Win!"
+    @content_type = "text/html"
   end
   
   def signup_notification(user)

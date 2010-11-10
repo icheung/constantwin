@@ -1,12 +1,16 @@
 class Task < ActiveRecord::Base
-  validates_presence_of :description
-  # validates_presence_of :duration   # no need to b/c we set duration when we start the task instead
-  validates_presence_of :user_id
-  validates_presence_of :is_finished, :if => "#{:is_finished}"
-  validates_length_of :description, :allow_blank => false, :allow_nil => false, :minimum => 5, :too_short => "Task Description must be at least 5 characters long!"
-  validate :new_task_cannot_be_already_finished, :new_task_cannot_be_already_started, :duration_cannot_be_less_than_5_minutes #:new_task_cannot_have_no_owner,
+
   belongs_to :user
   before_validation :default_values
+  
+  validates_presence_of :description
+  validates_presence_of :user_id
+  validates_numericality_of :duration, :only_integer => true, :in => 15..60, :message => "Minutes can only be whole number!"
+  validates_numericality_of :added_time, :only_integer => true, :in => 15..60, :message => "Minutes can only be whole number!"
+  validates_presence_of :is_finished, :if => "#{:is_finished}"
+  validates_length_of :description, :allow_blank => false, :allow_nil => false, :minimum => 5, :too_short => "Task Description must be at least 5 characters long!"
+  validate :new_task_cannot_be_already_finished, :new_task_cannot_be_already_started, :duration_cannot_be_less_than_5_minutes
+  
 
   def initialize(params=nil)
     super
@@ -20,10 +24,13 @@ class Task < ActiveRecord::Base
     self.started_at = nil unless self.started_at
   end
 
-  def add_time(amount_of_time)
-    self.duration += amount_of_time # shouldn't be amount_of_time.minutes b/c its an int
-    self.save!
+  def update_duration()
+    self.started_at = Time.now
+    self.duration = self.added_time.abs
+    self.added_time = 0
+    self.save
   end
+
   
   # special validations checks
 

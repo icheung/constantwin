@@ -9,7 +9,7 @@
   }
   function checkTime(taskId) {
     var timeLeft = parseInt(document.getElementById('timer' + taskId).innerHTML);
-    if (timeLeft <= 0) {
+    if (timeLeft == 0) {
       fail(taskId);
     }
   }
@@ -20,7 +20,8 @@
     new Ajax.Request('/tasks/finish/' + taskId, { method: 'post' })
     taskDescription = $$('#taskEntry' + taskId + ' td')[0];
     if (taskDescription.className.indexOf('done') == -1) {
-      taskDescription.className += ', done';
+      taskDescription.className += 'done';
+      Field.disable('checkbox' + taskId);
       ajax_updater.stop();
     }
     else {
@@ -38,7 +39,6 @@
   <%= image_tag "turtle.gif" %>
   Constant Win
 </h1>
-
 <div id="table_container">
 <table id="tasksTable">
   <tr>
@@ -54,7 +54,7 @@
 <% @tasks.each do |task| %>
   <tr id="taskEntry<%= task.id %>">
     <td><%= task.id %></td>
-    <td <%= 'class = "done"' if task.is_finished %>><%=h task.description %></td>
+    <td class="<%= task.is_finished ?  'done' : '' %>"><%=h task.description %></td>
     <td><%=h task.user_id %></td>
     <td><%=h task.duration %></td>
 
@@ -83,7 +83,8 @@
 
     <td><%= link_to 'Delete', task, :confirm => 'Are you sure?', :method => :delete %></td>
 
-    <td><input id="checkbox<%= task.id %>" type="checkbox" onclick="checkOff(<%=task.id%>)" <%= "checked" if task.is_finished %> <%= "disabled" if task.is_finished or task.started_at.nil? %>/></td>
+    <td><input id="checkbox<%= task.id %>" type="checkbox" onclick="checkOff(<%=task.id%>)" 
+	       <%= "checked" if task.is_finished %> <%= "disabled" if task.is_finished or task.started_at.nil? %>/></td>
 
   </tr>
 <% end %>

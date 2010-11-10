@@ -130,9 +130,7 @@ class TasksController < ApplicationController
   def update_duration
     @task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
     @task.update_attributes(params[:task])
-    @task.duration += @task.added_time
-    @task.added_time = 0
-    @task.save
+    @task.update_duration
 
     render :text => "Task duration updated"
     '''
@@ -172,8 +170,8 @@ class TasksController < ApplicationController
   end
   
   def finish
-    task = Task.find_by_id_and_user_id(params[:id], :user_id => @current_user.id)
-    task.update_attribute(:is_finished, true)
+    @task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
+    @task.update_attribute(:is_finished, true)
     render :text => 'Task updated'
   end
   

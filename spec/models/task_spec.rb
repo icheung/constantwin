@@ -18,6 +18,7 @@ describe Task do
       :password => "12345abcde",
       :password_confirmation => "12345abcde"
     }
+    @user = User.create! @valid_user_attributes
   end
 
   describe "when creating a new task" do
@@ -50,11 +51,8 @@ describe Task do
     end
     
     it "should destroy task when user is destroyed" do
-      @user = User.create! @valid_user_attributes
-      @user.save!
       @task = @user.tasks.create! @valid_task_attributes
-      @task.save!
-      task_id = @user.tasks[0].id
+      task_id = @user.id
       @user.destroy
       lambda {Task.find(task_id)}.should raise_error(::ActiveRecord::RecordNotFound)
     end
@@ -84,8 +82,8 @@ describe Task do
       @dummy_task = Task.new @valid_task_attributes
       @dummy_task.duration = 10
       @dummy_task.added_time = 5
-      @dummy_task.add_time(@dummy_task.added_time)
-      @dummy_task.duration.should == 15
+      @dummy_task.update_duration
+      @dummy_task.duration.should == 5
     end
   end
 end

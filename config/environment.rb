@@ -42,8 +42,8 @@ Rails::Initializer.run do |config|
     :port => '587',
     :authentication => :plain,
     :domain => 'constantwin.heroku.com',
-    :user_name => '',
-    :password => ''
+    :user_name => '', # YOUR GMAIL ADDRESS
+    :password => ''   # YOUR GMAIL PASSWD
   }
   
   # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
