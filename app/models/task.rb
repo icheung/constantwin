@@ -61,4 +61,9 @@ class Task < ActiveRecord::Base
       is_finished == true
   end
 
+  def validate_added_duration
+    self.added_time.kind_of?(Integer) and (5..60) === self.added_time
+  end
+
+  
 end

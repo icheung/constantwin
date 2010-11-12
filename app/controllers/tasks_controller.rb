@@ -130,9 +130,14 @@ class TasksController < ApplicationController
   def update_duration
     @task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
     @task.update_attributes(params[:task])
-    @task.update_duration
-
-    render :text => "Task duration updated"
+    if @task.validate_added_duration
+      @task.update_duration
+      render :text => "Task duration updated"
+    else
+      flash[:error] = "Added time needs to be a valid number between 5 and 60!"
+      redirect_to :action => "add_time", :id => params[:id]
+    end
+      
     '''
     respond_to do |format|
       if @task.save
