@@ -4,8 +4,8 @@ Given /^the following user record$/ do |table|
   end
 end
 
-When /^I login as "([^"]*)" with password "([^"]*)"$/ do |username, password|
-  fill_in "Login", :with => @testuser.login
-  fill_in "Password", :with => @testuser.password
-  click_button "Log in"
-end
+#When /^I login as "([^"]*)" with password "([^"]*)"$/ do |username, password|
+#  fill_in "Login", :with => username
+#  fill_in "Password", :with => password
+#  click_button "Log in"
+#end

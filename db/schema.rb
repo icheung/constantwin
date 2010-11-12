@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101122021855) do
+ActiveRecord::Schema.define(:version => 20101123114707) do
 
   create_table "tasks", :force => true do |t|
     t.string   "description"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(:version => 20101122021855) do
     t.integer  "added_time"
     t.time     "started_at"
     t.boolean  "active_task"
+    t.time     "stopped_at"
+    t.time     "stopped_duration"
   end
 
   create_table "users", :force => true do |t|

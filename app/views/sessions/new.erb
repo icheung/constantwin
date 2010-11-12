@@ -1,0 +1,58 @@
+<%= content_for :title, "Log In" %>
+
+
+<%= stylesheet_link_tag 'login' %>
+
+
+<%=image_tag("constant_win_banner_small.png")%>
+
+<h1> Win Constantly!</h1>
+<div id="loginPageDescription">
+	<p>
+		Never feel overwhelmed with <br />
+		your to-do lists again!
+	</p>
+
+	<p>
+		Constant WIN will help you <br />
+		manage your to-do lists in a<br />
+		positive, happy-fun-times way!
+	</p>	
+
+	<p>
+		Win small, win often. <br />
+		Don't do more than you need to. <br />
+		Build good habits. <br />
+	</p>
+</div>
+
+<div id= "rightColumn">
+	<% form_tag session_path do -%>
+	<div id="login">
+		<fieldset>
+			<p><%= label_tag 'login' %><br />
+			<%= text_field_tag 'login', @login, :size=>40 %> </p>
+
+			<p><%= label_tag 'password' %><br/>
+			<%= password_field_tag 'password', nil, :size=>40 %></p>
+			<p><%= submit_tag 'Log in' %></p>
+
+			<p>or login with Facebook connect</p>
+			<%= fb_login_button('window.location = "/users/link_user_accounts";')%>
+		</fieldset>
+</div>
+
+	<div id="register">
+		<fieldset>
+			<p>Don't have an account? <%=link_to 'Click here', signup_path%> to register!</p>
+		</fieldset>
+	</div>
+	<% end -%>
+</div>
+
+<!-- Uncomment this if you want this functionality
+<p><%= label_tag 'remember_me', 'Remember me' %>
+<%= check_box_tag 'remember_me', '1', @remember_me %></p>
+-->
+
+
