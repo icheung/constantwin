@@ -6,8 +6,9 @@
   <title>ConstantWin / <%= yield(:title) %></title>
   <!-- TODO: Add default JavaScript and CSS tags -->
   <%= stylesheet_link_tag 'base' %>
-  <%- javascript_include_tag 'jquery-1.4.3.min' %>
-  <%= javascript_include_tag :defaults -%>
+  <!--<%= javascript_include_tag 'jquery-1.4.3.min' %>-->
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag 'base' %>
 </head><body>
 
 <div id="wrapper">

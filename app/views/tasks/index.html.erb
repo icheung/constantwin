@@ -1,3 +1,5 @@
+<% content_for :title, "Tasks" %>
+
 <script type="text/javascript">
   function startTimer(elementID) {
     var ajax_updater = new Ajax.PeriodicalUpdater(
@@ -36,8 +38,10 @@
 </style>
 
 <h1>
+  <!--
   <%= image_tag "turtle.gif" %>
-  Constant Win
+  Constant Win-->
+  Listing tasks
 </h1>
 <div id="table_container">
 <table id="tasksTable">
@@ -92,5 +96,8 @@
 
 <br />
 
+<p>
 <%= link_to 'New task', new_task_path %>
+</p>
+
 </div>
