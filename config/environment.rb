@@ -39,11 +39,11 @@ Rails::Initializer.run do |config|
   config.action_mailer.smtp_settings = {
     :enable_starttls_auto => true,
     :address => 'smtp.gmail.com',
-    :port => '587',
+    :port => 587,
     :authentication => :plain,
     :domain => 'constantwin.heroku.com',
-    :user_name => '', # YOUR GMAIL ADDRESS
-    :password => ''   # YOUR GMAIL PASSWD
+    :user_name => 'cantstopwinning@gmail.com', # YOUR GMAIL ADDRESS
+    :password => 'constant.win'   # YOUR GMAIL PASSWD
   }
   
   # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.

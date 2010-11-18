@@ -1,5 +1,7 @@
 class TasksController < ApplicationController
 
+  layout 'base'
+
   before_filter :login_required
   
   # GET /tasks
