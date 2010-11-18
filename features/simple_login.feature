@@ -3,6 +3,7 @@ Feature: Simplest login test ever
     I want to be able to login to constant win
     So that I can begin winning
 
+	@wip
 	Scenario: Testing login
 		Given the following user record
 		 | login | password    |

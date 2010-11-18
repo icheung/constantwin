@@ -7,7 +7,7 @@ Feature: Add new task
     Given I sign up as "test" with email "test@test.com" and password "testaccount"
     And I log in as "test" with password "testaccount"
 
-  @wip
+  #@wip
   Scenario: Add a task to a blank dashboard and visualize it
     Given I am on the dashboard
     Then show me the page
@@ -25,40 +25,23 @@ Feature: Add new task
     When I add a new task called "Another random task"
     Then I should see "Another random task"
 
-  #Scenario: Add more tasks than alotted for one day
-  #  Given I am on the dashboard
-    # And I add 5 different tasks (max the daily task limit)
-  #  And I follow "New task"
-  #  And I fill in "Description" with "Task 1"
-  #  And I press "Create"
-  #  And I follow "Back"
-  #  And I follow "New task"
-  #  And I fill in "Description" with "Task 2"
-  #  And I press "Create"
-  #  And I follow "Back"
-  #  And I follow "New task"
-  #  And I fill in "Description" with "Task 3"
-  #  And I press "Create"
-  #  And I follow "Back"
-  #  And I follow "New task"
-  #  And I fill in "Description" with "Task 4"
-  #  And I press "Create"
-  #  And I follow "Back"
-  #  And I follow "New task"
-  #  And I fill in "Description" with "Task 5"
-  #  And I press "Create"
-  #  And I follow "Back"
-  #  When I follow "New task"
-  #  And I fill in "Description" with "Do laundry"
-  #  And I press "Create"
-  #  Then I should see "Error: Too many tasks!"
-  #  And I should not see "Do laundry"
+  Scenario: Add more tasks than alotted for one day
+    Given I am on the dashboard
+     And I add 5 different tasks (max the daily task limit)
+		And I add a new task called "Task 1"
+		And I add a new task called "Task 2"
+		And I add a new task called "Task 3"
+		And I add a new task called "Task 4"
+		And I add a new task called "Task 5"
+		When I add a new task called "Do laundry"
+    Then I should see "Error: Too many tasks!"
+    And I should not see "Do laundry"
 
-  #Given there is a calendar with current date October 7, 2010
-  #And I am currently on this date
-  #When the clock hits October 8, 2010
-  #Then I should have a fresh todo list for the new day
+  Given there is a calendar with current date October 7, 2010
+  And I am currently on this date
+  When the clock hits October 8, 2010
+  Then I should have a fresh todo list for the new day
 
-  #Given there is a calendar
-  #When I click on the day after the current
-  #Then I should be on the todo list for that day
+  Given there is a calendar
+  When I click on the day after the current
+  Then I should be on the todo list for that day
