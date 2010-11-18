@@ -43,7 +43,7 @@ Rails::Initializer.run do |config|
     :authentication => :plain,
     :domain => 'constantwin.heroku.com',
     :user_name => 'cantstopwinning@gmail.com', # YOUR GMAIL ADDRESS
-    :password => 'constant.win'   # YOUR GMAIL PASSWD
+    :password => ''   # YOUR GMAIL PASSWD
   }
   
   # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
