@@ -11,3 +11,4 @@ Feature: Simplest login test ever
 		When I login as "foo" with password "foopassword"
 		Then show me the page
 		Then I should be on the dashboard
+		Then show me the page
