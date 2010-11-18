@@ -1,9 +1,8 @@
-Feature: Start task
+Feature: Simplest login test ever
   As a user
-    I want to be able to start one of the tasks from my list of tasks
-    So that I can begin working on that task
+    I want to be able to login to constant win
+    So that I can begin winning
 
-	@focus
 	Scenario: Testing login
 		Given the following user record
 		 | login | password    |
@@ -11,8 +10,4 @@ Feature: Start task
 		And I am on the login page
 		When I login as "foo" with password "foopassword"
 		Then show me the page
-		Then I should be on the task timer page
-
-
-
-
+		Then I should be on the dashboard

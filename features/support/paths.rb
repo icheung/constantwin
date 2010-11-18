@@ -14,6 +14,8 @@ module NavigationHelpers
       '/'
     when /the task timer page/
       '/tasks/start'
+    when /the login page/
+      '/'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

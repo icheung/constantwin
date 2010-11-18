@@ -1,3 +1,4 @@
+=begin
 Given /^I sign up as "([^"]*)" with email "([^"]*)" and password "([^"]*)"$/ do |user, email, pass|
   visit "/signup"
   fill_in "Login", :with => "#{user}"
@@ -17,3 +18,4 @@ Given /^I log in as "([^"]*)" with password "([^"]*)"$/ do |user, pass|
   fill_in "Password", :with => "#{pass}"
   click_button "Log in"
 end
+=end

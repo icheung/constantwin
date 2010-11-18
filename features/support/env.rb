@@ -15,6 +15,7 @@ require 'cucumber/web/tableish'
 
 require 'webrat'
 require 'webrat/core/matchers'
+require "#{Rails.root}/spec/factories"
 
 Webrat.configure do |config|
   config.mode = :rails
