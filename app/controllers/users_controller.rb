@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   layout 'base'
 
-  before_filter :login_required
+  before_filter :login_required, :except => [:new, :create]
 
 
   # render new.rhtml
