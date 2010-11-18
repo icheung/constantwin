@@ -2,6 +2,9 @@ class UsersController < ApplicationController
 
   layout 'base'
 
+  before_filter :login_required
+
+
   # render new.rhtml
   def new
     @user = User.new

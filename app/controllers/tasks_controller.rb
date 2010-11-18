@@ -10,8 +10,8 @@ class TasksController < ApplicationController
   #before_filter :update_duration, :only => :show
 
   def index
-    @tasks = Task.find_all_by_user_id(@current_user.id, :conditions => {:is_finished => false}).sort_by {|t| t.created_at}
-    @finished_tasks = Task.find_all_by_user_id(@current_user.id, :conditions => {:is_finished => true}).sort_by {|t| t.created_at}
+    @tasks = @current_user.tasks.find(:all, :conditions => {:is_finished => false}).sort_by {|t| t.created_at}
+    @finished_tasks = @current_user.tasks.find(:all, :conditions => {:is_finished => true}).sort_by {|t| t.created_at}
     @tasks.concat(@finished_tasks)
 
     respond_to do |format|
@@ -23,7 +23,7 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.xml
   def show
-    @task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
+    @task = @current_user.tasks.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -44,7 +44,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
-    @task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
+    @task = @current_user.tasks.find(params[:id])
   end
 
   # POST /tasks
@@ -66,7 +66,7 @@ class TasksController < ApplicationController
   # PUT /tasks/1
   # PUT /tasks/1.xml
   def update
-    @task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
+    @task = @current_user.tasks.find(params[:id])
 
     respond_to do |format|
       if @task.update_attributes(params[:task])
@@ -82,7 +82,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.xml
   def destroy
-    @task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
+    @task = @current_user.tasks.find(params[:id])
     @task.destroy
 
     respond_to do |format|
@@ -92,7 +92,7 @@ class TasksController < ApplicationController
   end
 
   def start_task
-    @task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
+    @task = @current_user.tasks.find(params[:id])
     if @task.update_attributes(params[:task]) and @task.update_attribute(:started_at, Time.now)
       redirect_to(tasks_url)
     else
@@ -101,10 +101,10 @@ class TasksController < ApplicationController
   end
 
   def time_left
-    task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
-    if task.started_at.nil? or task.is_finished: render :text => '-'
+    @task = @current_user.tasks.find(params[:id])
+    if @task.started_at.nil? or @task.is_finished: render :text => '-'
     else
-      remaining = task.duration - Time.at(Time.now - task.started_at.to_time).min
+      remaining = @task.duration - Time.at(Time.now - @task.started_at.to_time).min
       if remaining > 0: render :text => remaining
       else render :text => 0
       end
@@ -112,7 +112,7 @@ class TasksController < ApplicationController
   end
 
   def add_time
-    @task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
+    @task = @current_user.tasks.find(params[:id])
 
     respond_to do |format|
       format.html
@@ -121,7 +121,7 @@ class TasksController < ApplicationController
   end
   
   def start
-    @task = Task.find_by_id_and_user_id(params[:task_id], @current_user.id)
+    @task = @current_user.tasks.find(params[:task_id])
 
     respond_to do |format|
       format.html # start.html.erb
@@ -130,31 +130,20 @@ class TasksController < ApplicationController
   end
 
   def update_duration
-    @task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
+    @task = @current_user.tasks.find(params[:id])
     @task.update_attributes(params[:task])
     if @task.validate_added_duration
       @task.update_duration
-      render :text => "Task duration updated"
+      flash[:notice] = "Successfully added more time!"
+      redirect_to :action => "index"
     else
       flash[:error] = "Added time needs to be a valid number between 5 and 60!"
       redirect_to :action => "add_time", :id => params[:id]
     end
-      
-    '''
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to(@task) }
-        format.xml  { render :xml => @task, :location => @task }
-      else
-        format.html { render :action => "add_time" }
-        format.xml  { render :xml => @task.errors, :status => :unprocessable_entity }
-      end
-    end
-    '''
   end
   
   def fail
-    @task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
+    @task = @current_user.tasks.find(params[:id])
   end
   
   def add_tasks   # Breaking it down.
@@ -177,7 +166,7 @@ class TasksController < ApplicationController
   end
   
   def finish
-    @task = Task.find_by_id_and_user_id(params[:id], @current_user.id)
+    @task = @current_user.tasks.find(params[:id])
     @task.update_attribute(:is_finished, true)
     render :text => 'Task updated'
   end
