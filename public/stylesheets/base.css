@@ -9,7 +9,8 @@ html, body { margin: 0; padding: 0; background-color: #eee; font: 9pt verdana, s
 #footer { padding: 0 10px; border-top: 1px solid #ccc; }
 #footer tt { background-color: #ffffcc; }
 /* specific elements */
-#flash_notice { border: 1px solid silver; background-color: #DFF2BF; padding: 0.3em; font: 10pt verdana; line-height: 1.3em; }
+#flash_notice, #flash_error { border: 1px solid silver; background-color: #DFF2BF; padding: 0.3em; font: 10pt verdana; line-height: 1.3em; }
+#flash_error { background-color: pink; }
 /* html elements */
 h1, h2, h3 { font-family: georgia, times; }
 a { color: green; }
