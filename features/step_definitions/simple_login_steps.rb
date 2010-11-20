@@ -1,7 +1,6 @@
 Given /^the following user record$/ do |table|
   table.hashes.each do |hash|
     @testuser = Factory(:user, hash)
-    @testuser
   end
 end
 

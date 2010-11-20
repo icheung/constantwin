@@ -1,0 +1,54 @@
+div#loginPageDescription
+{
+float: left;
+}
+
+input
+{
+color: #781351;
+background: #fee3ad;
+border: 1px solid #F3F85C;
+
+/* mozilla browser */
+-moz-border-radius: 5px;
+/* opera browser */
+border-radius: 5px;
+/* chrome & safari browser */
+-webkit-border-radius: 5px;
+}
+
+div#content{float:left;background-color: #fff;border: 1px solid #ccc; width: 760px; height: 500px;margin: -1px auto;position: relative;left: -1px;}
+div#footer{float:left;}
+div#rightColumn{float:left;}
+div#login{}
+
+div#register
+{
+	margin:10px 0px 0px 0px;
+	top:10px;	
+}
+
+fieldset
+{
+	
+color: #BF4314;
+background-color: #DFA031;
+position: relative;
+right: -100px;
+border: 1px solid #F3F85C;
+width: 20em;
+padding: 10px;
+
+/* mozilla browser */
+-moz-border-radius: 10px;
+/* opera browser */
+border-radius: 10px;
+/* chrome & safari browser */
+-webkit-border-radius: 10px;
+}
+
+div#login form input {padding: 5px;}
+div#login form input .button {-moz-border-radius: 5px}
+
+
+
