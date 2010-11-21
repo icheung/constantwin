@@ -44,7 +44,7 @@
   Listing tasks
 </h1>
 
-<% form_remote_tag(:controller => "tasks", :action => "create") do %>
+<% form_tag(:controller => "tasks", :action => "create") do %>
   <%= text_field_tag(:task_description, nil, :size => "30", :name => "task[description]") %>
   <%= submit_tag("Add task") %>
 <% end %>
