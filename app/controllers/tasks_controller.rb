@@ -54,8 +54,12 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to(@task) }
+        format.html {
+          flash[:notice] = "Task successfully added"
+          redirect_to :action => "index"
+        }
         format.xml  { render :xml => @task, :status => :created, :location => @task }
+        format.js
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @task.errors, :status => :unprocessable_entity }
