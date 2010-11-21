@@ -94,6 +94,7 @@ class TasksController < ApplicationController
   def start_task
     @task = @current_user.tasks.find(params[:id])
     if @task.update_attributes(params[:task]) and @task.update_attribute(:started_at, Time.now)
+      @current_user.update_attribute(:is_tasking, true)
       redirect_to(tasks_url)
     else
       format.html { render :action => 'start' }
@@ -121,11 +122,17 @@ class TasksController < ApplicationController
   end
   
   def start
-    @task = @current_user.tasks.find(params[:task_id])
-
-    respond_to do |format|
-      format.html # start.html.erb
-      format.xml  { render :xml => @task }
+    if @current_user.is_tasking
+      flash[:error] = "You should be completing only one task at a time!"
+      redirect_to(tasks_url)
+      
+    else
+      @task = @current_user.tasks.find(params[:task_id])
+      
+      respond_to do |format|
+        format.html # start.html.erb
+        format.xml  { render :xml => @task }
+      end
     end
   end
 
@@ -168,6 +175,7 @@ class TasksController < ApplicationController
   def finish
     @task = @current_user.tasks.find(params[:id])
     @task.update_attribute(:is_finished, true)
+    @current_user.update_attribute(:is_tasking, false)
     render :text => 'Task updated'
   end
   
