@@ -2,3 +2,4 @@
 *.log
 *.sqlite3
 webrat-*.html
+.DS_Store
