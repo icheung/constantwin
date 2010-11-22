@@ -87,8 +87,10 @@ class TasksController < ApplicationController
   # DELETE /tasks/1.xml
   def destroy
     @task = @current_user.tasks.find(params[:id])
+    if @task.active_task
+      current_user.update_attribute(:is_tasking, false)
+    end
     @task.destroy
-
     respond_to do |format|
       format.html { redirect_to(tasks_url) }
       format.xml  { head :ok }
@@ -97,7 +99,7 @@ class TasksController < ApplicationController
 
   def start_task
     @task = @current_user.tasks.find(params[:id])
-    if @task.update_attributes(params[:task]) and @task.update_attribute(:started_at, Time.now)
+    if @task.update_attributes(params[:task]) && @task.update_attribute(:started_at, Time.now) && @task.update_attribute(:active_task, true)
       @current_user.update_attribute(:is_tasking, true)
       redirect_to(tasks_url)
     else
