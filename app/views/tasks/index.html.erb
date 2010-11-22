@@ -12,9 +12,13 @@
   }
 
   function updateProgressBar(taskId) {
-    var timeLeft = checkTime(taskId);
+    var timeLeft = document.getElementById('timer' + taskId).innerHTML;
+    var parsed_time = timeLeft.match(/(\d+):(\d\d)/);
+    var minutes = parsed_time[1];
+    var seconds = parsed_time[2] / 60;
+    var timeFloatLeft = parseFloat(seconds) + parseFloat(minutes);
     var totalTime = parseInt(jQuery("#taskEntry"+taskId+">td#duration").html());
-    jQuery("#progressbar").progressbar({value: ((totalTime - timeLeft)/totalTime) * 100});
+    jQuery("#progressbar").progressbar({value: ((parseFloat(totalTime) - timeFloatLeft)/parseFloat(totalTime)) * 100.00});
   }
 
   function checkTime(taskId) {
