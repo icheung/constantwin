@@ -10,9 +10,10 @@ class TasksController < ApplicationController
   #before_filter :update_duration, :only => :show
 
   def index
-    @tasks = @current_user.tasks.find(:all, :conditions => {:is_finished => false}).sort_by {|t| t.created_at}
+    @tasks = @current_user.tasks.find(:all, :conditions => {:is_finished => false, :active_task => true})
+    @unstarted_tasks = @current_user.tasks.find(:all, :conditions => {:is_finished => false, :started_at => nil}).sort_by {|t| t.created_at}
     @finished_tasks = @current_user.tasks.find(:all, :conditions => {:is_finished => true}).sort_by {|t| t.created_at}
-    @tasks.concat(@finished_tasks)
+    @tasks.concat(@unstarted_tasks).concat(@finished_tasks)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -100,7 +101,12 @@ class TasksController < ApplicationController
   def start_task
     @task = @current_user.tasks.find(params[:id])
     if @task.update_attributes(params[:task]) && @task.update_attribute(:started_at, Time.now) && @task.update_attribute(:active_task, true)
-      @current_user.update_attribute(:is_tasking, true)
+      if @current_user.facebook_user?
+        @current_user.is_tasking = true
+        @current_user.save(false)
+      else
+        @current_user.update_attribute(:is_tasking, true)
+      end
       redirect_to(tasks_url)
     else
       format.html { render :action => 'start' }
@@ -185,7 +191,16 @@ class TasksController < ApplicationController
   def finish
     @task = @current_user.tasks.find(params[:id])
     @task.update_attribute(:is_finished, true)
-    @current_user.update_attribute(:is_tasking, false)
+
+    # Because Facebook users don't have password and email in the user model,
+    # validations fail on save, so this is a workaround
+    if @current_user.facebook_user?
+      @current_user.is_tasking = false
+      @current_user.save(false)
+    else
+      @current_user.update_attribute(:is_tasking, false)
+    end
+    
     render :text => 'Task updated'
   end
   
