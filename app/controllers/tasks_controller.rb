@@ -104,9 +104,13 @@ class TasksController < ApplicationController
     @task = @current_user.tasks.find(params[:id])
     if @task.started_at.nil? or @task.is_finished: render :text => '-'
     else
-      remaining = @task.duration - Time.at(Time.now - @task.started_at.to_time).min
-      if remaining > 0: render :text => remaining
-      else render :text => 0
+      time_remaining = Time.at(Time.now - @task.started_at.to_time)
+      remaining = @task.duration - time_remaining.min
+      seconds = 59 - time_remaining.sec
+      seconds = seconds >= 10 ? seconds.to_s : "0#{seconds.to_s}"
+      time = "#{remaining-1}:#{seconds}"
+      if remaining > 0: render :text => time
+      else render :text => "0:00"
       end
     end
   end
