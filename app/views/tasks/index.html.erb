@@ -5,28 +5,39 @@
     var ajax_updater = new Ajax.PeriodicalUpdater(
       elementID,
       '/tasks/time_left/' + elementID.substring(5).toString(),
-      { method: 'get', frequency: 30, decay: 1 }
+      { method: 'get', frequency: 10, decay: 1 }
     );
     setInterval('checkTime("' + elementID.substring(5).toString() + '")', 5000);
     setInterval('updateProgressBar("'+elementID.substring(5).toString()+'")',100);
   }
 
   function updateProgressBar(taskId) {
+    // Debugging is fun!
+    // console.debug(timeLeft);
     var timeLeft = document.getElementById('timer' + taskId).innerHTML;
-    var parsed_time = timeLeft.match(/(\d+):(\d\d)/);
-    var minutes = parsed_time[1];
-    var seconds = parsed_time[2] / 60;
-    var timeFloatLeft = parseFloat(seconds) + parseFloat(minutes);
-    var totalTime = parseInt(jQuery("#taskEntry"+taskId+">td#duration").html());
-    jQuery("#progressbar").progressbar({value: ((parseFloat(totalTime) - timeFloatLeft)/parseFloat(totalTime)) * 100.00});
+    var parsed_time = timeLeft.match(/(\d+):(\d{2})/);
+    if (parsed_time != null)
+    {
+      var minutes = parsed_time[1];
+      var seconds = parsed_time[2] / 60;
+      var timeFloatLeft = parseFloat(seconds) + parseFloat(minutes);
+      var totalTime = parseInt(jQuery("#taskEntry"+taskId+">td#duration").html());
+      jQuery("#progressbar").progressbar({value: ((parseFloat(totalTime) - timeFloatLeft)/parseFloat(totalTime)) * 100.00});
+    }
   }
 
   function checkTime(taskId) {
-    var timeLeft = parseInt(document.getElementById('timer' + taskId).innerHTML);
-    if (timeLeft == 0) {
-      fail(taskId);
+    var timeLeft = document.getElementById('timer' + taskId).innerHTML;
+    var timeLeftInt = parseInt(timeLeft);
+    var parsed_time = timeLeft.match(/(\d+):(\d{2})/);
+    if (parsed_time != null)
+    {
+      var minutes = parsed_time[1];
+      var seconds = parsed_time[2] / 60;
+      var timeFloatLeft = parseFloat(seconds) + parseFloat(minutes);
+      if (timeFloatLeft <= 0) fail(taskId);
     }
-    return timeLeft;
+    return timeLeftInt;
   }
   function fail(taskId) {
     window.location = '/tasks/fail/' + taskId;
