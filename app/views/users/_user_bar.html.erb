@@ -1,13 +1,21 @@
 <div id="userStatus">
 <% if logged_in? -%>
-  <!-- FACEBOOK PROFILE PICTURE -->
-  <fb:profile-pic uid="<%= current_user.fb_user_id%>" facebook-logo="true" size="thumb" ></fb:profile-pic>
-  
-  <span id="user-bar-greeting">Hi <%= link_to_current_user :content_method => :name %>!</span>
-  <span id="user-bar-action"><a href="#" onclick='FB.Connect.logoutAndRedirect("/sessions/destroy")'>Log out</a>
 
-    <!-- (<%= fb_logout_link("Log out", logout_path)%>)</span> -->
-    <!-- (<%= link_to "Log out", logout_path, { :title => "Log out" } %>)</span> -->
+  <% if current_user.facebook_user? %>
+    <!-- FACEBOOK PROFILE PICTURE -->
+    <fb:profile-pic uid="<%= current_user.fb_user_id%>" facebook-logo="true" size="thumb" ></fb:profile-pic>
+  
+    <span id="user-bar-greeting">Hi <%= link_to_current_user :content_method => :name %>!</span>
+    <span id="user-bar-action"><a href="#" onclick='FB.Connect.logoutAndRedirect("/sessions/destroy")'>Log out</a>
+      <!-- OLDER line, can delete -->
+      <!-- (<%= fb_logout_link("Log out", logout_path)%>)</span> -->
+
+  <% else %>
+    <span id="user-bar-greeting">Hi <%= link_to_current_user :content_method => :name %>!</span>
+    <span id="user-bar-action">(<%= link_to "Log out", logout_path, { :title => "Log out" } %>)</span>
+
+  <% end %>
+
 <% else -%>
   <!--<span id="user-bar-greeting"><%= link_to_login_with_IP 'Not logged in', :style => 'border: none;' %></span>-->
   <span id="user-bar-action"  ><%= link_to "Log in",  login_path,  { :title => "Log in" } %> |
