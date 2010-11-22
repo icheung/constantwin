@@ -5,13 +5,13 @@
     var ajax_updater = new Ajax.PeriodicalUpdater(
       elementID,
       '/tasks/time_left/' + elementID.substring(5).toString(),
-      { method: 'get', frequency: 1, decay: 60 }
+      { method: 'get', frequency: 30, decay: 1 }
     );
     setInterval('checkTime("' + elementID.substring(5).toString() + '")', 5000);
   }
   function checkTime(taskId) {
-    var timeLeft = (document.getElementById('timer' + taskId).innerHTML);
-    if (timeLeft.match(/(\d+)(?::(\d\d))?\s*(p?)/)[0] == "0:00") {
+    var timeLeft = parseInt(document.getElementById('timer' + taskId).innerHTML);
+    if (timeLeft == 0) {
       fail(taskId);
     }
   }
@@ -61,30 +61,6 @@
   Listing tasks
 </h1>
 
-    <!--<td><%=h task.user_id %></td>-->
-
-    <td><%=h task.duration %> min</td>
-
-    <!--<td>
-      <% if task.is_finished %>
-        <div class="task_done"><br/></div>
-      <% else %>
-        <div class="task_not_done"><br/></div>
-      <% end %>
-    </td>-->
-
-    <td>
-      <% if task.started_at.nil?%>
-        <%= link_to 'Start', {:action => "start", :task_id => task.id} %>
-      <% elsif task.is_finished? %>
-        -
-      <% else %>
-        <div id="timer<%=h task.id %>"></div>
-        <script type="text/javascript">startTimer('<%=h "timer" + task.id.to_s %>');</script>
-      <% end %>
-    </td>
-
-    <td><%= (task.started_at.nil? or task.is_finished?) ? '&nbsp;' : link_to('Add time', add_time_path(task)) %></td>
 <% form_tag(:controller => "tasks", :action => "create") do %>
   <%= text_field_tag(:task_description, nil, :size => "30", :name => "task[description]") %>
   <%= submit_tag("Add task") %>
@@ -103,3 +79,4 @@
 </p>
 
 </div>
+
