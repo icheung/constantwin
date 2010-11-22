@@ -42,7 +42,7 @@
       <% elsif task.is_finished? %>
         -
       <% else %>
-        <div id="timer<%=h task.id %>"></div>
+        <span id="timer<%=h task.id %>"></span>
         <script type="text/javascript">startTimer('<%=h "timer" + task.id.to_s %>');</script>
       <% end %>
     </td>

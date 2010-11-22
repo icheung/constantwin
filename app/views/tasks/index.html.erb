@@ -45,16 +45,20 @@
     }
   }
 
-  function save_edit() {
-    alert('saving');
+  function save_edit(taskId) {
+    var current = document.getElementById('current');
+    var val = current.value;
+    current.parentNode.parentNode.innerHTML = val;
+    new Ajax.Request('/tasks/update/' + taskId, { method: 'post', parameters: {'task[description]': val}});
     return false;
   }
   Event.observe(window, 'load', function() {
     $$('.task_description').each(function(td, index) {
-      td.id = 'td' + index;
+      var taskId = parseInt(td.parentNode.id.replace('taskEntry', ''));
+      td.id = 'td' + taskId;
       Event.observe(td.id, 'click', function() {
         if (td.getElementsByTagName('input').length != 0) return;
-        td.innerHTML = '<form onsubmit="save_edit"><input id="current" type="text" value="' + td.innerHTML + '" onblur="save_edit()"/></form>';
+        td.innerHTML = '<form onsubmit="save_edit('+taskId+');"><input id="current" type="text" value="' + td.innerHTML + '" onblur="save_edit('+taskId+')"/></form>';
         td.getElementsByTagName('input')[0].focus();
       });
     });
