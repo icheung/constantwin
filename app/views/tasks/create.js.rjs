@@ -1,0 +1,2 @@
+page.insert_html :top, 'table_container', :partial => 'task_list'
+page[@task].visual_effect :highlight

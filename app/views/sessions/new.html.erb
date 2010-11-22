@@ -36,6 +36,9 @@
 			<p><%= label_tag 'password' %><br/>
 			<%= password_field_tag 'password', nil, :size=>40 %></p>
 			<p><%= submit_tag 'Log in' %></p>
+
+			<p>or login with Facebook connect</p>
+			<%= fb_login_button('window.location = "/users/link_user_accounts";')%>
 		</fieldset>
 </div>
 

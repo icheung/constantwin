@@ -43,31 +43,6 @@
   Constant Win-->
   Listing tasks
 </h1>
-<div id="table_container">
-<table id="tasksTable">
-
-
-  <!--<tr>
-    <th>Finished?</th>
-    <th>ID</th>
-    <th>Description</th>
-    <th>Owner ID</th>
-    <th>Duration</th>
-    <th>Finished?</th>
-    <th>Time left</th>
-    <th>Add time</th>
-  </tr>-->
-
-<% @tasks.each do |task| %>
-
-  <tr id="taskEntry<%= task.id %>">
-
-    <td><input id="checkbox<%= task.id %>" type="checkbox" onclick="checkOff(<%=task.id%>)" 
-	       <%= "checked" if task.is_finished %> <%= "disabled" if task.is_finished or task.started_at.nil? %>/></td>
-
-    <!--<td><%= task.id %></td>-->
-
-    <td class="<%= task.is_finished ?  'done' : '' %>"><%=h task.description %></td>
 
     <!--<td><%=h task.user_id %></td>-->
 
@@ -93,19 +68,21 @@
     </td>
 
     <td><%= (task.started_at.nil? or task.is_finished?) ? '&nbsp;' : link_to('Add time', add_time_path(task)) %></td>
-
-    <td><%= link_to 'Edit', edit_task_path(task) %></td>
-
-    <td><%= link_to 'Delete', task, :confirm => 'Are you sure?', :method => :delete %></td>
-
-  </tr>
+<% form_tag(:controller => "tasks", :action => "create") do %>
+  <%= text_field_tag(:task_description, nil, :size => "30", :name => "task[description]") %>
+  <%= submit_tag("Add task") %>
 <% end %>
-</table>
+
+<br />
+
+<div id="table_container">
+
+<%= render :partial => "task_list" %>
 
 <br />
 
 <p>
-<%= link_to 'New task', new_task_path %>
+<!--<%= link_to 'New task', new_task_path %>-->
 </p>
 
 </div>

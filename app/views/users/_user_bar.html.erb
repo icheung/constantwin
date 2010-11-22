@@ -1,6 +1,6 @@
 <div id="userStatus">
 <% if logged_in? -%>
-  <span id="user-bar-greeting">Hi <%= link_to_current_user :content_method => :login %>!</span>
+  <span id="user-bar-greeting">Hi <%= link_to_current_user :content_method => :name %>!</span>
   <span id="user-bar-action" >(<%= link_to "Log out", logout_path, { :title => "Log out" } %>)</span>
 <% else -%>
   <!--<span id="user-bar-greeting"><%= link_to_login_with_IP 'Not logged in', :style => 'border: none;' %></span>-->
