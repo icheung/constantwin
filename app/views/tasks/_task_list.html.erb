@@ -47,7 +47,7 @@
       <% end %>
     </td>
 
-    <td><%= (task.started_at.nil? or task.is_finished?) ? '&nbsp;' : link_to('Add time', add_time_path(task)) %></td>
+    <td><%= (task.started_at.nil? or task.is_finished?) ? '&nbsp;' : link_to( image_tag("clock.png", :border=>0, :alt=>'Adjust time', :title=>'Adjust time'), add_time_path(task)) %></td>
 
     <noscript><td><%= link_to 'Edit', edit_task_path(task) %></td></noscript>
 

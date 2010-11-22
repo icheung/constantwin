@@ -1,14 +1,24 @@
 <% content_for :title, "Tasks" %>
 
 <script type="text/javascript">
+  var ajax_updater;
+  var update_progress;
+  var check_time;
   function startTimer(elementID) {
-    var ajax_updater = new Ajax.PeriodicalUpdater(
+    ajax_updater = new Ajax.PeriodicalUpdater(
       elementID,
       '/tasks/time_left/' + elementID.substring(5).toString(),
       { method: 'get', frequency: 10, decay: 1 }
     );
-    setInterval('checkTime("' + elementID.substring(5).toString() + '")', 5000);
-    setInterval('updateProgressBar("'+elementID.substring(5).toString()+'")',100);
+    check_time = setInterval('checkTime("' + elementID.substring(5).toString() + '")', 5000);
+    update_progress = setInterval('updateProgressBar("'+elementID.substring(5).toString()+'")',100);
+  }
+
+  function stopTimer() {
+    clearInterval(check_time);
+    clearInterval(update_progress);
+    jQuery("#progressbar").hide();
+    jQuery("#progressbar").css('margin-top', '0');
   }
 
   function updateProgressBar(taskId) {
@@ -23,6 +33,8 @@
       var timeFloatLeft = parseFloat(seconds) + parseFloat(minutes);
       var totalTime = parseInt(jQuery("#taskEntry"+taskId+">td#duration").html());
       jQuery("#progressbar").progressbar({value: ((parseFloat(totalTime) - timeFloatLeft)/parseFloat(totalTime)) * 100.00});
+      jQuery("#progressbar").show();
+      jQuery("#progressbar").css("margin-top", "1em");
     }
   }
 
@@ -44,9 +56,9 @@
   }
   function checkOff(taskId) {
     new Ajax.Request('/tasks/finish/' + taskId, { method: 'post' })
-    taskDescription = $$('#taskEntry' + taskId + ' td')[0];
+    taskDescription = $$('#taskEntry' + taskId + ' td')[1];
     if (taskDescription.className.indexOf('done') == -1) {
-      taskDescription.className += 'done';
+      taskDescription.className += ', done';
       Field.disable('checkbox' + taskId);
       ajax_updater.stop();
     }
@@ -54,6 +66,7 @@
       taskDescription.className = taskDescription.className.replace('done', '');
       ajax_updater.stop();
     }
+     stopTimer();
   }
 
   function save_edit(taskId) {
@@ -89,10 +102,13 @@
   Listing tasks
 </h1>
 
+
 <% form_tag(:controller => "tasks", :action => "create") do %>
   <%= text_field_tag(:task_description, nil, :size => "30", :name => "task[description]") %>
   <%= submit_tag("Add task") %>
 <% end %>
+
+<div style="display: none" id="progressbar"></div>
 
 <br />
 
@@ -110,6 +126,4 @@
 <% if @active_task %>
 <% end %>
 
-<div id="progressbar"></div>
-</div>
 

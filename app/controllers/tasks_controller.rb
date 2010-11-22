@@ -174,6 +174,16 @@ class TasksController < ApplicationController
   end
   
   def add_tasks   # Breaking it down.
+
+    # Because Facebook users don't have password and email in the user model,
+    # validations fail on save, so this is a workaround
+    if @current_user.facebook_user?
+      @current_user.is_tasking = false
+      @current_user.save(false)
+    else
+      @current_user.update_attribute(:is_tasking, false)
+    end
+
     # Generalize this later.
     id = params[:id]
     subtask1 = params[:first]
