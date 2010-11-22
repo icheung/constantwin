@@ -31,6 +31,23 @@
       ajax_updater.stop();
     }
   }
+
+  function save_edit() {
+    alert('saving');
+    return false;
+  }
+  Event.observe(window, 'load', function() {
+    $$('.task_description').each(function(td, index) {
+      td.id = 'td' + index;
+      Event.observe(td.id, 'click', function() {
+        if (td.getElementsByTagName('input').length != 0) return;
+        td.innerHTML = '<form onsubmit="save_edit"><input id="current" type="text" value="' + td.innerHTML + '" onblur="save_edit()"/></form>';
+        td.getElementsByTagName('input')[0].focus();
+      });
+    });
+    //Event.observe('signinForm', 'submit', checkForm);
+  });
+ 
 </script>
 
 <style type="text/css">
