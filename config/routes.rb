@@ -11,9 +11,11 @@ ActionController::Routing::Routes.draw do |map|
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
   
-  map.resources :users, :member => {:suspend => :put,
-                                    :unsuspend => :put,
-                                    :purge => :delete }
+  #map.resources :users, :member => {:suspend => :put,
+  #                                  :unsuspend => :put,
+  #                                  :purge => :delete }
+  map.resources :users, :collection => {:link_user_accounts => :get}
+  
   map.resource :session
 
   map.start_task '/tasks/start/:id', :controller => 'tasks', :action => 'start', :id => /\d/

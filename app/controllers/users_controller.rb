@@ -1,9 +1,20 @@
 class UsersController < ApplicationController 
 
   layout 'base'
+  
+  before_filter :login_required, :except => [:link_user_accounts, :new, :create, :activate]
 
-  before_filter :login_required, :except => [:new, :create, :activate]
-
+  # LINK USER ACCOUNTS TO FACEBOOK
+  def link_user_accounts
+    if self.current_user.nil?
+      #register with fb
+      User.create_from_fb_connect(facebook_session.user)
+    else
+      #connect accounts
+      self.current_user.link_fb_connect(facebook_session.user.id) unless self.current_user.fb_user_id == facebook_session.user.id
+    end
+    redirect_to '/'
+  end
 
   # render new.rhtml
   def new

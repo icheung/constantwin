@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101121222556) do
+ActiveRecord::Schema.define(:version => 20101121231551) do
 
   create_table "tasks", :force => true do |t|
     t.string   "description"
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(:version => 20101121222556) do
     t.string   "activation_code",           :limit => 40
     t.datetime "activated_at"
     t.boolean  "is_tasking"
+    t.integer  "fb_user_id"
+    t.string   "email_hash"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

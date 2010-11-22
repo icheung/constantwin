@@ -2,7 +2,7 @@
 class SessionsController < ApplicationController
 
   layout 'base'
-
+  
   # render new.erb.html
   def new
   end
