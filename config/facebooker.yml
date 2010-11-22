@@ -9,7 +9,6 @@
 # This should only be necessary until the final version of the new profile is released.
 
 development:
-  ## ADD THE TWO LINES HERE
   canvas_page_name:
   callback_url: http://localhost:3000/
   pretty_errors: true
