@@ -2,7 +2,7 @@ class Task < ActiveRecord::Base
 
   belongs_to :user
   before_validation :default_values
-  
+
   validates_presence_of :description
   validates_presence_of :user_id
   validates_numericality_of :duration, :only_integer => true, :in => 15..60, :message => "Minutes can only be whole number!"
@@ -10,7 +10,7 @@ class Task < ActiveRecord::Base
   validates_presence_of :is_finished, :if => "#{:is_finished}"
   validates_length_of :description, :allow_blank => false, :allow_nil => false, :minimum => 5, :too_short => "Task Description must be at least 5 characters long!"
   validate :new_task_cannot_be_already_finished, :new_task_cannot_be_already_started, :duration_cannot_be_less_than_5_minutes
-  
+
 
   def initialize(params=nil)
     super
@@ -31,39 +31,38 @@ class Task < ActiveRecord::Base
     self.save
   end
 
-  
+
   # special validations checks
 
   def new_task_cannot_have_no_owner
     errors.add(:task, "must have an owner!") if
-      user_id == nil
+    user_id == nil
   end
 
   def duration_cannot_be_less_than_5_minutes
     errors.add(:task, "duration has to last over 5 minutes!") if
-      duration != nil && (duration.hour == 0 and duration.min < 5)
+    duration != nil && (duration.hour == 0 and duration.min < 5)
   end
 
   # may be useful later
   def added_time_cannot_be_of_invalid_format
     errors.add(:task, "added time has to be an integer!") unless
-      added_time.instance_of?(Fixnum)
+    added_time.instance_of?(Fixnum)
   end
 
-  
+
   def new_task_cannot_be_already_started
     errors.add(:task, "cannot be already started!") if
-      started_at != nil and created_at.nil?
+    started_at != nil and created_at.nil?
   end
 
   def new_task_cannot_be_already_finished
     errors.add(:task, "cannot be already finished!") if
-      is_finished == true
+    is_finished == true
   end
 
   def validate_added_duration
     self.added_time.kind_of?(Integer) and (5..60) === self.added_time
   end
 
-  
 end
