@@ -21,6 +21,7 @@
     clearInterval(update_progress);
    // jQuery("#progressbar").hide();
     jQuery("#progressbar").css('margin-top', '1em');
+		jQuery("#progressbar > div").css({ 'background': '#ABDD58' });
   }
 
   function updateProgressBar(taskId) {
@@ -37,6 +38,7 @@
       jQuery("#progressbar").progressbar({value: ((parseFloat(totalTime) - timeFloatLeft)/parseFloat(totalTime)) * 100.00});
       jQuery("#progressbar").show();
       jQuery("#progressbar").css("margin-top", "1em");
+			jQuery("#progressbar > div").css({ 'background': '#ABDD58' });
     }
   }
 
@@ -83,7 +85,7 @@
 		else {
 		ajax_updater.start();
 		//startTimer();
-		jQuery("#progressbar > div").css({ 'background': '#DEDEDE' });
+		jQuery("#progressbar > div").css({ 'background': '#ABDD58' });
 		//jQuery("#stopTask" + taskId).attr('img src', '/public/images/circle-red-16.png');
 			jQuery("#imgStopTask" + taskId).children("img").attr('src', '/images/circle-red-16.png');
 		stopSwitch = true;
