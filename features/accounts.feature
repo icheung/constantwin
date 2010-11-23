@@ -26,7 +26,6 @@ Feature: Creating an account
     Then  she should see a notice message 'Thanks for signing up!'
      And  a user with login: 'oona' should exist
      And  the user should have login: 'oona', and email: 'unactivated@example.com'
-     And  oona should be logged in
 
   # Account Creation Failure: Account exists
 
@@ -91,4 +90,3 @@ Feature: Creating an account
     Then  she should see a notice message 'Thanks for signing up!'
      And  a user with login: 'oona' should exist
      And  the user should have login: 'oona', and email: 'unactivated@example.com'
-     And  oona should be logged in
