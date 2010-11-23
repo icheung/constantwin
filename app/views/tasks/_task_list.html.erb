@@ -14,7 +14,7 @@
 
 <% @tasks.each do |task| %>
 
-  <tr id="taskEntry<%= task.id %>">
+  <tr id="taskEntry<%= task.id %>" class="taskEntry">
 
     <td><input id="checkbox<%= task.id %>" type="checkbox" onclick="checkOff(<%=task.id%>)" 
 	       <%= "checked" if task.is_finished %> <%= "disabled" if task.is_finished or task.started_at.nil? %>/></td>
@@ -25,7 +25,7 @@
 
     <!--<td><%=h task.user_id %></td>-->
 
-    <td id="duration"><%=h task.duration %> min</td>
+    <td id="duration"><% if not task.started_at.nil? and not task.is_finished? %><%=h task.duration %> min<% end %></td>
 
     <!--<td>
       <% if task.is_finished %>
@@ -40,7 +40,7 @@
       <% if task.started_at.nil?%>
         <%= link_to 'Start', {:action => "start", :task_id => task.id} %>
       <% elsif task.is_finished? %>
-        -
+        
       <% else %>
         <span id="timer<%=h task.id %>"></span>
         <script type="text/javascript">startTimer('<%=h "timer" + task.id.to_s %>');</script>
