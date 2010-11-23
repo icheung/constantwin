@@ -59,7 +59,7 @@
     window.location = '/tasks/fail/' + taskId;
   }
   function checkOff(taskId) {
-    new Ajax.Request('/tasks/finish/' + taskId, { method: 'post' })
+    new Ajax.Request('/tasks/finish/' + taskId, { method: 'put' })
     taskDescription = $$('#taskEntry' + taskId + ' td')[1];
     if (taskDescription.className.indexOf('done') == -1) {
       taskDescription.className += ', done';
