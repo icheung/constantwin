@@ -76,18 +76,27 @@
 	function stopTask(taskId){
 		
 		if (stopSwitch == true) {
+		// effectively pause the timer
 		ajax_updater.stop();
 		stopTimer();
+		
+		// change progressbar and button colors
     jQuery("#progressbar > div").css({ 'background': 'Red' });
 		jQuery("#imgStopTask" + taskId).children("img").attr('src', '/images/circle-green-16.png');
+		
+		// set the stop button flag
 		stopSwitch = false;
 		}
 		else {
+		// effectively start the timer
 		ajax_updater.start();
 		//startTimer();
-		jQuery("#progressbar > div").css({ 'background': '#ABDD58' });
-		//jQuery("#stopTask" + taskId).attr('img src', '/public/images/circle-red-16.png');
-			jQuery("#imgStopTask" + taskId).children("img").attr('src', '/images/circle-red-16.png');
+		
+		// change the progressbar and button colors
+		jQuery("#progressbar > div").css({ 'background': '#ABDD58' });	
+		jQuery("#imgStopTask" + taskId).children("img").attr('src', '/images/circle-red-16.png');
+		
+		// set the stop button flag
 		stopSwitch = true;
 		}
 	}

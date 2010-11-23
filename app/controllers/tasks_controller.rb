@@ -157,18 +157,6 @@ class TasksController < ApplicationController
   end
   
   def stop_time
-    if @current_user.is_tasking
-      flash[:error] = "You should be completing only one task at a time!"
-      redirect_to(tasks_url)
-      
-    else
-      @task = @current_user.tasks.find(params[:task_id])
-      
-      respond_to do |format|
-        format.html # start.html.erb
-        format.xml  { render :xml => @task }
-      end
-    end
   end
 
   def update_duration

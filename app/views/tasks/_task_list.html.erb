@@ -47,6 +47,12 @@
       <% end %>
     </td>
 
+		<!-- Pause Timer for debugging>
+		<td>
+			<p>0:00</p>
+		</td>
+		-->
+
     <td><%= (task.started_at.nil? or task.is_finished?) ? '&nbsp;' : link_to( image_tag("clock.png", :border=>0, :alt=>'Adjust time', :title=>'Adjust time'), add_time_path(task)) %></td>
     <td style="display:none"><%= link_to 'Add time', add_time_path(task) %></td>
 
