@@ -28,17 +28,17 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="app-models-user_mailer_rb.html">app/models/user_mailer.rb</a></td>
-            <td class='right_align'><tt>24</tt></td>
-            <td class='right_align'><tt>20</tt></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>29.17%</tt></div>
+            <td class='right_align'><tt>32</tt></td>
+            <td class='right_align'><tt>26</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>31.25%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:29px"></div>
-            <div class="uncovered" style="width:71px"></div>
+            <div class="covered" style="width:31px"></div>
+            <div class="uncovered" style="width:69px"></div>
           </div></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>25.00%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>23.08%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:25px"></div>
-            <div class="uncovered" style="width:75px"></div>
+            <div class="covered" style="width:23px"></div>
+            <div class="uncovered" style="width:77px"></div>
           </div></td>
           </tr>
         </tbody>
@@ -62,38 +62,38 @@
         
           
           
+          <tr class="inferred">
+            <td><pre><a name="line2">2</a>   </pre></td>
+          </tr>
+        
+          
+          
           <tr class="marked">
-            <td><pre><a name="line2">2</a>   def signup_notification(user)</pre></td>
+            <td><pre><a name="line3">3</a>   def welcome_email(user)</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line3">3</a>     setup_email(user)</pre></td>
+            <td><pre><a name="line4">4</a>     setup_email(user)</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line4">4</a>     @subject    += 'Please activate your new account'</pre></td>
+            <td><pre><a name="line5">5</a>     @url  = &quot;http://constantwin.heroku.com&quot;</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line5">5</a>   </pre></td>
+            <td><pre><a name="line6">6</a>     @subject += &quot;Welcome to Constant Win!&quot;</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line6">6</a>     @body[:url]  = &quot;http://YOURSITE/activate/#{user.activation_code}&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line7">7</a>   </pre></td>
+            <td><pre><a name="line7">7</a>     @content_type = &quot;text/html&quot;</pre></td>
           </tr>
         
           
@@ -111,7 +111,7 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line10">10</a>   def activation(user)</pre></td>
+            <td><pre><a name="line10">10</a>   def signup_notification(user)</pre></td>
           </tr>
         
           
@@ -123,85 +123,133 @@
           
           
           <tr class="uncovered">
-            <td><pre><a name="line12">12</a>     @subject    += 'Your account has been activated!'</pre></td>
+            <td><pre><a name="line12">12</a>     @subject    += 'Please activate your new account'</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line13">13</a>     @body[:url]  = &quot;http://YOURSITE/&quot;</pre></td>
+            <td><pre><a name="line13">13</a>   </pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line14">14</a>   end</pre></td>
+            <td><pre><a name="line14">14</a>     @body[:url]  = &quot;http://localhost:3000/activate/#{user.activation_code}&quot;</pre></td>
           </tr>
         
           
           
-          <tr class="inferred">
+          <tr class="uncovered">
             <td><pre><a name="line15">15</a>   </pre></td>
           </tr>
         
           
           
+          <tr class="uncovered">
+            <td><pre><a name="line16">16</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line17">17</a>   </pre></td>
+          </tr>
+        
+          
+          
           <tr class="marked">
-            <td><pre><a name="line16">16</a>   protected</pre></td>
+            <td><pre><a name="line18">18</a>   def activation(user)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line19">19</a>     setup_email(user)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line20">20</a>     @subject    += 'Your account has been activated!'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line21">21</a>     @body[:url]  = &quot;http://constantwin.heroku.com&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line22">22</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line23">23</a>   </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line17">17</a>     def setup_email(user)</pre></td>
+            <td><pre><a name="line24">24</a>   protected</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line25">25</a>     def setup_email(user)</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line18">18</a>       @recipients  = &quot;#{user.email}&quot;</pre></td>
+            <td><pre><a name="line26">26</a>       @recipients  = &quot;#{user.email}&quot;</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line19">19</a>       @from        = &quot;ADMINEMAIL&quot;</pre></td>
+            <td><pre><a name="line27">27</a>       @from        = &quot;ADMINEMAIL&quot;</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line20">20</a>       @subject     = &quot;[YOURSITE] &quot;</pre></td>
+            <td><pre><a name="line28">28</a>       @subject     = &quot;[CONSTANT WIN] &quot;</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line21">21</a>       @sent_on     = Time.now</pre></td>
+            <td><pre><a name="line29">29</a>       @sent_on     = Time.now</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line22">22</a>       @body[:user] = user</pre></td>
+            <td><pre><a name="line30">30</a>       @body[:user] = user</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line23">23</a>     end</pre></td>
+            <td><pre><a name="line31">31</a>     end</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line24">24</a> end</pre></td>
+            <td><pre><a name="line32">32</a> end</pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on Tue Nov 02 14:30:17 -0700 2010 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
+    <p>Generated on Tue Nov 23 01:49:15 -0800 2010 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
 
   </body>
 </html>

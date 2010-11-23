@@ -1,0 +1,1428 @@
+(in /home/bt/Documents/constantwin)
+TasksHelper
+  is included in the helper object
+UsersHelper
+  if_authorized
+    yields if authorized
+    does nothing if not authorized
+  link_to_user
+    should give an error on a nil user
+    should link to the given user
+    should use given link text if :content_text is specified
+    should use the login as link text with no :content_method specified
+    should use the name as link text with :content_method => :name
+    should use the login as title with no :title_method specified
+    should use the name as link title with :content_method => :name
+    should have nickname as a class by default
+    should take other classes and no longer have the nickname class
+  link_to_login_with_IP
+    should link to the login_path
+    should use given link text if :content_text is specified
+    should use the login as link text with no :content_method specified
+    should use the ip address as title
+    should by default be like school in summer and have no class
+    should have some class if you tell it to
+    should have some class if you tell it to
+  link_to_current_user, When logged in
+    should link to the given user
+    should use given link text if :content_text is specified
+    should use the login as link text with no :content_method specified
+    should use the name as link text with :content_method => :name
+    should use the login as title with no :title_method specified
+    should use the name as link title with :content_method => :name
+    should have nickname as a class
+    should take other classes and no longer have the nickname class
+  link_to_current_user, When logged out
+    should link to the login_path
+    should use given link text if :content_text is specified
+    should use 'not signed in' as link text with no :content_method specified
+    should use the ip address as title
+    should by default be like school in summer and have no class
+    should have some class if you tell it to
+TasksController
+  routing
+    recognizes and generates #index
+    recognizes and generates #new
+    recognizes and generates #show
+    recognizes and generates #edit
+    recognizes and generates #create
+    recognizes and generates #update
+    recognizes and generates #destroy
+UsersController
+  allows signup
+  signs up user with activation code
+  requires login on signup
+  requires password on signup
+  requires password confirmation on signup
+  requires email on signup
+  activates user
+  does not activate user without key
+  does not activate user with blank key
+  does not activate user with bogus key
+  route generation
+    should route users's 'index' action correctly
+    should route users's 'new' action correctly
+    should route {:controller => 'users', :action => 'create'} correctly
+    should route users's 'show' action correctly
+    should route users's 'edit' action correctly
+    should route users's 'update' action correctly
+    should route users's 'destroy' action correctly
+  route recognition
+    should generate params for users's index action from GET /users
+    should generate params for users's new action from GET /users
+    should generate params for users's create action from POST /users
+    should generate params for users's show action from GET /users/1
+    should generate params for users's edit action from GET /users/1/edit
+    should generate params {:controller => 'users', :action => update', :id => '1'} from PUT /users/1
+    should generate params for users's destroy action from DELETE /users/1
+  named routing
+    should route users_path() to /users
+    should route new_user_path() to /users/new
+    should route user_(:id => '1') to /users/1
+    should route edit_user_path(:id => '1') to /users/1/edit
+SessionsController
+  logout_killing_session!
+    resets the session
+    kills my auth_token cookie
+    nils the current user
+    kills :user_id session
+    forgets me
+  logout_keeping_session!
+    does not reset the session
+    kills my auth_token cookie
+    nils the current user
+    kills :user_id session
+    forgets me
+  When logged out
+    should not be authorized? (FAILED - 1)
+  Logging in by cookie
+    logs in with cookie
+    fails cookie login with bad cookie (FAILED - 2)
+    fails cookie login with no cookie (FAILED - 3)
+    fails expired cookie login (FAILED - 4)
+TasksController
+  GET index
+    assigns all tasks as @tasks (FAILED - 5)
+  GET show
+    assigns the requested task as @task (FAILED - 6)
+  GET new
+    assigns a new task as @task (FAILED - 7)
+  GET edit
+    assigns the requested task as @task (FAILED - 8)
+  POST create
+    with valid params
+      assigns a newly created task as @task (FAILED - 9)
+      redirects to the created task (FAILED - 10)
+    with invalid params
+      assigns a newly created but unsaved task as @task (FAILED - 11)
+      re-renders the 'new' template (FAILED - 12)
+  PUT update
+    with valid params
+      updates the requested task (FAILED - 13)
+      assigns the requested task as @task (FAILED - 14)
+      redirects to the task (FAILED - 15)
+    with invalid params
+      updates the requested task (FAILED - 16)
+      assigns the task as @task (FAILED - 17)
+      re-renders the 'edit' template (FAILED - 18)
+  DELETE destroy
+    destroys the requested task (FAILED - 19)
+    redirects to the tasks list (FAILED - 20)
+  when starting a task
+    should take the user to the start task page (FAILED - 21)
+  when finishing a task
+    should update the time_left field to - (FAILED - 22)
+SessionsController
+  on successful login,
+    my request cookie token is nil,
+      and ask to be remembered
+        kills existing login (FAILED - 23)
+        authorizes me (FAILED - 24)
+        logs me in (FAILED - 25)
+        greets me nicely (FAILED - 26)
+        sets/resets/expires cookie (FAILED - 27)
+        sends a cookie (FAILED - 28)
+        redirects to the home page (FAILED - 29)
+        does not reset my session (FAILED - 30)
+        makes a new token (FAILED - 31)
+        does not refresh token (FAILED - 32)
+        sets an auth cookie (FAILED - 33)
+      and ask not to be remembered
+        kills existing login (FAILED - 34)
+        authorizes me (FAILED - 35)
+        logs me in (FAILED - 36)
+        greets me nicely (FAILED - 37)
+        sets/resets/expires cookie (FAILED - 38)
+        sends a cookie (FAILED - 39)
+        redirects to the home page (FAILED - 40)
+        does not reset my session (FAILED - 41)
+        does not make new token (FAILED - 42)
+        does not refresh token (FAILED - 43)
+        kills user token (FAILED - 44)
+    my request cookie token is expired,
+      and ask to be remembered
+        kills existing login (FAILED - 45)
+        authorizes me (FAILED - 46)
+        logs me in (FAILED - 47)
+        greets me nicely (FAILED - 48)
+        sets/resets/expires cookie (FAILED - 49)
+        sends a cookie (FAILED - 50)
+        redirects to the home page (FAILED - 51)
+        does not reset my session (FAILED - 52)
+        makes a new token (FAILED - 53)
+        does not refresh token (FAILED - 54)
+        sets an auth cookie (FAILED - 55)
+      and ask not to be remembered
+        kills existing login (FAILED - 56)
+        authorizes me (FAILED - 57)
+        logs me in (FAILED - 58)
+        greets me nicely (FAILED - 59)
+        sets/resets/expires cookie (FAILED - 60)
+        sends a cookie (FAILED - 61)
+        redirects to the home page (FAILED - 62)
+        does not reset my session (FAILED - 63)
+        does not make new token (FAILED - 64)
+        does not refresh token (FAILED - 65)
+        kills user token (FAILED - 66)
+    my request cookie token is different,
+      and ask to be remembered
+        kills existing login (FAILED - 67)
+        authorizes me (FAILED - 68)
+        logs me in (FAILED - 69)
+        greets me nicely (FAILED - 70)
+        sets/resets/expires cookie (FAILED - 71)
+        sends a cookie (FAILED - 72)
+        redirects to the home page (FAILED - 73)
+        does not reset my session (FAILED - 74)
+        makes a new token (FAILED - 75)
+        does not refresh token (FAILED - 76)
+        sets an auth cookie (FAILED - 77)
+      and ask not to be remembered
+        kills existing login (FAILED - 78)
+        authorizes me (FAILED - 79)
+        logs me in (FAILED - 80)
+        greets me nicely (FAILED - 81)
+        sets/resets/expires cookie (FAILED - 82)
+        sends a cookie (FAILED - 83)
+        redirects to the home page (FAILED - 84)
+        does not reset my session (FAILED - 85)
+        does not make new token (FAILED - 86)
+        does not refresh token (FAILED - 87)
+        kills user token (FAILED - 88)
+    my request cookie token is valid,
+      and ask to be remembered
+        kills existing login (FAILED - 89)
+        authorizes me (FAILED - 90)
+        logs me in (FAILED - 91)
+        greets me nicely (FAILED - 92)
+        sets/resets/expires cookie (FAILED - 93)
+        sends a cookie (FAILED - 94)
+        redirects to the home page (FAILED - 95)
+        does not reset my session (FAILED - 96)
+        does not make new token (FAILED - 97)
+        does refresh token (FAILED - 98)
+        sets an auth cookie (FAILED - 99)
+      and ask not to be remembered
+        kills existing login (FAILED - 100)
+        authorizes me (FAILED - 101)
+        logs me in (FAILED - 102)
+        greets me nicely (FAILED - 103)
+        sets/resets/expires cookie (FAILED - 104)
+        sends a cookie (FAILED - 105)
+        redirects to the home page (FAILED - 106)
+        does not reset my session (FAILED - 107)
+        does not make new token (FAILED - 108)
+        does refresh token (FAILED - 109)
+        sets an auth cookie (FAILED - 110)
+  on failed login
+    logs out keeping session
+    flashes an error
+    renders the log in page
+    doesn't log me in
+    doesn't send password back
+  on signout
+    logs me out
+    redirects me to the home page
+  route generation
+    should route the new sessions action correctly
+    should route the create sessions correctly
+    should route the destroy sessions action correctly
+  route recognition
+    should generate params from GET /login correctly
+    should generate params from POST /session correctly
+    should generate params from DELETE /session correctly
+  named routing
+    should route session_path() correctly
+    should route new_session_path() correctly
+/tasks/index.html.erb
+  renders a list of tasks (FAILED - 111)
+/tasks/show.html.erb
+  renders attributes in <p>
+/tasks/edit.html.erb
+  renders the edit task form
+/tasks/new.html.erb
+  renders new task form
+/users/index.html.erb
+  renders a list of users
+/users/show.html.erb
+  renders attributes in <p>
+/users/edit.html.erb
+  renders the edit user form
+/users/new.html.erb
+  renders new user form
+Task
+  when creating a new task
+    should create a new instance given valid attributes
+    should not create a task instance without a description
+    should not create a task with 'started_at' already set
+    should not create a task instance that is already tagged 'finished'
+    should destroy task when user is destroyed
+  when starting a task
+    task should not start without given a duration
+    task duration should not be given a duration of less than 5 minutes
+  when adding time to a task
+    should initialize the add_time field to 0
+    should add 5 minutes when the add_time field is set to 5
+User
+  requires login
+  requires password
+  requires password confirmation
+  requires email
+  resets password
+  does not rehash password
+  authenticates user
+  doesn't authenticate user with bad password
+  doesn't authenticate a user against a hard-coded old-style password
+  takes longer than 0.1ms to encrypt a password
+  sets remember token
+  unsets remember token
+  remembers me for one week
+  remembers me until one week
+  remembers me default two weeks
+  being created
+    increments User#count
+    initializes #activation_code
+  allows legitimate logins:
+    '123'
+    '1234567890_234567890_234567890_234567890'
+    'hello.-_there@funnychar.com'
+  disallows illegitimate logins:
+    '12'
+    '1234567890_234567890_234567890_234567890_'
+    'tab	'
+    'newline
+'
+    'Iñtërnâtiônàlizætiøn hasn't happened to ruby 1.8 yet'
+    'semicolon;'
+    'quote"'
+    'tick''
+    'backtick`'
+    'percent%'
+    'plus+'
+    'space '
+  allows legitimate emails:
+    'foo@bar.com'
+    'foo@newskool-tld.museum'
+    'foo@twoletter-tld.de'
+    'foo@nonexistant-tld.qq'
+    'r@a.wk'
+    '1234567890-234567890-234567890-234567890-234567890-234567890-234567890-234567890-234567890@gmail.com'
+    'hello.-_there@funnychar.com'
+    'uucp%addr@gmail.com'
+    'hello+routing-str@gmail.com'
+    'domain@can.haz.many.sub.doma.in'
+    'student.name@university.edu'
+  disallows illegitimate emails
+    '!!@nobadchars.com'
+    'foo@no-rep-dots..com'
+    'foo@badtld.xxx'
+    'foo@toolongtld.abcdefg'
+    'Iñtërnâtiônàlizætiøn@hasnt.happened.to.email'
+    'need.domain.and.tld@de'
+    'tab	'
+    'newline
+'
+    'r@.wk'
+    '1234567890-234567890-234567890-234567890-234567890-234567890-234567890-234567890-234567890@gmail2.com'
+    'uucp!addr@gmail.com'
+    'semicolon;@gmail.com'
+    'quote"@gmail.com'
+    'tick'@gmail.com'
+    'backtick`@gmail.com'
+    'space @gmail.com'
+    'bracket<@gmail.com'
+    'bracket>@gmail.com'
+  allows legitimate names:
+    'Andre The Giant (7'4", 520 lb.) -- has a posse'
+    ''
+    '1234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890'
+  disallows illegitimate names
+    'tab	'
+    'newline
+'
+    '1234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890_234567890_'
+
+1)
+NameError in 'SessionsController When logged out should not be authorized?'
+undefined local variable or method `facebook_session' for #<Spec::Rails::Example::ControllerExampleGroup::Subclass_3::Subclass_3:0xb6cb38b8>
+./spec/controllers/authenticated_system_spec.rb:62:
+
+2)
+NameError in 'SessionsController Logging in by cookie fails cookie login with bad cookie'
+undefined local variable or method `facebook_session' for #<Spec::Rails::Example::ControllerExampleGroup::Subclass_3::Subclass_4:0xb6c9c4c4>
+./spec/controllers/authenticated_system_spec.rb:86:
+
+3)
+NameError in 'SessionsController Logging in by cookie fails cookie login with no cookie'
+undefined local variable or method `facebook_session' for #<Spec::Rails::Example::ControllerExampleGroup::Subclass_3::Subclass_4:0xb6c8d514>
+./spec/controllers/authenticated_system_spec.rb:92:
+
+4)
+NameError in 'SessionsController Logging in by cookie fails expired cookie login'
+undefined local variable or method `facebook_session' for #<Spec::Rails::Example::ControllerExampleGroup::Subclass_3::Subclass_4:0xb6c78da8>
+./spec/controllers/authenticated_system_spec.rb:98:
+
+5)
+'TasksController GET index assigns all tasks as @tasks' FAILED
+expected: [#<Task:0x..fdb62ea8e @name="Task_1001">],
+     got: nil (using ==)
+./spec/controllers/tasks_controller_spec.rb:13:
+
+6)
+'TasksController GET show assigns the requested task as @task' FAILED
+
+expected #<Task:-614299158> => #<Task:0x..fdb6289ea @name="Task_1002">
+     got #<NilClass:4> => nil
+
+Compared using equal?, which compares object identity,
+but expected and actual are not the same object. Use
+'actual.should == expected' if you don't care about
+object identity in this example.
+
+./spec/controllers/tasks_controller_spec.rb:22:
+
+7)
+'TasksController GET new assigns a new task as @task' FAILED
+
+expected #<Task:-614327518> => #<Task:0x..fdb621b22 @name="Task_1003">
+     got #<NilClass:4> => nil
+
+Compared using equal?, which compares object identity,
+but expected and actual are not the same object. Use
+'actual.should == expected' if you don't care about
+object identity in this example.
+
+./spec/controllers/tasks_controller_spec.rb:30:
+
+8)
+'TasksController GET edit assigns the requested task as @task' FAILED
+
+expected #<Task:-614354908> => #<Task:0x..fdb61b024 @name="Task_1004">
+     got #<NilClass:4> => nil
+
+Compared using equal?, which compares object identity,
+but expected and actual are not the same object. Use
+'actual.should == expected' if you don't care about
+object identity in this example.
+
+./spec/controllers/tasks_controller_spec.rb:38:
+
+9)
+'TasksController POST create with valid params assigns a newly created task as @task' FAILED
+
+expected #<Task:-614382828> => #<Task:0x..fdb614314 @name="Task_1005">
+     got #<NilClass:4> => nil
+
+Compared using equal?, which compares object identity,
+but expected and actual are not the same object. Use
+'actual.should == expected' if you don't care about
+object identity in this example.
+
+./spec/controllers/tasks_controller_spec.rb:48:
+
+10)
+'TasksController POST create with valid params redirects to the created task' FAILED
+expected redirect to "http://test.host/tasks/1006", got redirect to "http://test.host/session/new"
+./spec/controllers/tasks_controller_spec.rb:54:
+
+11)
+'TasksController POST create with invalid params assigns a newly created but unsaved task as @task' FAILED
+
+expected #<Task:-614438058> => #<Task:0x..fdb606b56 @name="Task_1007">
+     got #<NilClass:4> => nil
+
+Compared using equal?, which compares object identity,
+but expected and actual are not the same object. Use
+'actual.should == expected' if you don't care about
+object identity in this example.
+
+./spec/controllers/tasks_controller_spec.rb:62:
+
+12)
+'TasksController POST create with invalid params re-renders the 'new' template' FAILED
+expected "new", got redirected to "http://test.host/session/new"
+./spec/controllers/tasks_controller_spec.rb:68:
+
+13)
+Spec::Mocks::MockExpectationError in 'TasksController PUT update with valid params updates the requested task'
+<Task(id: integer, description: string, is_finished: boolean, created_at: datetime, updated_at: datetime, user_id: integer, duration: integer, added_time: integer, started_at: time, active_task: boolean) (class)> expected :find with ("37") once, but received it 0 times
+./spec/controllers/tasks_controller_spec.rb:78:
+
+14)
+'TasksController PUT update with valid params assigns the requested task as @task' FAILED
+
+expected #<Task:-614523358> => #<Task:0x..fdb5f1e22 @name="Task_1010">
+     got #<NilClass:4> => nil
+
+Compared using equal?, which compares object identity,
+but expected and actual are not the same object. Use
+'actual.should == expected' if you don't care about
+object identity in this example.
+
+./spec/controllers/tasks_controller_spec.rb:86:
+
+15)
+'TasksController PUT update with valid params redirects to the task' FAILED
+expected redirect to "http://test.host/tasks/1011", got redirect to "http://test.host/session/new"
+./spec/controllers/tasks_controller_spec.rb:92:
+
+16)
+Spec::Mocks::MockExpectationError in 'TasksController PUT update with invalid params updates the requested task'
+<Task(id: integer, description: string, is_finished: boolean, created_at: datetime, updated_at: datetime, user_id: integer, duration: integer, added_time: integer, started_at: time, active_task: boolean) (class)> expected :find with ("37") once, but received it 0 times
+./spec/controllers/tasks_controller_spec.rb:98:
+
+17)
+'TasksController PUT update with invalid params assigns the task as @task' FAILED
+
+expected #<Task:-614604278> => #<Task:0x..fdb5de20a @name="Task_1013">
+     got #<NilClass:4> => nil
+
+Compared using equal?, which compares object identity,
+but expected and actual are not the same object. Use
+'actual.should == expected' if you don't care about
+object identity in this example.
+
+./spec/controllers/tasks_controller_spec.rb:106:
+
+18)
+'TasksController PUT update with invalid params re-renders the 'edit' template' FAILED
+expected "edit", got redirected to "http://test.host/session/new"
+./spec/controllers/tasks_controller_spec.rb:112:
+
+19)
+Spec::Mocks::MockExpectationError in 'TasksController DELETE destroy destroys the requested task'
+<Task(id: integer, description: string, is_finished: boolean, created_at: datetime, updated_at: datetime, user_id: integer, duration: integer, added_time: integer, started_at: time, active_task: boolean) (class)> expected :find with ("37") once, but received it 0 times
+./spec/controllers/tasks_controller_spec.rb:120:
+
+20)
+'TasksController DELETE destroy redirects to the tasks list' FAILED
+expected redirect to "http://test.host/tasks", got redirect to "http://test.host/session/new"
+./spec/controllers/tasks_controller_spec.rb:128:
+
+21)
+'TasksController when starting a task should take the user to the start task page' FAILED
+
+expected #<Task:-614706978> => #<Task:0x..fdb5c50de @name="Task_1017">
+     got #<NilClass:4> => nil
+
+Compared using equal?, which compares object identity,
+but expected and actual are not the same object. Use
+'actual.should == expected' if you don't care about
+object identity in this example.
+
+./spec/controllers/tasks_controller_spec.rb:136:
+
+22)
+Spec::Mocks::MockExpectationError in 'TasksController when finishing a task should update the time_left field to -'
+Mock "Task_1018" expected :update_attributes with ({"these"=>"params"}) once, but received it 0 times
+./spec/controllers/tasks_controller_spec.rb:150:
+
+23)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is nil, and ask to be remembered kills existing login'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:45:
+
+24)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is nil, and ask to be remembered authorizes me'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:46:
+
+25)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is nil, and ask to be remembered logs me in'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:47:
+
+26)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is nil, and ask to be remembered greets me nicely'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:48:
+
+27)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is nil, and ask to be remembered sets/resets/expires cookie'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:49:
+
+28)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is nil, and ask to be remembered sends a cookie'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:50:
+
+29)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is nil, and ask to be remembered redirects to the home page'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:51:
+
+30)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is nil, and ask to be remembered does not reset my session'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:52:
+
+31)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is nil, and ask to be remembered makes a new token'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:59:
+
+32)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is nil, and ask to be remembered does not refresh token'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:60:
+
+33)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is nil, and ask to be remembered sets an auth cookie'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:61:
+
+34)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is nil, and ask not to be remembered kills existing login'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:45:
+
+35)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is nil, and ask not to be remembered authorizes me'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:46:
+
+36)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is nil, and ask not to be remembered logs me in'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:47:
+
+37)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is nil, and ask not to be remembered greets me nicely'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:48:
+
+38)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is nil, and ask not to be remembered sets/resets/expires cookie'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:49:
+
+39)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is nil, and ask not to be remembered sends a cookie'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:50:
+
+40)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is nil, and ask not to be remembered redirects to the home page'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:51:
+
+41)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is nil, and ask not to be remembered does not reset my session'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:52:
+
+42)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is nil, and ask not to be remembered does not make new token'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:63:
+
+43)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is nil, and ask not to be remembered does not refresh token'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:64:
+
+44)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is nil, and ask not to be remembered kills user token'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:65:
+
+45)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is expired, and ask to be remembered kills existing login'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:45:
+
+46)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is expired, and ask to be remembered authorizes me'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:46:
+
+47)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is expired, and ask to be remembered logs me in'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:47:
+
+48)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is expired, and ask to be remembered greets me nicely'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:48:
+
+49)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is expired, and ask to be remembered sets/resets/expires cookie'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:49:
+
+50)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is expired, and ask to be remembered sends a cookie'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:50:
+
+51)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is expired, and ask to be remembered redirects to the home page'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:51:
+
+52)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is expired, and ask to be remembered does not reset my session'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:52:
+
+53)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is expired, and ask to be remembered makes a new token'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:59:
+
+54)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is expired, and ask to be remembered does not refresh token'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:60:
+
+55)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is expired, and ask to be remembered sets an auth cookie'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:61:
+
+56)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is expired, and ask not to be remembered kills existing login'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:45:
+
+57)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is expired, and ask not to be remembered authorizes me'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:46:
+
+58)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is expired, and ask not to be remembered logs me in'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:47:
+
+59)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is expired, and ask not to be remembered greets me nicely'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:48:
+
+60)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is expired, and ask not to be remembered sets/resets/expires cookie'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:49:
+
+61)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is expired, and ask not to be remembered sends a cookie'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:50:
+
+62)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is expired, and ask not to be remembered redirects to the home page'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:51:
+
+63)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is expired, and ask not to be remembered does not reset my session'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:52:
+
+64)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is expired, and ask not to be remembered does not make new token'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:63:
+
+65)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is expired, and ask not to be remembered does not refresh token'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:64:
+
+66)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is expired, and ask not to be remembered kills user token'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:65:
+
+67)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is different, and ask to be remembered kills existing login'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:45:
+
+68)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is different, and ask to be remembered authorizes me'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:46:
+
+69)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is different, and ask to be remembered logs me in'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:47:
+
+70)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is different, and ask to be remembered greets me nicely'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:48:
+
+71)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is different, and ask to be remembered sets/resets/expires cookie'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:49:
+
+72)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is different, and ask to be remembered sends a cookie'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:50:
+
+73)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is different, and ask to be remembered redirects to the home page'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:51:
+
+74)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is different, and ask to be remembered does not reset my session'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:52:
+
+75)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is different, and ask to be remembered makes a new token'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:59:
+
+76)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is different, and ask to be remembered does not refresh token'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:60:
+
+77)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is different, and ask to be remembered sets an auth cookie'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:61:
+
+78)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is different, and ask not to be remembered kills existing login'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:45:
+
+79)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is different, and ask not to be remembered authorizes me'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:46:
+
+80)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is different, and ask not to be remembered logs me in'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:47:
+
+81)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is different, and ask not to be remembered greets me nicely'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:48:
+
+82)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is different, and ask not to be remembered sets/resets/expires cookie'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:49:
+
+83)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is different, and ask not to be remembered sends a cookie'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:50:
+
+84)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is different, and ask not to be remembered redirects to the home page'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:51:
+
+85)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is different, and ask not to be remembered does not reset my session'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:52:
+
+86)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is different, and ask not to be remembered does not make new token'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:63:
+
+87)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is different, and ask not to be remembered does not refresh token'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:64:
+
+88)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is different, and ask not to be remembered kills user token'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:65:
+
+89)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is valid, and ask to be remembered kills existing login'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:45:
+
+90)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is valid, and ask to be remembered authorizes me'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:46:
+
+91)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is valid, and ask to be remembered logs me in'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:47:
+
+92)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is valid, and ask to be remembered greets me nicely'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:48:
+
+93)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is valid, and ask to be remembered sets/resets/expires cookie'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:49:
+
+94)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is valid, and ask to be remembered sends a cookie'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:50:
+
+95)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is valid, and ask to be remembered redirects to the home page'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:51:
+
+96)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is valid, and ask to be remembered does not reset my session'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:52:
+
+97)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is valid, and ask to be remembered does not make new token'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:54:
+
+98)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is valid, and ask to be remembered does refresh token'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:55:
+
+99)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is valid, and ask to be remembered sets an auth cookie'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:56:
+
+100)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is valid, and ask not to be remembered kills existing login'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:45:
+
+101)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is valid, and ask not to be remembered authorizes me'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:46:
+
+102)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is valid, and ask not to be remembered logs me in'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:47:
+
+103)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is valid, and ask not to be remembered greets me nicely'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:48:
+
+104)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is valid, and ask not to be remembered sets/resets/expires cookie'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:49:
+
+105)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is valid, and ask not to be remembered sends a cookie'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:50:
+
+106)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is valid, and ask not to be remembered redirects to the home page'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:51:
+
+107)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is valid, and ask not to be remembered does not reset my session'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:52:
+
+108)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is valid, and ask not to be remembered does not make new token'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:54:
+
+109)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is valid, and ask not to be remembered does refresh token'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:55:
+
+110)
+Spec::Mocks::MockExpectationError in 'SessionsController on successful login, my request cookie token is valid, and ask not to be remembered sets an auth cookie'
+Mock "cookies" received unexpected message :keys with (no args)
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:129:in `fb_cookie_names'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:135:in `secure_with_cookies!'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:30:in `create_facebook_session'
+/home/bt/Documents/constantwin/vendor/plugins/facebooker/lib/facebooker/rails/controller.rb:44:in `set_facebook_session'
+./spec/controllers/sessions_controller_spec.rb:16:in `do_create'
+./spec/controllers/sessions_controller_spec.rb:56:
+
+111)
+'/tasks/index.html.erb renders a list of tasks' FAILED
+2.
+<false> is not true.
+./spec/views/tasks/index.html.erb_spec.rb:24:
+
+Finished in 12.295354 seconds
+
+288 examples, 111 failures

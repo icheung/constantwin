@@ -1,0 +1,6 @@
+Features:
+
+1. inline editing of tasks
+2. timer and progress bar
+3. ability to pause the timer
+4. one task at a time

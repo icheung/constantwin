@@ -1,0 +1,1056 @@
+Using the default profile...
+Feature: Delete a task
+  As a user
+  I want to be able to delete a task from my list
+  So that I can remove tasks I don’t want from the list
+
+  Background:                                     # features/delete_task.feature:6
+    Given I am on the dashboard                   # features/step_definitions/web_steps.rb:15
+    And I follow "New task"                       # features/step_definitions/web_steps.rb:27
+      Could not find link with text or title or id "New task" (Webrat::NotFoundError)
+      ./features/step_definitions/web_steps.rb:28:in `/^(?:|I )follow "([^"]*)"$/'
+      features/delete_task.feature:9:in `And I follow "New task"'
+    And I fill in "Description" with "Do laundry" # features/step_definitions/web_steps.rb:35
+    And I press "Create"                          # features/step_definitions/web_steps.rb:23
+
+  Scenario: I delete the task                     # features/delete_task.feature:13
+    Given I am on the dashboard                   # features/step_definitions/web_steps.rb:15
+    And I see "Do laundry"                        # features/delete_task.feature:15
+      Undefined step: "I see "Do laundry"" (Cucumber::Undefined)
+      features/delete_task.feature:15:in `And I see "Do laundry"'
+    When I click "Delete"                         # features/delete_task.feature:16
+      Undefined step: "I click "Delete"" (Cucumber::Undefined)
+      features/delete_task.feature:16:in `When I click "Delete"'
+    And I press "OK"                              # features/step_definitions/web_steps.rb:23
+    Then I should not see "Do laundry"            # features/step_definitions/web_steps.rb:182
+
+Feature: Start task
+  As a user
+  I want to be able to start one of the tasks from my list of tasks
+  So that I can begin working on that task
+
+  @javascript
+  Scenario: I start the task                             # features/start_task.feature:7
+    Given I am on the login page                         # features/step_definitions/web_steps.rb:15
+    Then show me the page                                # features/step_definitions/web_steps.rb:279
+    Given I log in as "iriswin" with password "fast1car" # features/start_task.feature:10
+      Undefined step: "I log in as "iriswin" with password "fast1car"" (Cucumber::Undefined)
+      features/start_task.feature:10:in `Given I log in as "iriswin" with password "fast1car"'
+    And I am on the dashboard                            # features/step_definitions/web_steps.rb:15
+    Then show me the page                                # features/step_definitions/web_steps.rb:279
+    When I start timing "taskEntry7"                     # features/start_task.feature:13
+      Undefined step: "I start timing "taskEntry7"" (Cucumber::Undefined)
+      features/start_task.feature:13:in `When I start timing "taskEntry7"'
+    Then I should be on the task timer page              # features/step_definitions/web_steps.rb:257
+    And I should see "Do laundry"                        # features/step_definitions/web_steps.rb:143
+    Then show me the page                                # features/step_definitions/web_steps.rb:279
+    And I should see a timer entry field                 # features/step_definitions/start_task_steps.rb:27
+
+  Scenario:                              # features/start_task.feature:19
+    Given I am logged in as iriswin      # features/start_task.feature:20
+      Undefined step: "I am logged in as iriswin" (Cucumber::Undefined)
+      features/start_task.feature:20:in `Given I am logged in as iriswin'
+    When I start timing taskEntry7       # features/start_task.feature:21
+      Undefined step: "I start timing taskEntry7" (Cucumber::Undefined)
+      features/start_task.feature:21:in `When I start timing taskEntry7'
+    Then I should see "do laundry"       # features/step_definitions/web_steps.rb:143
+    And I should see a timer entry field # features/step_definitions/start_task_steps.rb:27
+
+Feature: Logout
+  As a user
+  I want to be able to log out of ‘Constant Win’
+  So that I can leave the application
+
+  Background:                                  # features/logout.feature:6
+    Given I am logged in as "sample@email.com" # features/logout.feature:7
+      Undefined step: "I am logged in as "sample@email.com"" (Cucumber::Undefined)
+      features/logout.feature:7:in `Given I am logged in as "sample@email.com"'
+
+  Scenario: Log out                            # features/logout.feature:9
+    When I click on "Log out"                  # features/logout.feature:10
+      Undefined step: "I click on "Log out"" (Cucumber::Undefined)
+      features/logout.feature:10:in `When I click on "Log out"'
+    Then I should be on the homepage           # features/step_definitions/web_steps.rb:257
+    And I should be logged out                 # features/logout.feature:12
+      Undefined step: "I should be logged out" (Cucumber::Undefined)
+      features/logout.feature:12:in `And I should be logged out'
+
+Feature: Add new task
+  As a user
+  I want to be able to add a new task
+  So that I can deal with it later
+
+  Background:                                                                       # features/add_new_task.feature:6
+    Given I sign up as "test" with email "test@test.com" and password "testaccount" # features/add_new_task.feature:7
+      Undefined step: "I sign up as "test" with email "test@test.com" and password "testaccount"" (Cucumber::Undefined)
+      features/add_new_task.feature:7:in `Given I sign up as "test" with email "test@test.com" and password "testaccount"'
+    And I log in as "test" with password "testaccount"                              # features/add_new_task.feature:8
+      Undefined step: "I log in as "test" with password "testaccount"" (Cucumber::Undefined)
+      features/add_new_task.feature:8:in `And I log in as "test" with password "testaccount"'
+
+  #@wip
+  Scenario: Add a task to a blank dashboard and visualize it                        # features/add_new_task.feature:11
+    Given I am on the dashboard                                                     # features/step_definitions/web_steps.rb:15
+    Then show me the page                                                           # features/step_definitions/web_steps.rb:279
+    When I add a new task called "Do laundry"                                       # features/step_definitions/add_new_task_steps.rb:1
+    Then I should see "Do laundry"                                                  # features/step_definitions/web_steps.rb:143
+
+  Scenario: Add a task while in the middle of another task                          # features/add_new_task.feature:17
+    Given I am on the dashboard                                                     # features/step_definitions/web_steps.rb:15
+    And I log in as "test" with password "testaccount"                              # features/add_new_task.feature:19
+      Undefined step: "I log in as "test" with password "testaccount"" (Cucumber::Undefined)
+      features/add_new_task.feature:19:in `And I log in as "test" with password "testaccount"'
+    When I add a new task called "Random task"                                      # features/step_definitions/add_new_task_steps.rb:1
+    And I follow "Start" #for "Random task"                                         # features/add_new_task.feature:21
+      Undefined step: "I follow "Start" #for "Random task"" (Cucumber::Undefined)
+      features/add_new_task.feature:21:in `And I follow "Start" #for "Random task"'
+    And I should be on the task timer page                                          # features/step_definitions/web_steps.rb:257
+    And I should see "Random task"                                                  # features/step_definitions/web_steps.rb:143
+    When I go to the dashboard                                                      # features/step_definitions/web_steps.rb:19
+    When I add a new task called "Another random task"                              # features/step_definitions/add_new_task_steps.rb:1
+    Then I should see "Another random task"                                         # features/step_definitions/web_steps.rb:143
+
+  Scenario: Add more tasks than alotted for one day                                 # features/add_new_task.feature:28
+    Given I am on the dashboard                                                     # features/step_definitions/web_steps.rb:15
+    And I add 5 different tasks (max the daily task limit)                          # features/add_new_task.feature:30
+      Undefined step: "I add 5 different tasks (max the daily task limit)" (Cucumber::Undefined)
+      features/add_new_task.feature:30:in `And I add 5 different tasks (max the daily task limit)'
+    And I add a new task called "Task 1"                                            # features/step_definitions/add_new_task_steps.rb:1
+    And I add a new task called "Task 2"                                            # features/step_definitions/add_new_task_steps.rb:1
+    And I add a new task called "Task 3"                                            # features/step_definitions/add_new_task_steps.rb:1
+    And I add a new task called "Task 4"                                            # features/step_definitions/add_new_task_steps.rb:1
+    And I add a new task called "Task 5"                                            # features/step_definitions/add_new_task_steps.rb:1
+    When I add a new task called "Do laundry"                                       # features/step_definitions/add_new_task_steps.rb:1
+    Then I should see "Error: Too many tasks!"                                      # features/step_definitions/web_steps.rb:143
+    And I should not see "Do laundry"                                               # features/step_definitions/web_steps.rb:182
+    Given there is a calendar with current date October 7, 2010                     # features/add_new_task.feature:40
+      Undefined step: "there is a calendar with current date October 7, 2010" (Cucumber::Undefined)
+      features/add_new_task.feature:40:in `Given there is a calendar with current date October 7, 2010'
+    And I am currently on this date                                                 # features/add_new_task.feature:41
+      Undefined step: "I am currently on this date" (Cucumber::Undefined)
+      features/add_new_task.feature:41:in `And I am currently on this date'
+    When the clock hits October 8, 2010                                             # features/add_new_task.feature:42
+      Undefined step: "the clock hits October 8, 2010" (Cucumber::Undefined)
+      features/add_new_task.feature:42:in `When the clock hits October 8, 2010'
+    Then I should have a fresh todo list for the new day                            # features/add_new_task.feature:43
+      Undefined step: "I should have a fresh todo list for the new day" (Cucumber::Undefined)
+      features/add_new_task.feature:43:in `Then I should have a fresh todo list for the new day'
+    Given there is a calendar                                                       # features/add_new_task.feature:45
+      Undefined step: "there is a calendar" (Cucumber::Undefined)
+      features/add_new_task.feature:45:in `Given there is a calendar'
+    When I click on the day after the current                                       # features/add_new_task.feature:46
+      Undefined step: "I click on the day after the current" (Cucumber::Undefined)
+      features/add_new_task.feature:46:in `When I click on the day after the current'
+    Then I should be on the todo list for that day                                  # features/step_definitions/web_steps.rb:257
+
+#Visitors should be in control of creating an account and of proving their
+#essential humanity/accountability or whatever it is people think the
+#id-validation does.  We should be fairly skeptical about this process, as the
+#identity+trust chain starts here.
+Feature: Creating an account
+  As an anonymous user
+  I want to be able to create an account
+  So that I can be one of the cool kids
+
+  # Account Creation: Get entry form
+  Scenario: Anonymous user can start creating an account                                                                                             # features/accounts.feature:12
+    Given an anonymous user                                                                                                                          # features/step_definitions/user_steps.rb:8
+    When she goes to /signup                                                                                                                         # features/step_definitions/ra_navigation_steps.rb:8
+      Could not find table 'users' (ActiveRecord::StatementInvalid)
+      ./app/controllers/users_controller.rb:21:in `new'
+      ./app/controllers/users_controller.rb:21:in `new'
+      /usr/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+      ./features/step_definitions/rest_auth_features_helper.rb:10:in `perform_action'
+      ./vendor/plugins/facebooker/lib/rack/facebook.rb:43:in `call'
+      ./features/step_definitions/ra_navigation_steps.rb:11:in `/^(.*)\ goes\ to\ (.*)$/'
+      features/accounts.feature:14:in `When she goes to /signup'
+    Then she should be at the 'users/new' page                                                                                                       # features/step_definitions/ra_response_steps.rb:15
+    And the page should look AWESOME                                                                                                                 # features/step_definitions/ra_response_steps.rb:23
+    And she should see a <form> containing a textfield: Login, textfield: Email, password: Password, password: 'Confirm Password', submit: 'Sign up' # features/step_definitions/ra_response_steps.rb:38
+
+  # Account Creation
+  Scenario: Anonymous user can create an account                                 # features/accounts.feature:20
+    Given an anonymous user                                                      # features/step_definitions/user_steps.rb:8
+    And no user with login: 'Oona' exists                                        # features/step_definitions/ra_resource_steps.rb:40
+      SQLite3::SQLException: no such table: users: SELECT * FROM "users" WHERE ("users"."login" = 'Oona')  (ActiveRecord::StatementInvalid)
+      ./features/step_definitions/ra_resource_steps.rb:42:in `/^no\ (.*)\ with\ (.*):\ '(.*)'\ exists$/'
+      features/accounts.feature:22:in `And no user with login: 'Oona' exists'
+    When she registers an account as the preloaded 'Oona'                        # features/step_definitions/user_steps.rb:42
+    Then she should be redirected to the home page                               # features/step_definitions/ra_response_steps.rb:19
+    When she follows that redirect!                                              # features/step_definitions/ra_navigation_steps.rb:46
+    Then she should see a notice message 'Thanks for signing up!'                # features/step_definitions/ra_response_steps.rb:112
+    And a user with login: 'oona' should exist                                   # features/step_definitions/ra_resource_steps.rb:53
+    And the user should have login: 'oona', and email: 'unactivated@example.com' # features/step_definitions/ra_resource_steps.rb:65
+    And oona should be logged in                                                 # features/step_definitions/user_steps.rb:68
+
+  # Account Creation Failure: Account exists
+  Scenario: Anonymous user can not create an account replacing an activated account                         # features/accounts.feature:33
+    Given an anonymous user                                                                                 # features/step_definitions/user_steps.rb:8
+    And an activated user named 'Reggie'                                                                    # features/step_definitions/user_steps.rb:16
+      Could not find table 'users' (ActiveRecord::StatementInvalid)
+      ./app/controllers/users_controller.rb:26:in `new'
+      ./app/controllers/users_controller.rb:26:in `create'
+      /usr/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+      ./features/step_definitions/rest_auth_features_helper.rb:10:in `perform_action'
+      ./vendor/plugins/facebooker/lib/rack/facebook.rb:43:in `call'
+      ./features/step_definitions/user_steps.rb:104:in `create_user'
+      ./features/step_definitions/user_steps.rb:110:in `create_user!'
+      ./features/step_definitions/user_steps.rb:17:in `/^(.*)\ (.*)\ user\ named\ '(.*)'$/'
+      features/accounts.feature:35:in `And an activated user named 'Reggie''
+    And we try hard to remember the user's updated_at, and created_at                                       # features/step_definitions/ra_resource_steps.rb:85
+    When she registers an account with login: 'reggie', password: 'monkey', and email: 'reggie@example.com' # features/step_definitions/user_steps.rb:48
+    Then she should be at the 'users/new' page                                                              # features/step_definitions/ra_response_steps.rb:15
+    And she should     see an errorExplanation message 'Login has already been taken'                       # features/step_definitions/ra_response_steps.rb:112
+    And she should not see an errorExplanation message 'Email has already been taken'                       # features/step_definitions/ra_response_steps.rb:116
+    And a user with login: 'reggie' should exist                                                            # features/step_definitions/ra_resource_steps.rb:53
+    And the user should have email: 'registered@example.com'                                                # features/step_definitions/ra_resource_steps.rb:65
+    And the user's created_at should stay the same under to_s                                               # features/step_definitions/ra_resource_steps.rb:103
+    And the user's updated_at should stay the same under to_s                                               # features/step_definitions/ra_resource_steps.rb:103
+    And she should not be logged in                                                                         # features/step_definitions/user_steps.rb:64
+
+  # Account Creation Failure: Incomplete input
+  #
+  Scenario: Anonymous user can not create an account with incomplete or incorrect input                                                        # features/accounts.feature:50
+    Given an anonymous user                                                                                                                    # features/step_definitions/user_steps.rb:8
+    And no user with login: 'Oona' exists                                                                                                      # features/step_definitions/ra_resource_steps.rb:40
+      SQLite3::SQLException: no such table: users: SELECT * FROM "users" WHERE ("users"."login" = 'Oona')  (ActiveRecord::StatementInvalid)
+      ./features/step_definitions/ra_resource_steps.rb:42:in `/^no\ (.*)\ with\ (.*):\ '(.*)'\ exists$/'
+      features/accounts.feature:52:in `And no user with login: 'Oona' exists'
+    When she registers an account with login: '',     password: 'monkey', password_confirmation: 'monkey' and email: 'unactivated@example.com' # features/step_definitions/user_steps.rb:48
+    Then she should be at the 'users/new' page                                                                                                 # features/step_definitions/ra_response_steps.rb:15
+    And she should     see an errorExplanation message 'Login can't be blank'                                                                  # features/step_definitions/ra_response_steps.rb:112
+    And no user with login: 'oona' should exist                                                                                                # features/step_definitions/ra_resource_steps.rb:59
+
+  Scenario: Anonymous user can not create an account with no password#    Given an anonymous user                                             # features/accounts.feature:58
+    And no user with login: 'Oona' exist                                                                                                      # features/accounts.feature:59
+      Undefined step: "no user with login: 'Oona' exist" (Cucumber::Undefined)
+      features/accounts.feature:59:in `And no user with login: 'Oona' exist'
+    When she registers an account with login: 'oona', password: '',       password_confirmation: 'monkey' and email:'unactivated@example.com' # features/step_definitions/user_steps.rb:48
+    Then she should be at the 'users/new' page                                                                                                # features/step_definitions/ra_response_steps.rb:15
+    And she should     see an errorExplanation message 'Password can't be blank'                                                              # features/step_definitions/ra_response_steps.rb:112
+    And no user with login: 'oona' should exist                                                                                               # features/step_definitions/ra_resource_steps.rb:59
+
+  Scenario: Anonymous user can not create an account with no password_confirmation                                                             # features/accounts.feature:65
+    Given an anonymous user                                                                                                                    # features/step_definitions/user_steps.rb:8
+    And no user with login: 'Oona' exists                                                                                                      # features/step_definitions/ra_resource_steps.rb:40
+      SQLite3::SQLException: no such table: users: SELECT * FROM "users" WHERE ("users"."login" = 'Oona')  (ActiveRecord::StatementInvalid)
+      ./features/step_definitions/ra_resource_steps.rb:42:in `/^no\ (.*)\ with\ (.*):\ '(.*)'\ exists$/'
+      features/accounts.feature:67:in `And no user with login: 'Oona' exists'
+    When she registers an account with login: 'oona', password: 'monkey', password_confirmation: ''       and email: 'unactivated@example.com' # features/step_definitions/user_steps.rb:48
+    Then she should be at the 'users/new' page                                                                                                 # features/step_definitions/ra_response_steps.rb:15
+    And she should     see an errorExplanation message 'Password confirmation can't be blank'                                                  # features/step_definitions/ra_response_steps.rb:112
+    And no user with login: 'oona' should exist                                                                                                # features/step_definitions/ra_resource_steps.rb:59
+
+  Scenario: Anonymous user can not create an account with mismatched password & password_confirmation                                          # features/accounts.feature:73
+    Given an anonymous user                                                                                                                    # features/step_definitions/user_steps.rb:8
+    And no user with login: 'Oona' exists                                                                                                      # features/step_definitions/ra_resource_steps.rb:40
+      SQLite3::SQLException: no such table: users: SELECT * FROM "users" WHERE ("users"."login" = 'Oona')  (ActiveRecord::StatementInvalid)
+      ./features/step_definitions/ra_resource_steps.rb:42:in `/^no\ (.*)\ with\ (.*):\ '(.*)'\ exists$/'
+      features/accounts.feature:75:in `And no user with login: 'Oona' exists'
+    When she registers an account with login: 'oona', password: 'monkey', password_confirmation: 'monkeY' and email: 'unactivated@example.com' # features/step_definitions/user_steps.rb:48
+    Then she should be at the 'users/new' page                                                                                                 # features/step_definitions/ra_response_steps.rb:15
+    And she should     see an errorExplanation message 'Password doesn't match confirmation'                                                   # features/step_definitions/ra_response_steps.rb:112
+    And no user with login: 'oona' should exist                                                                                                # features/step_definitions/ra_resource_steps.rb:59
+
+  Scenario: Anonymous user can not create an account with bad email                                                                            # features/accounts.feature:81
+    Given an anonymous user                                                                                                                    # features/step_definitions/user_steps.rb:8
+    And no user with login: 'Oona' exists                                                                                                      # features/step_definitions/ra_resource_steps.rb:40
+      SQLite3::SQLException: no such table: users: SELECT * FROM "users" WHERE ("users"."login" = 'Oona')  (ActiveRecord::StatementInvalid)
+      ./features/step_definitions/ra_resource_steps.rb:42:in `/^no\ (.*)\ with\ (.*):\ '(.*)'\ exists$/'
+      features/accounts.feature:83:in `And no user with login: 'Oona' exists'
+    When she registers an account with login: 'oona', password: 'monkey', password_confirmation: 'monkey' and email: ''                        # features/step_definitions/user_steps.rb:48
+    Then she should be at the 'users/new' page                                                                                                 # features/step_definitions/ra_response_steps.rb:15
+    And she should     see an errorExplanation message 'Email can't be blank'                                                                  # features/step_definitions/ra_response_steps.rb:112
+    And no user with login: 'oona' should exist                                                                                                # features/step_definitions/ra_resource_steps.rb:59
+    When she registers an account with login: 'oona', password: 'monkey', password_confirmation: 'monkey' and email: 'unactivated@example.com' # features/step_definitions/user_steps.rb:48
+    Then she should be redirected to the home page                                                                                             # features/step_definitions/ra_response_steps.rb:19
+    When she follows that redirect!                                                                                                            # features/step_definitions/ra_navigation_steps.rb:46
+    Then she should see a notice message 'Thanks for signing up!'                                                                              # features/step_definitions/ra_response_steps.rb:112
+    And a user with login: 'oona' should exist                                                                                                 # features/step_definitions/ra_resource_steps.rb:53
+    And the user should have login: 'oona', and email: 'unactivated@example.com'                                                               # features/step_definitions/ra_resource_steps.rb:65
+    And oona should be logged in                                                                                                               # features/step_definitions/user_steps.rb:68
+
+Feature: Login
+  As a user
+  I want to login to 'constant win'
+  So that I can begin creating a to-do list
+
+  Background:                            # features/login.feature:6
+    Given my email is "sample@email.com" # features/login.feature:7
+      Undefined step: "my email is "sample@email.com"" (Cucumber::Undefined)
+      features/login.feature:7:in `Given my email is "sample@email.com"'
+    And I am not logged in               # features/login.feature:8
+      Undefined step: "I am not logged in" (Cucumber::Undefined)
+      features/login.feature:8:in `And I am not logged in'
+
+  Scenario: Attempt to Register                   # features/login.feature:10
+    Given I am on the homepage                    # features/step_definitions/web_steps.rb:15
+    When I click on "Register"                    # features/login.feature:12
+      Undefined step: "I click on "Register"" (Cucumber::Undefined)
+      features/login.feature:12:in `When I click on "Register"'
+    Then I should be on the register account page # features/step_definitions/web_steps.rb:257
+
+  Scenario: Register new account with unique email           # features/login.feature:15
+    Given I am on the register account page                  # features/step_definitions/web_steps.rb:15
+    And there is no account registered to "sample@email.com" # features/login.feature:17
+      Undefined step: "there is no account registered to "sample@email.com"" (Cucumber::Undefined)
+      features/login.feature:17:in `And there is no account registered to "sample@email.com"'
+    And I entered all fields in the form                     # features/login.feature:18
+      Undefined step: "I entered all fields in the form" (Cucumber::Undefined)
+      features/login.feature:18:in `And I entered all fields in the form'
+    When I submit my form                                    # features/login.feature:19
+      Undefined step: "I submit my form" (Cucumber::Undefined)
+      features/login.feature:19:in `When I submit my form'
+    Then I should have an account registered with my email   # features/login.feature:20
+      Undefined step: "I should have an account registered with my email" (Cucumber::Undefined)
+      features/login.feature:20:in `Then I should have an account registered with my email'
+
+  Scenario: Register new account with non-unique email               # features/login.feature:22
+    Given I am on the register account page                          # features/step_definitions/web_steps.rb:15
+    And there is already an account registered to "sample@email.com" # features/login.feature:24
+      Undefined step: "there is already an account registered to "sample@email.com"" (Cucumber::Undefined)
+      features/login.feature:24:in `And there is already an account registered to "sample@email.com"'
+    And I entered all fields in the form                             # features/login.feature:25
+      Undefined step: "I entered all fields in the form" (Cucumber::Undefined)
+      features/login.feature:25:in `And I entered all fields in the form'
+    When I submit my form                                            # features/login.feature:26
+      Undefined step: "I submit my form" (Cucumber::Undefined)
+      features/login.feature:26:in `When I submit my form'
+    Then I should see "Error: Email address already exists."         # features/step_definitions/web_steps.rb:143
+
+  Scenario: Log in with unregistered email                   # features/login.feature:29
+    Given I am on the homepage                               # features/step_definitions/web_steps.rb:15
+    And there is no account registered to "sample@email.com" # features/login.feature:31
+      Undefined step: "there is no account registered to "sample@email.com"" (Cucumber::Undefined)
+      features/login.feature:31:in `And there is no account registered to "sample@email.com"'
+    When I attempt to sign in                                # features/login.feature:32
+      Undefined step: "I attempt to sign in" (Cucumber::Undefined)
+      features/login.feature:32:in `When I attempt to sign in'
+    Then I should see "Error: Wrong Email/Password."         # features/step_definitions/web_steps.rb:143
+    And I should not be signed in                            # features/login.feature:34
+      Undefined step: "I should not be signed in" (Cucumber::Undefined)
+      features/login.feature:34:in `And I should not be signed in'
+
+  Scenario: Log in with wrong password                               # features/login.feature:36
+    Given I am on the homepage                                       # features/step_definitions/web_steps.rb:15
+    And there is already an account registered to "sample@email.com" # features/login.feature:38
+      Undefined step: "there is already an account registered to "sample@email.com"" (Cucumber::Undefined)
+      features/login.feature:38:in `And there is already an account registered to "sample@email.com"'
+    And my password entry is wrong                                   # features/login.feature:39
+      Undefined step: "my password entry is wrong" (Cucumber::Undefined)
+      features/login.feature:39:in `And my password entry is wrong'
+    When I attempt to sign in                                        # features/login.feature:40
+      Undefined step: "I attempt to sign in" (Cucumber::Undefined)
+      features/login.feature:40:in `When I attempt to sign in'
+    Then I should see "Error: Wrong Email/Password."                 # features/step_definitions/web_steps.rb:143
+    And I should not be signed in                                    # features/login.feature:42
+      Undefined step: "I should not be signed in" (Cucumber::Undefined)
+      features/login.feature:42:in `And I should not be signed in'
+
+  Scenario: Log in with registered email                             # features/login.feature:44
+    Given I am on the homepage                                       # features/step_definitions/web_steps.rb:15
+    And there is already an account registered to "sample@email.com" # features/login.feature:46
+      Undefined step: "there is already an account registered to "sample@email.com"" (Cucumber::Undefined)
+      features/login.feature:46:in `And there is already an account registered to "sample@email.com"'
+    And my password entry is correct                                 # features/login.feature:47
+      Undefined step: "my password entry is correct" (Cucumber::Undefined)
+      features/login.feature:47:in `And my password entry is correct'
+    When I attempt to sign in                                        # features/login.feature:48
+      Undefined step: "I attempt to sign in" (Cucumber::Undefined)
+      features/login.feature:48:in `When I attempt to sign in'
+    Then I should be signed in                                       # features/login.feature:49
+      Undefined step: "I should be signed in" (Cucumber::Undefined)
+      features/login.feature:49:in `Then I should be signed in'
+    And I should see my dashboard                                    # features/login.feature:50
+      Undefined step: "I should see my dashboard" (Cucumber::Undefined)
+      features/login.feature:50:in `And I should see my dashboard'
+
+Feature: Exit Item View
+  As a user
+  I want to be able to exit from this gnarly task view
+  So that I can edit tasks again like a boss
+
+  Background:                                       # features/exit_item_view.feature:6
+    Given I am logged in as "sample@email.com"      # features/exit_item_view.feature:7
+      Undefined step: "I am logged in as "sample@email.com"" (Cucumber::Undefined)
+      features/exit_item_view.feature:7:in `Given I am logged in as "sample@email.com"'
+    And I have a task with description "Do laundry" # features/exit_item_view.feature:8
+      Undefined step: "I have a task with description "Do laundry"" (Cucumber::Undefined)
+      features/exit_item_view.feature:8:in `And I have a task with description "Do laundry"'
+    And I have started the task "Do laundry"        # features/exit_item_view.feature:9
+      Undefined step: "I have started the task "Do laundry"" (Cucumber::Undefined)
+      features/exit_item_view.feature:9:in `And I have started the task "Do laundry"'
+
+  Scenario: I exit item view while doing a task          # features/exit_item_view.feature:12
+    Given I am on the task timer page for "Do laundry"   # features/step_definitions/web_steps.rb:15
+    When I click on "Back to dashboard"                  # features/exit_item_view.feature:14
+      Undefined step: "I click on "Back to dashboard"" (Cucumber::Undefined)
+      features/exit_item_view.feature:14:in `When I click on "Back to dashboard"'
+    Then I should be on the dashboard                    # features/step_definitions/web_steps.rb:257
+    And the task "Do laundry" should not end prematurely # features/exit_item_view.feature:16
+      Undefined step: "the task "Do laundry" should not end prematurely" (Cucumber::Undefined)
+      features/exit_item_view.feature:16:in `And the task "Do laundry" should not end prematurely'
+
+  Scenario: I am going back to item view from dashboard      # features/exit_item_view.feature:18
+    Given I am on the dashboard                              # features/step_definitions/web_steps.rb:15
+    When I click on "Back to task"                           # features/exit_item_view.feature:20
+      Undefined step: "I click on "Back to task"" (Cucumber::Undefined)
+      features/exit_item_view.feature:20:in `When I click on "Back to task"'
+    Then I should be on the task timer page for "Do laundry" # features/step_definitions/web_steps.rb:257
+
+  Scenario: I attempt to exit item view right after time runs out     # features/exit_item_view.feature:23
+    Given I am on the task timer page for "Do laundry"                # features/step_definitions/web_steps.rb:15
+    And the time runs out                                             # features/exit_item_view.feature:25
+      Undefined step: "the time runs out" (Cucumber::Undefined)
+      features/exit_item_view.feature:25:in `And the time runs out'
+    When I click on "Back to dashboard"                               # features/exit_item_view.feature:26
+      Undefined step: "I click on "Back to dashboard"" (Cucumber::Undefined)
+      features/exit_item_view.feature:26:in `When I click on "Back to dashboard"'
+    Then I should see "Please choose what to do with your task first" # features/step_definitions/web_steps.rb:143
+    And I should be on the on the task timer page for "Do laundry"    # features/step_definitions/web_steps.rb:257
+
+Feature: Set timer for task
+  As a user
+  I want to be able to set a timer for a task
+  So that I am motivated to complete task on time
+
+  Background:                                     # features/start_timer.feature:6
+    Given I am on the dashboard                   # features/step_definitions/web_steps.rb:15
+    When I follow "New task"                      # features/step_definitions/web_steps.rb:27
+      Could not find link with text or title or id "New task" (Webrat::NotFoundError)
+      ./features/step_definitions/web_steps.rb:28:in `/^(?:|I )follow "([^"]*)"$/'
+      features/start_timer.feature:9:in `When I follow "New task"'
+    And I fill in "Description" with "Do laundry" # features/step_definitions/web_steps.rb:35
+    And I press "Create"                          # features/step_definitions/web_steps.rb:23
+
+  Scenario: I set the timer for task                         # features/start_timer.feature:13
+    Given I click “Start” #for "Do laundry"                  # features/start_timer.feature:14
+      Undefined step: "I click “Start” #for "Do laundry"" (Cucumber::Undefined)
+      features/start_timer.feature:14:in `Given I click “Start” #for "Do laundry"'
+    And I should be on the task timer page #for "Do laundry" # features/step_definitions/web_steps.rb:257
+    When I enter "15" minutes in the timer entry field       # features/start_timer.feature:16
+      Undefined step: "I enter "15" minutes in the timer entry field" (Cucumber::Undefined)
+      features/start_timer.feature:16:in `When I enter "15" minutes in the timer entry field'
+    Then I should have "15" minutes to complete my task      # features/start_timer.feature:17
+      Undefined step: "I should have "15" minutes to complete my task" (Cucumber::Undefined)
+      features/start_timer.feature:17:in `Then I should have "15" minutes to complete my task'
+
+  Scenario: I set too little time                              # features/start_timer.feature:19
+    Given I click “Start” #for "Do laundry"                    # features/start_timer.feature:20
+      Undefined step: "I click “Start” #for "Do laundry"" (Cucumber::Undefined)
+      features/start_timer.feature:20:in `Given I click “Start” #for "Do laundry"'
+    And I should be on the task timer page #for "Do laundry"   # features/step_definitions/web_steps.rb:257
+    When I enter "5" minutes in the timer entry field          # features/start_timer.feature:22
+      Undefined step: "I enter "5" minutes in the timer entry field" (Cucumber::Undefined)
+      features/start_timer.feature:22:in `When I enter "5" minutes in the timer entry field'
+    Then I should see "Time should be a minimum of 15 minutes" # features/step_definitions/web_steps.rb:143
+    And the task should not be started                         # features/start_timer.feature:24
+      Undefined step: "the task should not be started" (Cucumber::Undefined)
+      features/start_timer.feature:24:in `And the task should not be started'
+
+Feature: Add more time
+  As a user
+  I want to add more time
+  So that I can finish in a reasonable amount of time
+
+  Background:                                     # features/add_more_time.feature:6
+    Given I am on the dashboard                   # features/step_definitions/web_steps.rb:15
+    And I follow "New task"                       # features/step_definitions/web_steps.rb:27
+      Could not find link with text or title or id "New task" (Webrat::NotFoundError)
+      ./features/step_definitions/web_steps.rb:28:in `/^(?:|I )follow "([^"]*)"$/'
+      features/add_more_time.feature:9:in `And I follow "New task"'
+    And I fill in "Description" with "Do laundry" # features/step_definitions/web_steps.rb:35
+    And I press "Create"                          # features/step_definitions/web_steps.rb:23
+
+  #Scenario: I see the options when time runs out for the task
+  #Given I am on the dashboard
+  #And time runs out (or Time left is 0)
+  #Then I should see "add more time" and "break your original task down"
+  Scenario: I click on Add time                    # features/add_more_time.feature:18
+    Given the time runs out                        # features/add_more_time.feature:19
+      Undefined step: "the time runs out" (Cucumber::Undefined)
+      features/add_more_time.feature:19:in `Given the time runs out'
+    And I click on “Add time”                      # features/add_more_time.feature:20
+      Undefined step: "I click on “Add time”" (Cucumber::Undefined)
+      features/add_more_time.feature:20:in `And I click on “Add time”'
+    Then I should see a form for adding more time. # features/add_more_time.feature:21
+      Undefined step: "I should see a form for adding more time." (Cucumber::Undefined)
+      features/add_more_time.feature:21:in `Then I should see a form for adding more time.'
+
+  Scenario: I added more time                           # features/add_more_time.feature:23
+    Given the time runs out                             # features/add_more_time.feature:24
+      Undefined step: "the time runs out" (Cucumber::Undefined)
+      features/add_more_time.feature:24:in `Given the time runs out'
+    And I click on “Add time”                           # features/add_more_time.feature:25
+      Undefined step: "I click on “Add time”" (Cucumber::Undefined)
+      features/add_more_time.feature:25:in `And I click on “Add time”'
+    And I fill in 15 more minutes                       # features/add_more_time.feature:26
+      Undefined step: "I fill in 15 more minutes" (Cucumber::Undefined)
+      features/add_more_time.feature:26:in `And I fill in 15 more minutes'
+    Then I should be on the task timer page             # features/step_definitions/web_steps.rb:257
+    And there should be 15 more minutes left on my task # features/add_more_time.feature:28
+      Undefined step: "there should be 15 more minutes left on my task" (Cucumber::Undefined)
+      features/add_more_time.feature:28:in `And there should be 15 more minutes left on my task'
+
+Feature: Break task down
+  As a user
+  I want to be able to break down a task
+  So that I can finish tasks that are bite-sized chunks of what they used to be
+
+  Background:                                        # features/break_task_down.feature:6
+    And I have task with description "Do laundry"    # features/break_task_down.feature:9
+      Undefined step: "I have task with description "Do laundry"" (Cucumber::Undefined)
+      features/break_task_down.feature:9:in `And I have task with description "Do laundry"'
+    And I started the task, "Do laundry"             # features/break_task_down.feature:10
+      Undefined step: "I started the task, "Do laundry"" (Cucumber::Undefined)
+      features/break_task_down.feature:10:in `And I started the task, "Do laundry"'
+    And I am on the task timer page for "Do laundry" # features/step_definitions/web_steps.rb:15
+    And the time runs out                            # features/break_task_down.feature:12
+      Undefined step: "the time runs out" (Cucumber::Undefined)
+      features/break_task_down.feature:12:in `And the time runs out'
+
+  Scenario: I click on Divide and Conquer                 # features/break_task_down.feature:14
+    When I click on “Divide and Conquer”                  # features/break_task_down.feature:15
+      Undefined step: "I click on “Divide and Conquer”" (Cucumber::Undefined)
+      features/break_task_down.feature:15:in `When I click on “Divide and Conquer”'
+    Then I should see a form for breaking down my tasks.  # features/break_task_down.feature:16
+      Undefined step: "I should see a form for breaking down my tasks." (Cucumber::Undefined)
+      features/break_task_down.feature:16:in `Then I should see a form for breaking down my tasks.'
+    And I should see two field entries for entering tasks # features/break_task_down.feature:17
+      Undefined step: "I should see two field entries for entering tasks" (Cucumber::Undefined)
+      features/break_task_down.feature:17:in `And I should see two field entries for entering tasks'
+
+  Scenario: I broke it down to only one subtask             # features/break_task_down.feature:19
+    Given I click on “Divide and Conquer”                   # features/break_task_down.feature:20
+      Undefined step: "I click on “Divide and Conquer”" (Cucumber::Undefined)
+      features/break_task_down.feature:20:in `Given I click on “Divide and Conquer”'
+    When I enter only one subtask                           # features/break_task_down.feature:21
+      Undefined step: "I enter only one subtask" (Cucumber::Undefined)
+      features/break_task_down.feature:21:in `When I enter only one subtask'
+    Then I should see "You need to break down your task"    # features/step_definitions/web_steps.rb:143
+    And there should be no new tasks                        # features/break_task_down.feature:23
+      Undefined step: "there should be no new tasks" (Cucumber::Undefined)
+      features/break_task_down.feature:23:in `And there should be no new tasks'
+    And I should be on the task timer page for "Do laundry" # features/step_definitions/web_steps.rb:257
+
+  Scenario: I broke it down to 2 subtasks                       # features/break_task_down.feature:26
+    Given I click on “Divide and Conquer”                       # features/break_task_down.feature:27
+      Undefined step: "I click on “Divide and Conquer”" (Cucumber::Undefined)
+      features/break_task_down.feature:27:in `Given I click on “Divide and Conquer”'
+    When I enter two subtasks, "Wash clothes" and "Dry clothes" # features/break_task_down.feature:28
+      Undefined step: "I enter two subtasks, "Wash clothes" and "Dry clothes"" (Cucumber::Undefined)
+      features/break_task_down.feature:28:in `When I enter two subtasks, "Wash clothes" and "Dry clothes"'
+    Then the "Do laundry" task should be removed from task list # features/break_task_down.feature:29
+      Undefined step: "the "Do laundry" task should be removed from task list" (Cucumber::Undefined)
+      features/break_task_down.feature:29:in `Then the "Do laundry" task should be removed from task list'
+    And "Wash clothes should be on task list                    # features/break_task_down.feature:30
+      Undefined step: ""Wash clothes should be on task list" (Cucumber::Undefined)
+      features/break_task_down.feature:30:in `And "Wash clothes should be on task list'
+    And "Dry clothes" should be on task list                    # features/break_task_down.feature:31
+      Undefined step: ""Dry clothes" should be on task list" (Cucumber::Undefined)
+      features/break_task_down.feature:31:in `And "Dry clothes" should be on task list'
+    And I should be on the dashboard                            # features/step_definitions/web_steps.rb:257
+
+  Scenario: I broke it down to 2 subtask, and want to break it more # features/break_task_down.feature:34
+    Given I click on “Divide and Conquer”                           # features/break_task_down.feature:35
+      Undefined step: "I click on “Divide and Conquer”" (Cucumber::Undefined)
+      features/break_task_down.feature:35:in `Given I click on “Divide and Conquer”'
+    And I type two subtasks, "Wash clothes" and "Dry clothes"       # features/break_task_down.feature:36
+      Undefined step: "I type two subtasks, "Wash clothes" and "Dry clothes"" (Cucumber::Undefined)
+      features/break_task_down.feature:36:in `And I type two subtasks, "Wash clothes" and "Dry clothes"'
+    When I click on "More"                                          # features/break_task_down.feature:37
+      Undefined step: "I click on "More"" (Cucumber::Undefined)
+      features/break_task_down.feature:37:in `When I click on "More"'
+    Then I should see another entry field                           # features/break_task_down.feature:38
+      Undefined step: "I should see another entry field" (Cucumber::Undefined)
+      features/break_task_down.feature:38:in `Then I should see another entry field'
+
+  Scenario: I broke it down to 3 subtasks                        # features/break_task_down.feature:40
+    Given I click on “Divide and Conquer”                        # features/break_task_down.feature:41
+      Undefined step: "I click on “Divide and Conquer”" (Cucumber::Undefined)
+      features/break_task_down.feature:41:in `Given I click on “Divide and Conquer”'
+    And I enter three subtasks, "Wash clothes" and "Dry clothes" # features/break_task_down.feature:42
+      Undefined step: "I enter three subtasks, "Wash clothes" and "Dry clothes"" (Cucumber::Undefined)
+      features/break_task_down.feature:42:in `And I enter three subtasks, "Wash clothes" and "Dry clothes"'
+    Then the "Do laundry" task should be removed from task list  # features/break_task_down.feature:43
+      Undefined step: "the "Do laundry" task should be removed from task list" (Cucumber::Undefined)
+      features/break_task_down.feature:43:in `Then the "Do laundry" task should be removed from task list'
+    And "Wash clothes should be on task list                     # features/break_task_down.feature:44
+      Undefined step: ""Wash clothes should be on task list" (Cucumber::Undefined)
+      features/break_task_down.feature:44:in `And "Wash clothes should be on task list'
+    And "Dry clothes" should be on task list                     # features/break_task_down.feature:45
+      Undefined step: ""Dry clothes" should be on task list" (Cucumber::Undefined)
+      features/break_task_down.feature:45:in `And "Dry clothes" should be on task list'
+    And "Fold clothes" should be on task list                    # features/break_task_down.feature:46
+      Undefined step: ""Fold clothes" should be on task list" (Cucumber::Undefined)
+      features/break_task_down.feature:46:in `And "Fold clothes" should be on task list'
+    And I should be on the dashboard                             # features/step_definitions/web_steps.rb:257
+
+Feature: Simplest login test ever
+  As a user
+  I want to be able to login to constant win
+  So that I can begin winning
+
+Feature: Delegate
+  As a user
+  I want to be able to delegate a task I’ve started and not completed
+  So that I can do other tasks more suitable for me
+
+#Users want to know that nobody can masquerade as them.  We want to extend trust
+#only to visitors who present the appropriate credentials.  Everyone wants this
+#identity verification to be as secure and convenient as possible.
+Feature: Logging in
+  As an anonymous user with an account
+  I want to log in to my account
+  So that I can be myself
+
+  # Log in: get form
+  #
+  Scenario: Anonymous user can get a login form.                                                        # features/sessions.feature:12
+    Given an anonymous user                                                                             # features/step_definitions/user_steps.rb:8
+    When she goes to /login                                                                             # features/step_definitions/ra_navigation_steps.rb:8
+    Then she should be at the new sessions page                                                         # features/step_definitions/ra_response_steps.rb:15
+    And the page should look AWESOME                                                                    # features/step_definitions/ra_response_steps.rb:23
+    And she should see a <form> containing a textfield: Login, password: Password, and submit: 'Log in' # features/step_definitions/ra_response_steps.rb:38
+
+  #
+  # Log in successfully, but don't remember me
+  #
+  Scenario: Anonymous user can log in                                                              # features/sessions.feature:22
+    Given an anonymous user                                                                        # features/step_definitions/user_steps.rb:8
+    And an activated user named 'reggie'                                                           # features/step_definitions/user_steps.rb:16
+      Could not find table 'users' (ActiveRecord::StatementInvalid)
+      ./app/controllers/users_controller.rb:26:in `new'
+      ./app/controllers/users_controller.rb:26:in `create'
+      /usr/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+      ./features/step_definitions/rest_auth_features_helper.rb:10:in `perform_action'
+      ./vendor/plugins/facebooker/lib/rack/facebook.rb:43:in `call'
+      ./features/step_definitions/user_steps.rb:104:in `create_user'
+      ./features/step_definitions/user_steps.rb:110:in `create_user!'
+      ./features/step_definitions/user_steps.rb:17:in `/^(.*)\ (.*)\ user\ named\ '(.*)'$/'
+      features/sessions.feature:24:in `And an activated user named 'reggie''
+    When she creates a singular sessions with login: 'reggie', password: 'monkey', remember me: '' # features/step_definitions/ra_navigation_steps.rb:19
+    Then she should be redirected to the home page                                                 # features/step_definitions/ra_response_steps.rb:19
+    When she follows that redirect!                                                                # features/step_definitions/ra_navigation_steps.rb:46
+    Then she should see a notice message 'Logged in successfully'                                  # features/step_definitions/ra_response_steps.rb:112
+    And reggie should be logged in                                                                 # features/step_definitions/user_steps.rb:68
+    And she should not have an auth_token cookie                                                   # features/step_definitions/ra_response_steps.rb:75
+
+  Scenario: Logged-in user who logs in should be the new one                                       # features/sessions.feature:32
+    Given an activated user named 'reggie'                                                         # features/step_definitions/user_steps.rb:16
+      Could not find table 'users' (ActiveRecord::StatementInvalid)
+      ./app/controllers/users_controller.rb:26:in `new'
+      ./app/controllers/users_controller.rb:26:in `create'
+      /usr/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+      ./features/step_definitions/rest_auth_features_helper.rb:10:in `perform_action'
+      ./vendor/plugins/facebooker/lib/rack/facebook.rb:43:in `call'
+      ./features/step_definitions/user_steps.rb:104:in `create_user'
+      ./features/step_definitions/user_steps.rb:110:in `create_user!'
+      ./features/step_definitions/user_steps.rb:17:in `/^(.*)\ (.*)\ user\ named\ '(.*)'$/'
+      features/sessions.feature:33:in `Given an activated user named 'reggie''
+    And an activated user logged in as 'oona'                                                      # features/step_definitions/user_steps.rb:20
+    When she creates a singular sessions with login: 'reggie', password: 'monkey', remember me: '' # features/step_definitions/ra_navigation_steps.rb:19
+    Then she should be redirected to the home page                                                 # features/step_definitions/ra_response_steps.rb:19
+    When she follows that redirect!                                                                # features/step_definitions/ra_navigation_steps.rb:46
+    Then she should see a notice message 'Logged in successfully'                                  # features/step_definitions/ra_response_steps.rb:112
+    And reggie should be logged in                                                                 # features/step_definitions/user_steps.rb:68
+    And she should not have an auth_token cookie                                                   # features/step_definitions/ra_response_steps.rb:75
+
+  #
+  # Log in successfully, remember me
+  #
+  Scenario: Anonymous user can log in and be remembered                                             # features/sessions.feature:45
+    Given an anonymous user                                                                         # features/step_definitions/user_steps.rb:8
+    And an activated user named 'reggie'                                                            # features/step_definitions/user_steps.rb:16
+      Could not find table 'users' (ActiveRecord::StatementInvalid)
+      ./app/controllers/users_controller.rb:26:in `new'
+      ./app/controllers/users_controller.rb:26:in `create'
+      /usr/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+      ./features/step_definitions/rest_auth_features_helper.rb:10:in `perform_action'
+      ./vendor/plugins/facebooker/lib/rack/facebook.rb:43:in `call'
+      ./features/step_definitions/user_steps.rb:104:in `create_user'
+      ./features/step_definitions/user_steps.rb:110:in `create_user!'
+      ./features/step_definitions/user_steps.rb:17:in `/^(.*)\ (.*)\ user\ named\ '(.*)'$/'
+      features/sessions.feature:47:in `And an activated user named 'reggie''
+    When she creates a singular sessions with login: 'reggie', password: 'monkey', remember me: '1' # features/step_definitions/ra_navigation_steps.rb:19
+    Then she should be redirected to the home page                                                  # features/step_definitions/ra_response_steps.rb:19
+    When she follows that redirect!                                                                 # features/step_definitions/ra_navigation_steps.rb:46
+    Then she should see a notice message 'Logged in successfully'                                   # features/step_definitions/ra_response_steps.rb:112
+    And reggie should be logged in                                                                  # features/step_definitions/user_steps.rb:68
+    And she should have an auth_token cookie                                                        # features/step_definitions/ra_response_steps.rb:72
+    And her session store should have user_id: 4                                                    # features/step_definitions/ra_response_steps.rb:93
+
+  #
+  # Log in unsuccessfully
+  #
+  Scenario: Logged-in user who fails logs in should be logged out                                   # features/sessions.feature:61
+    Given an activated user named 'oona'                                                            # features/step_definitions/user_steps.rb:16
+      Could not find table 'users' (ActiveRecord::StatementInvalid)
+      ./app/controllers/users_controller.rb:26:in `new'
+      ./app/controllers/users_controller.rb:26:in `create'
+      /usr/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+      ./features/step_definitions/rest_auth_features_helper.rb:10:in `perform_action'
+      ./vendor/plugins/facebooker/lib/rack/facebook.rb:43:in `call'
+      ./features/step_definitions/user_steps.rb:104:in `create_user'
+      ./features/step_definitions/user_steps.rb:110:in `create_user!'
+      ./features/step_definitions/user_steps.rb:17:in `/^(.*)\ (.*)\ user\ named\ '(.*)'$/'
+      features/sessions.feature:62:in `Given an activated user named 'oona''
+    When she creates a singular sessions with login: 'oona', password: '1234oona', remember me: '1' # features/step_definitions/ra_navigation_steps.rb:19
+    Then she should be redirected to the home page                                                  # features/step_definitions/ra_response_steps.rb:19
+    When she follows that redirect!                                                                 # features/step_definitions/ra_navigation_steps.rb:46
+    Then she should see a notice message 'Logged in successfully'                                   # features/step_definitions/ra_response_steps.rb:112
+    And oona should be logged in                                                                    # features/step_definitions/user_steps.rb:68
+    And she should have an auth_token cookie                                                        # features/step_definitions/ra_response_steps.rb:72
+    When she creates a singular sessions with login: 'reggie', password: 'i_haxxor_joo'             # features/step_definitions/ra_navigation_steps.rb:19
+    Then she should be at the new sessions page                                                     # features/step_definitions/ra_response_steps.rb:15
+    Then she should see an error message 'Couldn't log you in as 'reggie''                          # features/step_definitions/ra_response_steps.rb:112
+    And she should not be logged in                                                                 # features/step_definitions/user_steps.rb:64
+    And she should not have an auth_token cookie                                                    # features/step_definitions/ra_response_steps.rb:75
+    And her session store should not have user_id                                                   # features/step_definitions/ra_response_steps.rb:101
+
+  Scenario: Log-in with bogus info should fail until it doesn't                                     # features/sessions.feature:76
+    Given an activated user named 'reggie'                                                          # features/step_definitions/user_steps.rb:16
+      Could not find table 'users' (ActiveRecord::StatementInvalid)
+      ./app/controllers/users_controller.rb:26:in `new'
+      ./app/controllers/users_controller.rb:26:in `create'
+      /usr/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+      ./features/step_definitions/rest_auth_features_helper.rb:10:in `perform_action'
+      ./vendor/plugins/facebooker/lib/rack/facebook.rb:43:in `call'
+      ./features/step_definitions/user_steps.rb:104:in `create_user'
+      ./features/step_definitions/user_steps.rb:110:in `create_user!'
+      ./features/step_definitions/user_steps.rb:17:in `/^(.*)\ (.*)\ user\ named\ '(.*)'$/'
+      features/sessions.feature:77:in `Given an activated user named 'reggie''
+    When she creates a singular sessions with login: 'reggie', password: 'i_haxxor_joo'             # features/step_definitions/ra_navigation_steps.rb:19
+    Then she should be at the new sessions page                                                     # features/step_definitions/ra_response_steps.rb:15
+    Then she should see an error message 'Couldn't log you in as 'reggie''                          # features/step_definitions/ra_response_steps.rb:112
+    And she should not be logged in                                                                 # features/step_definitions/user_steps.rb:64
+    And she should not have an auth_token cookie                                                    # features/step_definitions/ra_response_steps.rb:75
+    And her session store should not have user_id                                                   # features/step_definitions/ra_response_steps.rb:101
+    When she creates a singular sessions with login: 'reggie', password: ''                         # features/step_definitions/ra_navigation_steps.rb:19
+    Then she should be at the new sessions page                                                     # features/step_definitions/ra_response_steps.rb:15
+    Then she should see an error message 'Couldn't log you in as 'reggie''                          # features/step_definitions/ra_response_steps.rb:112
+    And she should not be logged in                                                                 # features/step_definitions/user_steps.rb:64
+    And she should not have an auth_token cookie                                                    # features/step_definitions/ra_response_steps.rb:75
+    And her session store should not have user_id                                                   # features/step_definitions/ra_response_steps.rb:101
+    When she creates a singular sessions with login: '', password: 'monkey'                         # features/step_definitions/ra_navigation_steps.rb:19
+    Then she should be at the new sessions page                                                     # features/step_definitions/ra_response_steps.rb:15
+    Then she should see an error message 'Couldn't log you in as '''                                # features/step_definitions/ra_response_steps.rb:112
+    And she should not be logged in                                                                 # features/step_definitions/user_steps.rb:64
+    And she should not have an auth_token cookie                                                    # features/step_definitions/ra_response_steps.rb:75
+    And her session store should not have user_id                                                   # features/step_definitions/ra_response_steps.rb:101
+    When she creates a singular sessions with login: 'leonard_shelby', password: 'monkey'           # features/step_definitions/ra_navigation_steps.rb:19
+    Then she should be at the new sessions page                                                     # features/step_definitions/ra_response_steps.rb:15
+    Then she should see an error message 'Couldn't log you in as 'leonard_shelby''                  # features/step_definitions/ra_response_steps.rb:112
+    And she should not be logged in                                                                 # features/step_definitions/user_steps.rb:64
+    And she should not have an auth_token cookie                                                    # features/step_definitions/ra_response_steps.rb:75
+    And her session store should not have user_id                                                   # features/step_definitions/ra_response_steps.rb:101
+    When she creates a singular sessions with login: 'reggie', password: 'monkey', remember me: '1' # features/step_definitions/ra_navigation_steps.rb:19
+    Then she should be redirected to the home page                                                  # features/step_definitions/ra_response_steps.rb:19
+    When she follows that redirect!                                                                 # features/step_definitions/ra_navigation_steps.rb:46
+    Then she should see a notice message 'Logged in successfully'                                   # features/step_definitions/ra_response_steps.rb:112
+    And reggie should be logged in                                                                  # features/step_definitions/user_steps.rb:68
+    And she should have an auth_token cookie                                                        # features/step_definitions/ra_response_steps.rb:72
+    And her session store should have user_id: 4                                                    # features/step_definitions/ra_response_steps.rb:93
+
+  #
+  # Log out successfully (should always succeed)
+  #
+  Scenario: Anonymous (logged out) user can log out.                # features/sessions.feature:114
+    Given an anonymous user                                         # features/step_definitions/user_steps.rb:8
+    When she goes to /logout                                        # features/step_definitions/ra_navigation_steps.rb:8
+    Then she should be redirected to the home page                  # features/step_definitions/ra_response_steps.rb:19
+    When she follows that redirect!                                 # features/step_definitions/ra_navigation_steps.rb:46
+    Then she should see a notice message 'You have been logged out' # features/step_definitions/ra_response_steps.rb:112
+      Expected at least 1 element matching "div.notice", found 0.
+      <false> is not true. (Spec::Expectations::ExpectationNotMetError)
+      ./features/step_definitions/ra_response_steps.rb:113:in `/^she should +see an? (\w+) message '([\w !\']+)'$/'
+      features/sessions.feature:119:in `Then she should see a notice message 'You have been logged out''
+    And she should not be logged in                                 # features/step_definitions/user_steps.rb:64
+    And she should not have an auth_token cookie                    # features/step_definitions/ra_response_steps.rb:75
+    And her session store should not have user_id                   # features/step_definitions/ra_response_steps.rb:101
+
+  Scenario: Logged in user can log out.                             # features/sessions.feature:124
+    Given an activated user logged in as 'reggie'                   # features/step_definitions/user_steps.rb:20
+      Could not find table 'users' (ActiveRecord::StatementInvalid)
+      ./app/controllers/users_controller.rb:26:in `new'
+      ./app/controllers/users_controller.rb:26:in `create'
+      /usr/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+      ./features/step_definitions/rest_auth_features_helper.rb:10:in `perform_action'
+      ./vendor/plugins/facebooker/lib/rack/facebook.rb:43:in `call'
+      ./features/step_definitions/user_steps.rb:104:in `create_user'
+      ./features/step_definitions/user_steps.rb:110:in `create_user!'
+      ./features/step_definitions/user_steps.rb:21:in `/^(.*)\ (.*)\ user\ logged\ in\ as\ '(.*)'$/'
+      features/sessions.feature:125:in `Given an activated user logged in as 'reggie''
+    When she goes to /logout                                        # features/step_definitions/ra_navigation_steps.rb:8
+    Then she should be redirected to the home page                  # features/step_definitions/ra_response_steps.rb:19
+    When she follows that redirect!                                 # features/step_definitions/ra_navigation_steps.rb:46
+    Then she should see a notice message 'You have been logged out' # features/step_definitions/ra_response_steps.rb:112
+    And she should not be logged in                                 # features/step_definitions/user_steps.rb:64
+    And she should not have an auth_token cookie                    # features/step_definitions/ra_response_steps.rb:75
+    And her session store should not have user_id                   # features/step_definitions/ra_response_steps.rb:101
+
+Failing Scenarios:
+cucumber features/delete_task.feature:13 # Scenario: I delete the task
+cucumber features/accounts.feature:12 # Scenario: Anonymous user can start creating an account
+cucumber features/accounts.feature:20 # Scenario: Anonymous user can create an account
+cucumber features/accounts.feature:33 # Scenario: Anonymous user can not create an account replacing an activated account
+cucumber features/accounts.feature:50 # Scenario: Anonymous user can not create an account with incomplete or incorrect input
+cucumber features/accounts.feature:65 # Scenario: Anonymous user can not create an account with no password_confirmation
+cucumber features/accounts.feature:73 # Scenario: Anonymous user can not create an account with mismatched password & password_confirmation
+cucumber features/accounts.feature:81 # Scenario: Anonymous user can not create an account with bad email
+cucumber features/start_timer.feature:13 # Scenario: I set the timer for task
+cucumber features/add_more_time.feature:18 # Scenario: I click on Add time
+cucumber features/sessions.feature:22 # Scenario: Anonymous user can log in
+cucumber features/sessions.feature:32 # Scenario: Logged-in user who logs in should be the new one
+cucumber features/sessions.feature:45 # Scenario: Anonymous user can log in and be remembered
+cucumber features/sessions.feature:61 # Scenario: Logged-in user who fails logs in should be logged out
+cucumber features/sessions.feature:76 # Scenario: Log-in with bogus info should fail until it doesn't
+cucumber features/sessions.feature:114 # Scenario: Anonymous (logged out) user can log out.
+cucumber features/sessions.feature:124 # Scenario: Logged in user can log out.
+
+41 scenarios (17 failed, 2 skipped, 21 undefined, 1 passed)
+357 steps (17 failed, 197 skipped, 120 undefined, 23 passed)
+0m4.416s
+
+You can implement step definitions for undefined steps with these snippets:
+
+Given /^I see "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I click "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I log in as "([^"]*)" with password "([^"]*)"$/ do |arg1, arg2|
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I start timing "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I am logged in as iriswin$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I start timing taskEntry(\d+)$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I am logged in as "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I click on "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should be logged out$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I sign up as "([^"]*)" with email "([^"]*)" and password "([^"]*)"$/ do |arg1, arg2, arg3|
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I follow "([^"]*)" \#for "([^"]*)"$/ do |arg1, arg2|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I add (\d+) different tasks \(max the daily task limit\)$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^there is a calendar with current date October (\d+), (\d+)$/ do |arg1, arg2|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I am currently on this date$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^the clock hits October (\d+), (\d+)$/ do |arg1, arg2|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should have a fresh todo list for the new day$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^there is a calendar$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I click on the day after the current$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^no user with login: 'Oona' exist$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^my email is "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I am not logged in$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^there is no account registered to "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I entered all fields in the form$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I submit my form$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should have an account registered with my email$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^there is already an account registered to "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I attempt to sign in$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should not be signed in$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^my password entry is wrong$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^my password entry is correct$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should be signed in$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should see my dashboard$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I have a task with description "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I have started the task "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^the task "([^"]*)" should not end prematurely$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^the time runs out$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I click “Start” \#for "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I enter "([^"]*)" minutes in the timer entry field$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should have "([^"]*)" minutes to complete my task$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^the task should not be started$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I click on “Add time”$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should see a form for adding more time\.$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I fill in (\d+) more minutes$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^there should be (\d+) more minutes left on my task$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I have task with description "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I started the task, "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^the time runs out$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I click on “Divide and Conquer”$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should see a form for breaking down my tasks\.$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should see two field entries for entering tasks$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I click on “Divide and Conquer”$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I enter only one subtask$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^there should be no new tasks$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I enter two subtasks, "([^"]*)" and "([^"]*)"$/ do |arg1, arg2|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^the "([^"]*)" task should be removed from task list$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^"Wash clothes should be on task list$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^"([^"]*)" should be on task list$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I type two subtasks, "([^"]*)" and "([^"]*)"$/ do |arg1, arg2|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should see another entry field$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I enter three subtasks, "([^"]*)" and "([^"]*)"$/ do |arg1, arg2|
+  pending # express the regexp above with the code you wish you had
+end
+

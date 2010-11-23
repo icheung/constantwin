@@ -28,17 +28,17 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="app-models-task_rb.html">app/models/task.rb</a></td>
-            <td class='right_align'><tt>49</tt></td>
-            <td class='right_align'><tt>38</tt></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>51.02%</tt></div>
+            <td class='right_align'><tt>68</tt></td>
+            <td class='right_align'><tt>50</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>52.94%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:51px"></div>
-            <div class="uncovered" style="width:49px"></div>
+            <div class="covered" style="width:53px"></div>
+            <div class="uncovered" style="width:47px"></div>
           </div></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>39.47%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>38.00%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:39px"></div>
-            <div class="uncovered" style="width:61px"></div>
+            <div class="covered" style="width:38px"></div>
+            <div class="uncovered" style="width:62px"></div>
           </div></td>
           </tr>
         </tbody>
@@ -62,74 +62,74 @@
         
           
           
+          <tr class="inferred">
+            <td><pre><a name="line2">2</a> </pre></td>
+          </tr>
+        
+          
+          
           <tr class="marked">
-            <td><pre><a name="line2">2</a>   validates_presence_of :description</pre></td>
+            <td><pre><a name="line3">3</a>   belongs_to :user</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line4">4</a>   before_validation :default_values</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line3">3</a>   # validates_presence_of :duration   # no need to b/c we set duration when we start the task instead</pre></td>
+            <td><pre><a name="line5">5</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line4">4</a>   validates_presence_of :user_id</pre></td>
+            <td><pre><a name="line6">6</a>   validates_presence_of :description</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line5">5</a>   validates_presence_of :is_finished, :if =&gt; &quot;#{:is_finished}&quot;</pre></td>
+            <td><pre><a name="line7">7</a>   validates_presence_of :user_id</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line6">6</a>   validates_length_of :description, :allow_blank =&gt; false, :allow_nil =&gt; false, :minimum =&gt; 5, :too_short =&gt; &quot;Task Description must be at least 5 characters long!&quot;</pre></td>
+            <td><pre><a name="line8">8</a>   validates_numericality_of :duration, :only_integer =&gt; true, :in =&gt; 15..60, :message =&gt; &quot;Minutes can only be whole number!&quot;</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line7">7</a>   validate :new_task_cannot_be_already_finished, :new_task_cannot_be_already_started, :duration_cannot_be_less_than_5_minutes #:new_task_cannot_have_no_owner,</pre></td>
+            <td><pre><a name="line9">9</a>   validates_numericality_of :added_time, :only_integer =&gt; true, :in =&gt; 15..60, :message =&gt; &quot;Minutes can only be whole number!&quot;</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line8">8</a>   belongs_to :user</pre></td>
+            <td><pre><a name="line10">10</a>   validates_presence_of :is_finished, :if =&gt; &quot;#{:is_finished}&quot;</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line9">9</a>   before_validation :default_values</pre></td>
+            <td><pre><a name="line11">11</a>   validates_length_of :description, :allow_blank =&gt; false, :allow_nil =&gt; false, :minimum =&gt; 5, :too_short =&gt; &quot;Task Description must be at least 5 characters long!&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line12">12</a>   validate :new_task_cannot_be_already_finished, :new_task_cannot_be_already_started, :duration_cannot_be_less_than_5_minutes</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line10">10</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line11">11</a>   def initialize(params=nil)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line12">12</a>     super</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line13">13</a>   end</pre></td>
+            <td><pre><a name="line13">13</a> </pre></td>
           </tr>
         
           
@@ -141,61 +141,61 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line15">15</a>   def default_values</pre></td>
+            <td><pre><a name="line15">15</a>   def initialize(params=nil)</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line16">16</a>     self.user_id = 1 unless self.user_id  # needs to belong to users, handle this later, maybe use self.user.id instead?</pre></td>
+            <td><pre><a name="line16">16</a>     super</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line17">17</a>     self.is_finished = false unless self.is_finished</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line18">18</a>     self.duration = 15 unless self.duration</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line19">19</a>     self.added_time = 0 unless self.added_time</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line20">20</a>   end</pre></td>
+            <td><pre><a name="line17">17</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line21">21</a> </pre></td>
+            <td><pre><a name="line18">18</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line22">22</a>   def add_time(amount_of_time)</pre></td>
+            <td><pre><a name="line19">19</a>   def default_values</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line23">23</a>     self.duration += amount_of_time # shouldn't be amount_of_time.minutes b/c its an int</pre></td>
+            <td><pre><a name="line20">20</a>     self.user_id = 1 unless self.user_id  # needs to belong to users, handle this later, maybe use self.user.id instead?</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line24">24</a>     self.save!</pre></td>
+            <td><pre><a name="line21">21</a>     self.is_finished = false unless self.is_finished</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line22">22</a>     self.duration = 15 unless self.duration</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line23">23</a>     self.added_time = 0 unless self.added_time</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line24">24</a>     self.started_at = nil unless self.started_at</pre></td>
           </tr>
         
           
@@ -207,37 +207,37 @@
           
           
           <tr class="inferred">
-            <td><pre><a name="line26">26</a>   </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line27">27</a>   # special validations checks</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line28">28</a> </pre></td>
+            <td><pre><a name="line26">26</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line29">29</a>   def new_task_cannot_have_no_owner</pre></td>
+            <td><pre><a name="line27">27</a>   def update_duration()</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line30">30</a>     errors.add(:task, &quot;must have an owner!&quot;) if</pre></td>
+            <td><pre><a name="line28">28</a>     self.started_at = Time.now</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line31">31</a>       user_id == nil</pre></td>
+            <td><pre><a name="line29">29</a>     self.duration = self.added_time.abs</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line30">30</a>     self.added_time = 0</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line31">31</a>     self.save</pre></td>
           </tr>
         
           
@@ -254,104 +254,218 @@
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line34">34</a>   def duration_cannot_be_less_than_5_minutes</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line35">35</a>     errors.add(:task, &quot;duration has to last over 5 minutes!&quot;) if</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line36">36</a>       duration != nil &amp;&amp; (duration.hour == 0 and duration.min &lt; 5)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line37">37</a>   end</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line34">34</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line38">38</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line39">39</a>   def new_task_cannot_be_already_started</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line40">40</a>     errors.add(:task, &quot;cannot be already started!&quot;) if</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line41">41</a>       started_at != nil</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line42">42</a>   end</pre></td>
+            <td><pre><a name="line35">35</a>   # special validations checks</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line43">43</a> </pre></td>
+            <td><pre><a name="line36">36</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line44">44</a>   def new_task_cannot_be_already_finished</pre></td>
+            <td><pre><a name="line37">37</a>   def new_task_cannot_have_no_owner</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line45">45</a>     errors.add(:task, &quot;cannot be already finished!&quot;) if</pre></td>
+            <td><pre><a name="line38">38</a>     errors.add(:task, &quot;must have an owner!&quot;) if</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line46">46</a>       is_finished == true</pre></td>
+            <td><pre><a name="line39">39</a>     user_id == nil</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line47">47</a>   end</pre></td>
+            <td><pre><a name="line40">40</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line41">41</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line42">42</a>   def duration_cannot_be_less_than_5_minutes</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line48">48</a> </pre></td>
+            <td><pre><a name="line43">43</a>     errors.add(:task, &quot;duration has to last over 5 minutes!&quot;) if</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line49">49</a> end</pre></td>
+            <td><pre><a name="line44">44</a>     duration != nil &amp;&amp; (duration.hour == 0 and duration.min &lt; 5)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line45">45</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line46">46</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line47">47</a>   # may be useful later</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line48">48</a>   def added_time_cannot_be_of_invalid_format</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line49">49</a>     errors.add(:task, &quot;added time has to be an integer!&quot;) unless</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line50">50</a>     added_time.instance_of?(Fixnum)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line51">51</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line52">52</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line53">53</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line54">54</a>   def new_task_cannot_be_already_started</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line55">55</a>     errors.add(:task, &quot;cannot be already started!&quot;) if</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line56">56</a>     started_at != nil and created_at.nil?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line57">57</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line58">58</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line59">59</a>   def new_task_cannot_be_already_finished</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line60">60</a>     errors.add(:task, &quot;cannot be already finished!&quot;) if</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line61">61</a>     is_finished == true</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line62">62</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line63">63</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line64">64</a>   def validate_added_duration</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line65">65</a>     self.added_time.kind_of?(Integer) and (5..60) === self.added_time</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line66">66</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line67">67</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line68">68</a> end</pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on Tue Nov 02 14:30:17 -0700 2010 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
+    <p>Generated on Tue Nov 23 01:49:15 -0800 2010 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
 
   </body>
 </html>

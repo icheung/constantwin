@@ -28,14 +28,14 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="app-controllers-users_controller_rb.html">app/controllers/users_controller.rb</a></td>
-            <td class='right_align'><tt>40</tt></td>
-            <td class='right_align'><tt>34</tt></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>27.50%</tt></div>
+            <td class='right_align'><tt>56</tt></td>
+            <td class='right_align'><tt>46</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>26.79%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:28px"></div>
-            <div class="uncovered" style="width:72px"></div>
+            <div class="covered" style="width:27px"></div>
+            <div class="uncovered" style="width:73px"></div>
           </div></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>14.71%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>15.22%</tt></div>
           <div class="percent_graph">
             <div class="covered" style="width:15px"></div>
             <div class="uncovered" style="width:85px"></div>
@@ -57,19 +57,19 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line1">1</a> class UsersController &lt; ApplicationController</pre></td>
+            <td><pre><a name="line1">1</a> class UsersController &lt; ApplicationController </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line2">2</a>   # Be sure to include AuthenticationSystem in Application Controller instead</pre></td>
+            <td><pre><a name="line2">2</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line3">3</a>   include AuthenticatedSystem</pre></td>
+            <td><pre><a name="line3">3</a>   layout 'base'</pre></td>
           </tr>
         
           
@@ -80,104 +80,104 @@
         
           
           
-          <tr class="inferred">
-            <td><pre><a name="line5">5</a> </pre></td>
+          <tr class="marked">
+            <td><pre><a name="line5">5</a>   before_filter :login_required, :except =&gt; [:link_user_accounts, :new, :create, :activate]</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line6">6</a>   # render new.rhtml</pre></td>
+            <td><pre><a name="line6">6</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line7">7</a>   # LINK USER ACCOUNTS TO FACEBOOK</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line7">7</a>   def new</pre></td>
+            <td><pre><a name="line8">8</a>   def link_user_accounts</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line8">8</a>     @user = User.new</pre></td>
+            <td><pre><a name="line9">9</a>     if self.current_user.nil?</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line9">9</a>   end</pre></td>
+            <td><pre><a name="line10">10</a>       #register with fb</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line11">11</a>       User.create_from_fb_connect(facebook_session.user)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line12">12</a>     else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line13">13</a>       #connect accounts</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line14">14</a>       self.current_user.link_fb_connect(facebook_session.user.id) unless self.current_user.fb_user_id == facebook_session.user.id</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line15">15</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line16">16</a>     redirect_to '/'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line17">17</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line10">10</a>  </pre></td>
+            <td><pre><a name="line18">18</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line19">19</a>   # render new.rhtml</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line11">11</a>   def create</pre></td>
+            <td><pre><a name="line20">20</a>   def new</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line12">12</a>     logout_keeping_session!</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line13">13</a>     @user = User.new(params[:user])</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line14">14</a>     success = @user &amp;&amp; @user.save</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line15">15</a>     if success &amp;&amp; @user.errors.empty?</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line16">16</a>       redirect_back_or_default('/')</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line17">17</a>       flash[:notice] = &quot;Thanks for signing up!  We're sending you an email with your activation code.&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line18">18</a>     else</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line19">19</a>       flash[:error]  = &quot;We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above).&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line20">20</a>       render :action =&gt; 'new'</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line21">21</a>     end</pre></td>
+            <td><pre><a name="line21">21</a>     @user = User.new</pre></td>
           </tr>
         
           
@@ -189,13 +189,13 @@
           
           
           <tr class="inferred">
-            <td><pre><a name="line23">23</a> </pre></td>
+            <td><pre><a name="line23">23</a>  </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line24">24</a>   def activate</pre></td>
+            <td><pre><a name="line24">24</a>   def create</pre></td>
           </tr>
         
           
@@ -207,97 +207,193 @@
           
           
           <tr class="uncovered">
-            <td><pre><a name="line26">26</a>     user = User.find_by_activation_code(params[:activation_code]) unless params[:activation_code].blank?</pre></td>
+            <td><pre><a name="line26">26</a>     @user = User.new(params[:user])</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line27">27</a>     case</pre></td>
+            <td><pre><a name="line27">27</a>     success = @user &amp;&amp; @user.save</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line28">28</a>     when (!params[:activation_code].blank?) &amp;&amp; user &amp;&amp; !user.active?</pre></td>
+            <td><pre><a name="line28">28</a>     if success &amp;&amp; @user.errors.empty?</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line29">29</a>       user.activate!</pre></td>
+            <td><pre><a name="line29">29</a>       flash[:notice] = &quot;Thanks for signing up!  We're sending you an email with your activation code.&quot;</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line30">30</a>       flash[:notice] = &quot;Signup complete! Please sign in to continue.&quot;</pre></td>
+            <td><pre><a name="line30">30</a>       redirect_back_or_default('/')</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line31">31</a>       redirect_to '/login'</pre></td>
+            <td><pre><a name="line31">31</a>       UserMailer.deliver_signup_notification(@user)</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line32">32</a>     when params[:activation_code].blank?</pre></td>
+            <td><pre><a name="line32">32</a>     else</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line33">33</a>       flash[:error] = &quot;The activation code was missing.  Please follow the URL from your email.&quot;</pre></td>
+            <td><pre><a name="line33">33</a>       flash[:error]  = &quot;We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above).&quot;</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line34">34</a>       redirect_back_or_default('/')</pre></td>
+            <td><pre><a name="line34">34</a>       render :action =&gt; 'new'</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line35">35</a>     else </pre></td>
+            <td><pre><a name="line35">35</a>     end</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line36">36</a>       flash[:error]  = &quot;We couldn't find a user with that activation code -- check your email? Or maybe you've already activated -- try signing in.&quot;</pre></td>
+            <td><pre><a name="line36">36</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line37">37</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line38">38</a>   def activate</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line37">37</a>       redirect_back_or_default('/')</pre></td>
+            <td><pre><a name="line39">39</a>     logout_keeping_session!</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line38">38</a>     end</pre></td>
+            <td><pre><a name="line40">40</a>     user = User.find_by_activation_code(params[:activation_code]) unless params[:activation_code].blank?</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line39">39</a>   end</pre></td>
+            <td><pre><a name="line41">41</a>     case</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line40">40</a> end</pre></td>
+            <td><pre><a name="line42">42</a>     when (!params[:activation_code].blank?) &amp;&amp; user &amp;&amp; !user.active?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line43">43</a>       user.activate!</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line44">44</a>       flash[:notice] = &quot;Signup complete! Please sign in to continue.&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line45">45</a>       redirect_to '/login'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line46">46</a>       UserMailer.deliver_activation(user)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line47">47</a>       UserMailer.deliver_welcome_email(user)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line48">48</a>     when params[:activation_code].blank?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line49">49</a>       flash[:error] = &quot;The activation code was missing.  Please follow the URL from your email.&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line50">50</a>       redirect_back_or_default('/')</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line51">51</a>     else </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line52">52</a>       flash[:error]  = &quot;We couldn't find a user with that activation code -- check your email? Or maybe you've already activated -- try signing in.&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line53">53</a>       redirect_back_or_default('/')</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line54">54</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line55">55</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line56">56</a> end</pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on Tue Nov 02 14:30:17 -0700 2010 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
+    <p>Generated on Tue Nov 23 01:49:15 -0800 2010 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
 
   </body>
 </html>
