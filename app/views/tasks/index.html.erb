@@ -4,6 +4,8 @@
   var ajax_updater;
   var update_progress;
   var check_time;
+	var stopSwitch = true;
+	
   function startTimer(elementID) {
     ajax_updater = new Ajax.PeriodicalUpdater(
       elementID,
@@ -17,8 +19,8 @@
   function stopTimer() {
     clearInterval(check_time);
     clearInterval(update_progress);
-    jQuery("#progressbar").hide();
-    jQuery("#progressbar").css('margin-top', '0');
+   // jQuery("#progressbar").hide();
+    jQuery("#progressbar").css('margin-top', '1em');
   }
 
   function updateProgressBar(taskId) {
@@ -68,6 +70,25 @@
     }
      stopTimer();
   }
+
+	function stopTask(taskId){
+		
+		if (stopSwitch == true) {
+		ajax_updater.stop();
+		stopTimer();
+    jQuery("#progressbar > div").css({ 'background': 'Red' });
+		jQuery("#imgStopTask" + taskId).children("img").attr('src', '/images/circle-green-16.png');
+		stopSwitch = false;
+		}
+		else {
+		ajax_updater.start();
+		//startTimer();
+		jQuery("#progressbar > div").css({ 'background': '#DEDEDE' });
+		//jQuery("#stopTask" + taskId).attr('img src', '/public/images/circle-red-16.png');
+			jQuery("#imgStopTask" + taskId).children("img").attr('src', '/images/circle-red-16.png');
+		stopSwitch = true;
+		}
+	}
 
   function save_edit(taskId) {
     var current = document.getElementById('current');
