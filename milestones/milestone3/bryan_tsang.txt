@@ -1,0 +1,34 @@
+Feature:
+  Really, really awesome cool drawing canvas application!  You can use
+  your paintbrushes to draw anything you want on the screen.
+  
+  The code that makes the magic is a bit complicated.  It's a bunch of
+  Javascript functions:
+    - init()
+    - clickTool()
+    - findElements()
+    - injectCanvas()
+    - registerTools()
+    - registerChat()
+    - toolWidth()
+    - toolColor()
+    - toolEraser()
+    - canvasCoords()
+    - mouseDown()
+    - mouseUp()
+    - mouseMove()
+    - scheduleSave()
+    - save()
+    - schedulePoll()
+    - poll()
+    - sendChat()
+    - publish()
+    - compose()
+  
+  Seems like the actual drawing magic is done using tons of AJAX and
+  HTML5.
+  
+  Overall, it's pretty awesome.  All the functions are clearly separated
+  and generally easy to read.  But I have to admit that it's quite a
+  bit of work.  Major props to these guys for making an awesome
+  whiteboard app!
