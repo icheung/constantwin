@@ -1,15 +1,15 @@
 <div id="userStatus">
 <% if logged_in? -%>
 
-  <% if facebook_session %>
+  <% if @current_user.facebook_user? %>
     <!-- FACEBOOK PROFILE PICTURE -->
     <fb:profile-pic uid="<%= current_user.fb_user_id%>" facebook-logo="true" size="thumb" ></fb:profile-pic>
   
     <span id="user-bar-greeting">Hi <%= link_to_current_user :content_method => :name %>!</span>
-    <span id="user-bar-action">(<%= fb_logout_link("Log out", logout_path)%>)</span>
+    <!-- <span id="user-bar-action">(<%= fb_logout_link("Log out", logout_path)%>)</span> -->
     
     <!-- OLDER line, can delete -->
-    <!-- <span id="user-bar-action"><a href="#" onclick='FB.Connect.logoutAndRedirect("/sessions/destroy")'>Log out</a> -->
+    <span id="user-bar-action"><a href="#" onclick='FB.Connect.logoutAndRedirect("/sessions/destroy")'>Log out</a>
     <!-- <span id="user-bar-action">(<%= link_to "Log out", logout_path, { :title => "Log out" } %>)</span> -->
     
   <% else %>
