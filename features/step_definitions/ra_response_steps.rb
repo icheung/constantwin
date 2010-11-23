@@ -118,17 +118,17 @@ Then "$actor should not see $an $notice message '$message'" do |_, _, notice, me
 end
 
 Then "$actor should see no messages" do |_|
-  ['error', 'warning', 'notice'].each do |notice|
+  ['flash_error', 'flash_warning', 'flash_notice'].each do |notice|
     response.should_not have_flash(notice)
   end
 end
 
 RE_POLITENESS = /(?:please|sorry|thank(?:s| you))/i
 Then %r{we should be polite about it} do
-  response.should have_tag("div.error,div.notice", RE_POLITENESS)
+  response.should have_tag("div.flash_error,div.flash_notice", RE_POLITENESS)
 end
 Then %r{we should not even be polite about it} do
-  response.should_not have_tag("div.error,div.notice", RE_POLITENESS)
+  response.should_not have_tag("div.flash_error,div.flash_notice", RE_POLITENESS)
 end
 
 #
@@ -143,6 +143,10 @@ end
 
 
 def have_flash notice, *args
+  if notice == 'error' or notice == 'notice'
+    have_tag("p#flash_#{notice}", *args)
+    return
+  end
   have_tag("div.#{notice}", *args)
 end
 
