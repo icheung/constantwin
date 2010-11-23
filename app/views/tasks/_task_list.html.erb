@@ -25,7 +25,7 @@
 
     <!--<td><%=h task.user_id %></td>-->
 
-    <td id="duration"><% if not task.started_at.nil? and not task.is_finished? %><%=h task.duration %> min<% end %></td>
+    <td class="duration"><% if not task.started_at.nil? and not task.is_finished? %><%=h task.duration %> min<% end %></td>
 
     <!--<td>
       <% if task.is_finished %>

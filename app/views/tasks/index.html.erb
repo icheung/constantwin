@@ -31,7 +31,7 @@
       var minutes = parsed_time[1];
       var seconds = parsed_time[2] / 60;
       var timeFloatLeft = parseFloat(seconds) + parseFloat(minutes);
-      var totalTime = parseInt(jQuery("#taskEntry"+taskId+">td#duration").html());
+      var totalTime = parseInt(jQuery("#taskEntry"+taskId+">.duration").html());
       jQuery("#progressbar").progressbar({value: ((parseFloat(totalTime) - timeFloatLeft)/parseFloat(totalTime)) * 100.00});
       jQuery("#progressbar").show();
       jQuery("#progressbar").css("margin-top", "1em");
