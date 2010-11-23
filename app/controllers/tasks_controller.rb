@@ -155,6 +155,17 @@ class TasksController < ApplicationController
       end
     end
   end
+  
+  def stop_time
+
+    flash[:notice] = "Stopping the timer!"
+    @task = @current_user.tasks.find(params[:id])
+    redirect_to(tasks_url)
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => task }
+    end
+  end
 
   def update_duration
     @task = @current_user.tasks.find(params[:id])

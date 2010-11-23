@@ -49,6 +49,8 @@
 
     <td><%= (task.started_at.nil? or task.is_finished?) ? '&nbsp;' : link_to( image_tag("clock.png", :border=>0, :alt=>'Adjust time', :title=>'Adjust time'), add_time_path(task)) %></td>
 
+    <td><%= (task.started_at.nil? or task.is_finished?) ? '&nbsp;' : link_to( image_tag("sign_deny.png", :border=>0, :alt=>'Adjust time', :title=>'Stop time'), stop_time_path(task)) %></td>
+
     <noscript><td><%= link_to 'Edit', edit_task_path(task) %></td></noscript>
 
     <td><%= link_to image_tag("cross.png", :border=>0, :alt=>'Delete task', :title=>'Delete task'), task, :confirm => 'Are you sure?', :method => :delete %></td>

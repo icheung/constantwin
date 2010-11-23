@@ -2,6 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   map.start_task '/tasks/start', :controller => "tasks", :action => "start"
   map.fail_task '/tasks/fail', :controller => "tasks", :action => "fail"
   map.add_time '/tasks/:id/add_time', :controller => "tasks", :action => "add_time"
+  map.stop_time '/tasks/:id/stop_time', :controller => "tasks", :action => "stop_time"
   map.update_duration '/tasks/:id/update_duration', :controller => "tasks", :action => "update_duration"
   map.connect 'tasks/start', :controller => 'tasks', :action => 'start'
 
