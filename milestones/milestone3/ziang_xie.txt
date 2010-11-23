@@ -1,0 +1,14 @@
+Rides - http://high-samurai-91.heroku.com/ - http://github.com/marklu/rides
+
+Although the app overall impressed with with its clean implemention and its
+adherence to the rule that the features of deployed applications be functional,
+one feature which was particularly impressive was the account management.
+I found the code for this within "/app/views/devise/registrations/edit.html.erb".
+A seemingly custom-defined "person" model for authentication was very well
+fleshed out. They seem to have used a flexible authentication system called "devise",
+which allowed them to make the user system more modular, and passed in the
+vehicles of a particular user within a resources object. Routes were all named
+rather than specifying controller and action or hard-coding path.
+One possible improvement is more use of the controllers, which have surprisingly
+little code. Overall there is a very good use of partials and good modularity as well.
+
