@@ -2,7 +2,7 @@ class UserMailer < ActionMailer::Base
   
   def welcome_email(user)
     setup_email(user)
-    @url  = "http://constantwin.heroku.com"
+    @url  = "http://cwin.heroku.com"
     @subject += "Welcome to Constant Win!"
     @content_type = "text/html"
   end
@@ -11,14 +11,14 @@ class UserMailer < ActionMailer::Base
     setup_email(user)
     @subject    += 'Please activate your new account'
   
-    @body[:url]  = "http://localhost:3000/activate/#{user.activation_code}"
+    @body[:url]  = "http://cwin.heroku.com/activate/#{user.activation_code}"
   
   end
   
   def activation(user)
     setup_email(user)
     @subject    += 'Your account has been activated!'
-    @body[:url]  = "http://constantwin.heroku.com"
+    @body[:url]  = "http://cwin.heroku.com"
   end
   
   protected
