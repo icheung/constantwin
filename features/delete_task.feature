@@ -5,7 +5,8 @@ Feature: Delete a task
 
   Background:
     #Given I am logged in as "sample@email.com"
-    Given I am on the dashboard
+    Given I am logged in as "foo" with password "foopassword"
+    And I am on the dashboard
     And I follow "New task"
     And I fill in "Description" with "Do laundry"
     And I press "Create"
