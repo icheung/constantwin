@@ -3,16 +3,20 @@
 <script type="text/javascript">
   var ajax_updater;
   var update_progress;
-  var check_time;
+  var check_time; //<- actually should be named start_time
 	var stopSwitch = true;
+	var paused_time_stop;
+	var paused_time_go;
+	var paused_total_duration;
 	
   function startTimer(elementID) {
     ajax_updater = new Ajax.PeriodicalUpdater(
       elementID,
       '/tasks/time_left/' + elementID.substring(5).toString(),
-      { method: 'get', frequency: 10, decay: 1 }
+      { method: 'get', frequency: 1, decay: 1 }
     );
     check_time = setInterval('checkTime("' + elementID.substring(5).toString() + '")', 5000);
+		// console.debug(check_time);
     update_progress = setInterval('updateProgressBar("'+elementID.substring(5).toString()+'")',100);
   }
 
@@ -76,18 +80,39 @@
 	function stopTask(taskId){
 		
 		if (stopSwitch == true) {
+		
+		/*	STOPPING THE TIMER	*/	
+			
+		// get current time
+		paused_time_stop = document.getElementById('timer' + taskId).innerHTML;
+		//console.debug("paused_time_stop" + paused_time_stop);
+		
 		// effectively pause the timer
 		ajax_updater.stop();
 		stopTimer();
+		 console.debug(check_time);
 		
 		// change progressbar and button colors
     jQuery("#progressbar > div").css({ 'background': 'Red' });
-		jQuery("#imgStopTask" + taskId).children("img").attr('src', '/images/circle-green-16.png');
+		jQuery("#imgStopTask" + taskId).children("img").attr('src','/images/circle-green-16.png');
 		
 		// set the stop button flag
 		stopSwitch = false;
 		}
 		else {
+			
+		/*	RE-STARTING THE TIMER	*/
+		
+		// get the current time
+		paused_time_go = document.getElementById('timer' + taskId).innerHTML;
+		paused_total_duration = paused_time_go - paused_time_stop;
+		
+		//console.debug("paused_time_go" + paused_time_stop);
+		//console.debug("paused_time_duration" + paused_time_stop);
+		
+		//console.debug(timeLeft);
+		//console.debug(timeLeft);
+		
 		// effectively start the timer
 		ajax_updater.start();
 		//startTimer();
@@ -98,6 +123,10 @@
 		
 		// set the stop button flag
 		stopSwitch = true;
+		
+		// clear the paused_time(s) , JUST to be sure
+		paused_time_stop = 0;
+		paused_time_go = 0;
 		}
 	}
 

@@ -9,7 +9,8 @@ class Task < ActiveRecord::Base
   validates_numericality_of :added_time, :only_integer => true, :in => 15..60, :message => "Minutes can only be whole number!"
   validates_presence_of :is_finished, :if => "#{:is_finished}"
   validates_length_of :description, :allow_blank => false, :allow_nil => false, :minimum => 5, :too_short => "Task Description must be at least 5 characters long!"
-  validate :new_task_cannot_be_already_finished, :new_task_cannot_be_already_started, :duration_cannot_be_less_than_5_minutes
+  validate :new_task_cannot_be_already_finished, :new_task_cannot_be_already_started
+  #:duration_cannot_be_less_than_5_minutes # commented this validation out b/c it makes clearing the duration hard
 
 
   def initialize(params=nil)
@@ -26,8 +27,13 @@ class Task < ActiveRecord::Base
 
   def update_duration()
     self.started_at = Time.now
-    self.duration = self.added_time.abs
+    self.duration += self.added_time.abs
     self.added_time = 0
+    self.save
+  end
+  
+  def clear_duration()
+    self.duration = 0
     self.save
   end
 
@@ -39,10 +45,11 @@ class Task < ActiveRecord::Base
     user_id == nil
   end
 
-  def duration_cannot_be_less_than_5_minutes
-    errors.add(:task, "duration has to last over 5 minutes!") if
-    duration != nil && (duration.hour == 0 and duration.min < 5)
-  end
+  # commented this validation out b/c it makes clearing the duration hard
+  #def duration_cannot_be_less_than_5_minutes
+  #  errors.add(:task, "duration has to last over 5 minutes!") if
+  #  duration != nil && (duration.hour == 0 and duration.min < 5)
+  #end
 
   # may be useful later
   def added_time_cannot_be_of_invalid_format

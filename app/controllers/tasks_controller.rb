@@ -163,7 +163,17 @@ class TasksController < ApplicationController
     end
   end
   
-  def stop_time
+  def pause
+    # set the paused_at time
+  end
+  
+  def resume
+    # get the time task was paused
+    # get the current time and take the difference
+    # total_paused_duration = Time.at(Time.now - @task.paused_at.to_time)
+    # add the difference to the task
+    # @task.update_attributes(:added_time, total_paused_duration)
+    
   end
 
   def update_duration
@@ -181,6 +191,7 @@ class TasksController < ApplicationController
   
   def fail
     @task = @current_user.tasks.find(params[:id])
+    @task.clear_duration
   end
   
   def add_tasks   # Breaking it down.
