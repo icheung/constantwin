@@ -142,10 +142,12 @@
 <h1>
 </h1>
 
+<div id="addTaskDiv">
   <% form_tag(:controller => "tasks", :action => "create") do %>
     <%= text_field_tag(:task_description, nil, :size => "30", :name => "task[description]") %>
-    <%= submit_tag("Add Task") %>
+    <%= submit_tag "Add Task", :id => "addTaskButton" %>
   <% end %>
+</div>
 
 <div id="popupDateField" class="dateField">Select Date</div>
 
