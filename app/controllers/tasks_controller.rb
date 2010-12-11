@@ -227,5 +227,18 @@ class TasksController < ApplicationController
     
     render :text => 'Task updated'
   end
-  
+
+
+  def ondate
+    date = params[:date].to_i
+    y = date/10000
+    m = (date-y*10000)/100
+    d = date-y*10000-m*100
+    #render :text => ''+y.to_s+'-'+m.to_s+'-'+d.to_s
+    date = Date.new(y, m, d)
+    @tasks = Task.all(:conditions => ['created_at >= ?', Date.new(y, m, d).to_s])
+    @tasks = @tasks.select{|task| task.created_at <= DateTime.new(y, m, d+1)}
+    render :partial => 'task_list'
+  end
+    
 end

@@ -135,10 +135,11 @@
   
 
 function datePickSelect() {
-  selectedDate = this.date.print(this.dateFormat).split('-')
-  alert(selectedDate);
-  y = selectedDate[0], m = selectedDate[1], d = selectedDate[2]
-  alert('loading just tasks for that date'+y+m+d);
+  y = this.date.getFullYear()
+  m = this.date.getMonth()
+  d = this.date.getDay()
+  dateParam = y*10000+m*100+d
+  jQuery("#table_container").load('/tasks/ondate/',  {'date': dateParam})
   Calendar.defaultSelectHandler(this);
 }
 
