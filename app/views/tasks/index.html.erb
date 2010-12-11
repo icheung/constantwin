@@ -10,10 +10,16 @@
     ajax_updater = new Ajax.PeriodicalUpdater(
     elementID,
     '/tasks/time_left/' + elementID.substring(5).toString(),
-  { method: 'get', frequency: 10, decay: 1 }
+  { method: 'get', frequency: 10, decay: 1, onCreate: hideTasks() }
     );
     check_time = setInterval('checkTime("' + elementID.substring(5).toString() + '")', 5000);
     update_progress = setInterval('updateProgressBar("'+elementID.substring(5).toString()+'")',100);
+  }
+
+  function hideTasks() {
+    jQuery(document).ready( function() {
+      jQuery(".taskEntry").has("input[disabled=\"\"]").hide();
+    });
   }
 
   function stopTimer() {
@@ -131,6 +137,7 @@
     function() {
       jQuery("#task_description").focus(function() { jQuery("#task_description").css('background-color','#f9f8e4'); });
       jQuery("#task_description").blur(function() { jQuery("#task_description").css('background-color', 'white');});
+      jQuery("#other_tasks").click(function() { jQuery("#other_tasks").fadeTo('slow',0.0).delay(1000);jQuery(".taskEntry").delay(1000).show();});
     });
   
 
@@ -170,7 +177,7 @@ function datePickSelect() {
   <%= render :partial => "task_list" %>
 
   <br />
-
+  <div id="other_tasks">Show other tasks</div><br/>
 
   <% @active_task = Task.find(:all, :conditions => {:active_task => true}) %>
   <% if @active_task %>
