@@ -30,6 +30,7 @@ describe SessionsController do
               @ccookies.stub!(:[]).with(:auth_token).and_return(token_value)
               @ccookies.stub!(:delete).with(:auth_token)
               @ccookies.stub!(:[]=)
+              @ccookies.stub!(:keys).and_return(Array.new)
               @user.stub!(:remember_me) 
               @user.stub!(:refresh_token) 
               @user.stub!(:forget_me)
