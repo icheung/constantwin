@@ -57,8 +57,7 @@ Feature: Logging in
   #
   # Log in unsuccessfully
   #
-  
-  Scenario: Logged-in user who fails logs in should be logged out
+  Scenario: Logged-in user who fails login should be logged out
     Given an activated user named 'oona'
     When  she creates a singular sessions with login: 'oona', password: '1234oona', remember me: '1'
     Then  she should be redirected to the home page
