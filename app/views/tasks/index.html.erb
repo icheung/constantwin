@@ -17,8 +17,10 @@
   }
 
   function hideTasks() {
-    jQuery(document).ready( function() {
+  jQuery(document).ready( function() {      
+      jQuery("#other_tasks").show();
       jQuery(".taskEntry").has("input[disabled=\"\"]").hide();
+      jQuery(".taskEntry").not(jQuery(".taskEntry").has("input[disabled=\"\"]")).css("font-size",20);
     });
   }
 
@@ -138,6 +140,7 @@
       jQuery("#task_description").focus(function() { jQuery("#task_description").css('background-color','#f9f8e4'); });
       jQuery("#task_description").blur(function() { jQuery("#task_description").css('background-color', 'white');});
       jQuery("#other_tasks").click(function() { jQuery("#other_tasks").fadeTo('slow',0.0).delay(1000);jQuery(".taskEntry").delay(1000).show();});
+      jQuery("#other_tasks").hide();
     });
   
 

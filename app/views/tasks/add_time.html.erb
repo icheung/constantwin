@@ -1,17 +1,14 @@
 <h1>Add some time!</h1>
 <div id="table_container">
-<p>How much time would YOU like to add?</p>
 
 <% form_for(@task, :url => update_duration_path(@task)) do |f| %>
   <%= f.error_messages %>
 
-  <p>
-    <%= f.label 'Time to add (in min)' %>
+  <p id="task_added_time_size">
     <%= f.text_field :added_time %>
+    more minutes
+    <%= f.submit '+' %>
   </p>
   
-  <p> 
-    <%= f.submit 'Add time' %>
-  </p>
 <% end %>
 </div>

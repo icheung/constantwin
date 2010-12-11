@@ -15,12 +15,15 @@ html, body { margin: 0; padding: 0; background-color: #eee; font: 9pt verdana, s
 h1, h2, h3 { font-family: georgia, times; }
 a { color: green; }
 #progressbar { height:50px; }
-#task_description { outline-width:0px ;width: 480px; padding: 7px; border: 1px solid #008000; font-size:28px; font-family:georgia; }
+#task_description, #task_added_time { outline-width:0px ;width: 480px; padding: 7px; border: 1px solid #008000; font-size:28px; font-family:georgia; }
+#task_added_time { width:100px; }
+#task_added_time_size { font-family:georgia; font-size:28px; }
 .task_description { padding-right: 50px; }
 /* calendarview */
 #addTaskDiv { display: inline-block; }
 #popupDateField { display: inline; background-color: #cde; cursor: pointer; }
-input[type="submit"][value="+"] { font-size:20px; -webkit-border-radius:6px; -moz-border-radius:6px; border:solid; border-width:0px;background-color:#abdd58}
+input[type="submit"][value="+"],input[type="submit"][value="Add time"] { font-size:20px; -webkit-border-radius:6px; -moz-border-radius:6px; border:solid; border-width:0px;background-color:#abdd58}
+input[type="submit"][value="+"]:hover ,input[type="submit"][value="Add time"]:hover { background:#008000; }
 .taskEntry { font-family:verdana; font-size:12px; }
 #addTaskDiv {display: inline-block; }
 div.dateField, #addTaskButton { display: inline-block; padding: 3px 5px; border: 0; -webkit-border-radius: 6px; -moz-border-radius: 6px; color: #555; background-color: #cde; text-align: center; cursor: pointer}
