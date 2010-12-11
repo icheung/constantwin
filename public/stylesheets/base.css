@@ -18,6 +18,10 @@ a { color: green; }
 #task_description { outline-width:0px ;width: 480px; padding: 7px; border: 1px solid #008000; font-size:28px; font-family:georgia; }
 .task_description { padding-right: 50px; }
 /* calendarview */
+#addTaskDiv { display: inline-block; }
+#popupDateField { display: inline; background-color: #cde; cursor: pointer; }
+input[type="submit"][value="+"] { font-size:20px; -webkit-border-radius:6px; -moz-border-radius:6px; border:solid; border-width:0px;background-color:#abdd58}
+.taskEntry { font-family:verdana; font-size:12px; }
 #addTaskDiv {display: inline-block; }
 div.dateField, #addTaskButton { display: inline-block; padding: 3px 5px; border: 0; -webkit-border-radius: 6px; -moz-border-radius: 6px; color: #555; background-color: #cde; text-align: center; cursor: pointer}
 

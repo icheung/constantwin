@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe TasksController do
+  integrate_views
 
+  # COPIED THIS CODE FROM ONLINE, SUPPOSED TO SET UP USER SESSION FOR ACCESSING TASKS ACTIONS, NOT SURE IF IT ACTUALLY DOES THAT
   before (:each) do
     @current_user = stub_model(User)
     target = controller rescue template
@@ -11,21 +13,22 @@ describe TasksController do
 
   
   def mock_task(stubs={})
-    @mock_task ||= mock_model(Task, stubs)
+    @mock_task = mock_model(Task, stubs)
   end
   
   describe "GET index" do
     it "assigns all tasks as @tasks" do
-      TasksController.stub!(:get_sorted_list_of_tasks).and_return([mock_task])
+      TasksController.stub(:get_sorted_list_of_tasks).and_return([mock_task])
       get :index
-      #assert_response 302
+      assert assigns(:tasks)
+      assigns.each {|k, v| puts "[#{k} #{v}]"}
 
-      #response.should_not be_success
-      puts assigns[:tasks]
-      #puts @tasks
-      #assigns[:tasks].should == [mock_task]
+      assigns[:tasks].should == [mock_task]
     end
   end
+
+  #TEMPORARILY COMMENTED OUT FOR TESTING PURPOSES
+  
 =begin
   describe "GET show" do
     it "assigns the requested task as @task" do
