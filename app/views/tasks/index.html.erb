@@ -119,6 +119,11 @@
       });
     });
     //Event.observe('signinForm', 'submit', checkForm);
+    Calendar.setup({
+      dateField: 'popupDateField',
+      triggerElement: 'popupDateField'
+    })
+
   });
 
   jQuery(document).ready( 
@@ -139,8 +144,10 @@
 
   <% form_tag(:controller => "tasks", :action => "create") do %>
     <%= text_field_tag(:task_description, nil, :size => "30", :name => "task[description]") %>
-    <%= submit_tag("Add task") %>
+    <%= submit_tag("Add Task") %>
   <% end %>
+
+<div id="popupDateField" class="dateField">Select Date</div>
 
 <div style="display: none" id="progressbar"></div>
 
