@@ -19,7 +19,7 @@ module AuthenticatedSystem
     end
 
     def login_from_fb
-      if facebook_session
+      if defined? facebook_session  # facebook_session isn't defined wat
         self.current_user = User.find_by_fb_user(facebook_session.user)
       end
     end

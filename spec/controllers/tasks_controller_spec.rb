@@ -22,7 +22,6 @@ describe TasksController do
       get :index
       assert assigns(:tasks)
       assigns.each {|k, v| puts "[#{k} #{v}]"}
-
       assigns[:tasks].should == [mock_task]
     end
   end

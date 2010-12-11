@@ -10,7 +10,6 @@ Feature: Add new task
   #@wip
   Scenario: Add a task to a blank dashboard and visualize it
     Given I am on the dashboard
-    Then show me the page
     When I add a new task called "Do laundry"
     Then I should see "Do laundry"
 
