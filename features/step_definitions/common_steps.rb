@@ -12,6 +12,13 @@ Given /^a user "([^"]*)" exists with email "([^"]*)" and password "([^"]*)"$/ do
   user[0].save
 end
 
+Given /^I am logged in with username "([^"]*)" and password "([^"]*)"$/ do |user, pass|
+  visit "/session/new"
+  fill_in "Login", :with => "#{user}"
+  fill_in "Password", :with => "#{pass}"
+  click_button "Log in"
+end
+
 When /^I log in as "([^"]*)" with password "([^"]*)"$/ do |user, pass|
   puts "User: #{user} and Password: #{pass}"
   fill_in "Login", :with => "foo"
