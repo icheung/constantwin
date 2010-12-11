@@ -15,4 +15,5 @@ html, body { margin: 0; padding: 0; background-color: #eee; font: 9pt verdana, s
 h1, h2, h3 { font-family: georgia, times; }
 a { color: green; }
 #progressbar { height:50px; }
+#task_description { outline-width:0px ;width: 480px; padding: 7px; border: 1px solid #008000; font-size:28px; font-family:georgia; }
 .task_description { padding-right: 50px; }

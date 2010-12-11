@@ -4,13 +4,13 @@
   var ajax_updater;
   var update_progress;
   var check_time;
-	var stopSwitch = true;
-	
+  var stopSwitch = true;
+
   function startTimer(elementID) {
     ajax_updater = new Ajax.PeriodicalUpdater(
-      elementID,
-      '/tasks/time_left/' + elementID.substring(5).toString(),
-      { method: 'get', frequency: 10, decay: 1 }
+    elementID,
+    '/tasks/time_left/' + elementID.substring(5).toString(),
+  { method: 'get', frequency: 10, decay: 1 }
     );
     check_time = setInterval('checkTime("' + elementID.substring(5).toString() + '")', 5000);
     update_progress = setInterval('updateProgressBar("'+elementID.substring(5).toString()+'")',100);
@@ -19,9 +19,9 @@
   function stopTimer() {
     clearInterval(check_time);
     clearInterval(update_progress);
-   // jQuery("#progressbar").hide();
+    // jQuery("#progressbar").hide();
     jQuery("#progressbar").css('margin-top', '1em');
-		jQuery("#progressbar > div").css({ 'background': '#ABDD58' });
+  jQuery("#progressbar > div").css({ 'background': '#ABDD58' });
   }
 
   function updateProgressBar(taskId) {
@@ -35,10 +35,10 @@
       var seconds = parsed_time[2] / 60;
       var timeFloatLeft = parseFloat(seconds) + parseFloat(minutes);
       var totalTime = parseInt(jQuery("#taskEntry"+taskId+">.duration").html());
-      jQuery("#progressbar").progressbar({value: ((parseFloat(totalTime) - timeFloatLeft)/parseFloat(totalTime)) * 100.00});
+    jQuery("#progressbar").progressbar({value: ((parseFloat(totalTime) - timeFloatLeft)/parseFloat(totalTime)) * 100.00});
       jQuery("#progressbar").show();
       jQuery("#progressbar").css("margin-top", "1em");
-			jQuery("#progressbar > div").css({ 'background': '#ABDD58' });
+    jQuery("#progressbar > div").css({ 'background': '#ABDD58' });
     }
   }
 
@@ -59,7 +59,7 @@
     window.location = '/tasks/fail/' + taskId;
   }
   function checkOff(taskId) {
-    new Ajax.Request('/tasks/finish/' + taskId, { method: 'put' })
+  new Ajax.Request('/tasks/finish/' + taskId, { method: 'put' })
     taskDescription = $$('#taskEntry' + taskId + ' td')[1];
     if (taskDescription.className.indexOf('done') == -1) {
       taskDescription.className += ', done';
@@ -70,42 +70,42 @@
       taskDescription.className = taskDescription.className.replace('done', '');
       ajax_updater.stop();
     }
-     stopTimer();
+    stopTimer();
   }
 
-	function stopTask(taskId){
-		
-		if (stopSwitch == true) {
-		// effectively pause the timer
-		ajax_updater.stop();
-		stopTimer();
-		
-		// change progressbar and button colors
+  function stopTask(taskId){
+
+    if (stopSwitch == true) {
+      // effectively pause the timer
+      ajax_updater.stop();
+      stopTimer();
+
+      // change progressbar and button colors
     jQuery("#progressbar > div").css({ 'background': 'Red' });
-		jQuery("#imgStopTask" + taskId).children("img").attr('src', '/images/circle-green-16.png');
-		
-		// set the stop button flag
-		stopSwitch = false;
-		}
-		else {
-		// effectively start the timer
-		ajax_updater.start();
-		//startTimer();
-		
-		// change the progressbar and button colors
-		jQuery("#progressbar > div").css({ 'background': '#ABDD58' });	
-		jQuery("#imgStopTask" + taskId).children("img").attr('src', '/images/circle-red-16.png');
-		
-		// set the stop button flag
-		stopSwitch = true;
-		}
-	}
+      jQuery("#imgStopTask" + taskId).children("img").attr('src', '/images/circle-green-16.png');
+
+      // set the stop button flag
+      stopSwitch = false;
+    }
+    else {
+      // effectively start the timer
+      ajax_updater.start();
+      //startTimer();
+
+      // change the progressbar and button colors
+    jQuery("#progressbar > div").css({ 'background': '#ABDD58' });	
+      jQuery("#imgStopTask" + taskId).children("img").attr('src', '/images/circle-red-16.png');
+
+      // set the stop button flag
+      stopSwitch = true;
+    }
+  }
 
   function save_edit(taskId) {
     var current = document.getElementById('current');
     var val = current.value;
     current.parentNode.parentNode.innerHTML = val;
-    new Ajax.Request('/tasks/update/' + taskId, { method: 'post', parameters: {'task[description]': val}});
+  new Ajax.Request('/tasks/update/' + taskId, { method: 'post', parameters: {'task[description]': val}});
     return false;
   }
   Event.observe(window, 'load', function() {
@@ -121,24 +121,26 @@
     //Event.observe('signinForm', 'submit', checkForm);
   });
 
+  jQuery(document).ready( 
+    function() {
+      jQuery("#task_description").focus(function() { jQuery("#task_description").css('background-color','#f9f8e4'); });
+      jQuery("#task_description").blur(function() { jQuery("#task_description").css('background-color', 'white');});
+    });
+  
+
 </script>
 
 <style type="text/css">
-.done { text-decoration: line-through; color: #999; }
+  .done { text-decoration: line-through; color: #999; }
 </style>
 
 <h1>
-  <!--
-  <%= image_tag "turtle.gif" %>
-  Constant Win-->
-  Listing tasks
 </h1>
 
-
-<% form_tag(:controller => "tasks", :action => "create") do %>
-  <%= text_field_tag(:task_description, nil, :size => "30", :name => "task[description]") %>
-  <%= submit_tag("Add task") %>
-<% end %>
+  <% form_tag(:controller => "tasks", :action => "create") do %>
+    <%= text_field_tag(:task_description, nil, :size => "30", :name => "task[description]") %>
+    <%= submit_tag("Add task") %>
+  <% end %>
 
 <div style="display: none" id="progressbar"></div>
 
@@ -146,16 +148,16 @@
 
 <div id="table_container">
 
-<%= render :partial => "task_list" %>
+  <%= render :partial => "task_list" %>
 
-<br />
+  <br />
 
-<p>
-<%= link_to 'New task', new_task_path %>
-</p>
+  <p>
+  <%= link_to 'New task', new_task_path %>
+  </p>
 
-<% @active_task = Task.find(:all, :conditions => {:active_task => true}) %>
-<% if @active_task %>
-<% end %>
+  <% @active_task = Task.find(:all, :conditions => {:active_task => true}) %>
+  <% if @active_task %>
+  <% end %>
 
 
