@@ -56,9 +56,10 @@
     <td><%= (task.started_at.nil? or task.is_finished?) ? '&nbsp;' : link_to( image_tag("clock.png", :border=>0, :alt=>'Adjust time', :title=>'Adjust time'), add_time_path(task)) %></td>
     <td style="display:none"><%= link_to 'Add time', add_time_path(task) %></td>
 
-		<!-- Onclick goes to stopTask javascript function...  need to make it call "pause" task controller method-->
-		<td id="stopTask<%= task.id %>"> <%= (task.started_at.nil? or task.is_finished?) ? '&nbsp;' : link_to_function(image_tag("circle-red-16.png"), "stopTask(#{task.id})", :id => "imgStopTask#{task.id}") %> 
-			<%= link_to 'Pause time',:method => :pause %></td>
+		<!-- Onclick goes to stopTask javascript function...  need to make it call "pause" task controller method -->
+		<td id="stopTask<%= task.id %>"> 
+		<%= (task.started_at.nil? or task.is_finished?) ? '&nbsp;' : link_to_function(image_tag("circle-red-16.png", :border=>0), "stopTask(#{task.id})", :id => "imgStopTask#{task.id}") %>
+		</td>
 
     <noscript><td><%= link_to 'Edit', edit_task_path(task) %></td></noscript>
 

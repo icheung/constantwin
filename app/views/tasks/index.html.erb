@@ -99,6 +99,8 @@
 		paused_time_stop = document.getElementById('timer' + taskId).innerHTML;
 		//console.debug("paused_time_stop" + paused_time_stop);
 		
+		// talk to the model pause
+		new Ajax.Request('/tasks/pause/' + taskId, { method: 'put' });
 		// effectively pause the timer
 		ajax_updater.stop();
 		stopTimer();
@@ -117,7 +119,10 @@
 		
 		// get the current time
 		paused_time_go = document.getElementById('timer' + taskId).innerHTML;
-		paused_total_duration = paused_time_go - paused_time_stop;
+		//paused_total_duration = paused_time_go - paused_time_stop;
+		
+		// talk to the model "resume"
+		new Ajax.Request('/tasks/resume/' + taskId, { method: 'put' });
 		
 		//console.debug("paused_time_go" + paused_time_stop);
 		//console.debug("paused_time_duration" + paused_time_stop);

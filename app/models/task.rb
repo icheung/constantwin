@@ -23,16 +23,41 @@ class Task < ActiveRecord::Base
     self.duration = 15 unless self.duration
     self.added_time = 0 unless self.added_time
     self.started_at = nil unless self.started_at
+    self.paused_at = nil unless self.paused_at
+  end
+  
+  def resume_time(resumed_time)
+    total_paused_time = Time.at(resumed_time.to_time - self.paused_at.to_time)
+    #total_paused_time_mins = total_paused_time.min
+    self.started_at += (total_paused_time.min * 60 + total_paused_time.sec)
+    self.save
+    
+    logger.debug "***** IN THE TASK MODEL ***** total_paused_time: #{total_paused_time}"
+    
+  end
+  
+  def update_paused_time(paused_time)
+    self.paused_at = paused_time
+    self.save
+    
+    logger.debug "***** IN THE TASK MODEL ***** paused_time: #{paused_time}"
+    
   end
 
+  #def update_added_time(paused_duration)
+  #  self.added_time += paused_duration
+  #  self.save
+  #end
+
   def update_duration()
-    self.started_at = Time.now
+    #self.started_at = Time.now
     self.duration += self.added_time.abs
     self.added_time = 0
     self.save
   end
   
   def clear_duration()
+    self.started_at = Time.now
     self.duration = 0
     self.save
   end

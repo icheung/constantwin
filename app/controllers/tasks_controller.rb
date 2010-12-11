@@ -164,15 +164,37 @@ class TasksController < ApplicationController
   end
   
   def pause
-    # set the paused_at time
-  end
+    
+    @task = @current_user.tasks.find(params[:id])
+    
+    logger.debug "ZOMG WE HAVE STOPPED TIME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    
+    paused_time = Time.now
+    
+    logger.debug "paused time: #{paused_time}"
+    
+    @task.update_paused_time(paused_time)
+    
+    
+    
+    end
   
   def resume
     # get the time task was paused
     # get the current time and take the difference
     # total_paused_duration = Time.at(Time.now - @task.paused_at.to_time)
     # add the difference to the task
-    # @task.update_attributes(:added_time, total_paused_duration)
+    # @task.update_added_duration(paused_time)
+    @task = @current_user.tasks.find(params[:id])
+    
+    logger.debug "ZOMG IT'S TIME TO RESUME TIME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    
+    resumed_time = Time.now
+    
+    logger.debug "resumed time: #{resumed_time}"
+    
+    @task.resume_time(resumed_time)
+  
     
   end
 
