@@ -121,7 +121,8 @@
     //Event.observe('signinForm', 'submit', checkForm);
     Calendar.setup({
       dateField: 'popupDateField',
-      triggerElement: 'popupDateField'
+      triggerElement: 'popupDateField',
+      selectHandler: datePickSelect
     })
 
   });
@@ -132,6 +133,14 @@
       jQuery("#task_description").blur(function() { jQuery("#task_description").css('background-color', 'white');});
     });
   
+
+function datePickSelect() {
+  selectedDate = this.date.print(this.dateFormat).split('-')
+  alert(selectedDate);
+  y = selectedDate[0], m = selectedDate[1], d = selectedDate[2]
+  alert('loading just tasks for that date'+y+m+d);
+  Calendar.defaultSelectHandler(this);
+}
 
 </script>
 
