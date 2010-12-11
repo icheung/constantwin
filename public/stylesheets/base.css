@@ -17,3 +17,9 @@ a { color: green; }
 #progressbar { height:50px; }
 #task_description { outline-width:0px ;width: 480px; padding: 7px; border: 1px solid #008000; font-size:28px; font-family:georgia; }
 .task_description { padding-right: 50px; }
+/* calendarview */
+#addTaskDiv { display: inline-block; }
+#popupDateField { display: inline; background-color: #cde; cursor: pointer; }
+div.dateField { width: 140px; padding: 4px 6px; -webkit-border-radius: 6px; -moz-border-radius: 6px; color: #555; text-align: center; }
+input[type="submit"][value="+"] { font-size:20px; -webkit-border-radius:6px; -moz-border-radius:6px; border:solid; border-width:0px;background-color:#abdd58}
+.taskEntry { font-family:verdana; font-size:12px; }
