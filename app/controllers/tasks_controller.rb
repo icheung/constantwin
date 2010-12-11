@@ -10,17 +10,24 @@ class TasksController < ApplicationController
   #before_filter :update_duration, :only => :show
 
   def index
-    @tasks = @current_user.tasks.find(:all, :conditions => {:is_finished => false, :active_task => true})
-    @unstarted_tasks = @current_user.tasks.find(:all, :conditions => {:is_finished => false, :started_at => nil}).sort_by {|t| t.created_at}
-    @finished_tasks = @current_user.tasks.find(:all, :conditions => {:is_finished => true}).sort_by {|t| t.created_at}
-    @tasks.concat(@unstarted_tasks).concat(@finished_tasks)
-
+    @tasks = get_sorted_list_of_tasks
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @tasks }
     end
   end
 
+  # easier for rspec testing
+  def get_sorted_list_of_tasks
+    tasks = @current_user.tasks.find(:all, :conditions => {:is_finished => false, :active_task => true})
+    unstarted_tasks = @current_user.tasks.find(:all, :conditions => {:is_finished => false, :started_at => nil}).sort_by {|t| t.created_at}
+    finished_tasks = @current_user.tasks.find(:all, :conditions => {:is_finished => true}).sort_by {|t| t.created_at}
+
+    tasks.concat(unstarted_tasks).concat(finished_tasks)
+    return tasks
+  end
+
+  
   # GET /tasks/1
   # GET /tasks/1.xml
   def show
