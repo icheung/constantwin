@@ -19,7 +19,9 @@ module AuthenticatedSystem
     end
 
     def login_from_fb
-      if defined? facebook_session  # facebook_session isn't defined wat
+      # facebook_session needs to be defined for rspec to pass
+      facebook_session ||= nil
+      if facebook_session
         self.current_user = User.find_by_fb_user(facebook_session.user)
       end
     end
