@@ -52,4 +52,11 @@ protected
     link_to_function text, js, *args
   end
   
+  def about
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @tasks }
+    end
+  end
+  
 end

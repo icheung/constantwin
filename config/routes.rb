@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+  map.about '/about', :controller => "sessions", :action => "about"
   map.pause '/tasks/resume', :controller => "tasks", :action => "resume"
   map.pause '/tasks/pause', :controller => "tasks", :action => "pause"
   map.start_task '/tasks/start', :controller => "tasks", :action => "start"
