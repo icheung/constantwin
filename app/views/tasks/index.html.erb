@@ -177,7 +177,7 @@
   jQuery(document).ready( 
     function() {
       jQuery(".buttons").hide();
-      jQuery("#task_description").focus(function() { jQuery("#task_description").css('background-color','#f9f8e4'); });
+      jQuery("#task_description,input#first,input#second").focus(function() { jQuery("#task_description").css('background-color','#f9f8e4'); });
       jQuery("#task_description").blur(function() { jQuery("#task_description").css('background-color', 'white');});
       jQuery("#other_tasks").click(function() { jQuery("#other_tasks").fadeTo('slow',0.0).delay(1000);jQuery(".taskEntry").delay(1000).show();});
       jQuery("#other_tasks").hide();
@@ -222,7 +222,7 @@ function previousDay() {
 
 <div id="addTaskDiv">
 <% form_tag(:controller => "tasks", :action => "create") do %>
-  <%= text_field_tag(:task_description, nil, :size => "30", :name => "task[description]") %>
+  <%= text_field_tag(:task_description, nil, :size => "30", :name => "task[description]",:placeholder => "Enter a new task!") %>
   <%= hidden_field_tag(:associated_date, Time.now(), :name => "task[associated_date]", :id => "associatedDateField") %>
   <%= submit_tag("+") %>
 <% end %>

@@ -2,12 +2,18 @@
   function breakDown() {
     alert(1);
   }
+
+  jQuery(document).ready(
+    function() {
+      jQuery("input#first,input#second").focus(function() { jQuery(this).css('background-color','#f9f8e4');});
+      jQuery("input#first,input#second").blur(function() { jQuery(this).css('background-color','white'); });
+      });
 </script>
 
-<h1><strong>ZOMG!  You failed to complete the task!</strong></h1>
+<h1><strong>You didn't complete the task...</strong></h1>
 <div id="table_container">
 <p>
-  You could try to break your original task, "<%= @task.description %>", down into smaller pieces <em>(ex. "clean up room" would turn into 1) clear desk 2) make the bed)</em>:
+
   <div>
     <% if flash[:error] %>
       <span id="errorExplanation"><%= flash[:error] %></span>
@@ -15,11 +21,12 @@
     <% end %>
     <% form_tag :action => "add_tasks" do %>
       <%= hidden_field_tag "id", @task.id %>
-      <%= text_field_tag "first" %>
+      <%= text_field_tag "first", nil, :placeholder => "Smaller subtask" %>
       <br />
-      <%= text_field_tag "second" %>
+      <%= text_field_tag "second", nil, :placeholder => "Another smaller subtask" %>
       <br />
       <%= submit_tag "Break it down!" %>
+      <br /> <br />
     <% end %>
   </div>
 </p>

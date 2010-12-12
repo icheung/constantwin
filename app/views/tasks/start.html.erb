@@ -1,15 +1,20 @@
-<h1>Let's start a task!</h1>
+<script type="text/javascript">
+  jQuery(document).ready(
+    function() {
+      jQuery("input#task_duration").focus(function() { jQuery(this).css('background-color','#f9f8e4');});
+      jQuery("input#task_duration").blur(function() { jQuery(this).css('background-color','white'); });
+      });
+</script>
 <div id="table_container">
-<p>
-  <b>Task to start:</b>
+<p id="minutes">
+  <b>Starting:</b>
   <%=h @task.description %>
 </p>
 
 <% form_for @task, :url => { :action => 'start_task', :id => @task.id } do |f| %>
   <%= f.error_messages %>
-  <p>
-    <%= f.label "#{:duration} in minutes" %><br />
-    <%= f.text_field :duration %>
+  <p id="minutes">
+    <%= f.text_field :duration %> minutes
   </p>
   <p>
     <%= f.submit 'Start!' %>
