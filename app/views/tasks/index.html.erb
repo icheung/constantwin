@@ -195,7 +195,7 @@ function datePickSelect() {
   }
   else d = this.date.getUTCDate();
   dateParam = y*10000+m*100+d;
-  jQuery("#table_container").load('/tasks/ondate/',  {'date': dateParam});
+  jQuery("#taskListContainer").load('/tasks/ondate/',  {'date': dateParam});
   weekDay = Calendar.DAY_NAMES[this.date.getDay()];
   monthName = Calendar.MONTH_NAMES[m-1] 
   jQuery('#pageHeading').text('Tasks for ' + weekDay + ', ' + monthName + ' ' + d + ', ' + y);
@@ -225,7 +225,7 @@ function datePickSelect() {
 
 <div id="table_container">
 
-  <%= render :partial => "task_list" %>
+  <div id="taskListContainer"><%= render :partial => "task_list" %></div>
 
   <br />
   <div id="other_tasks">Show other tasks</div><br/>
