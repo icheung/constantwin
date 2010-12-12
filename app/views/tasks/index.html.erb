@@ -203,6 +203,13 @@ function datePickSelect() {
   Calendar.defaultSelectHandler(this);
 }
 
+function nextDay() {
+  jQuery('td[class~="selected"]').last().next().click();
+}
+function previousDay() {
+  jQuery('td.selected').first().prev().click();
+}
+
 </script>
 
 <style type="text/css">
@@ -220,6 +227,7 @@ function datePickSelect() {
 </div>
 
 <div id="popupDateField" class="dateField">Select Date</div>
+<div id="dateNav"><a href="javascript:previousDay()">&lsaquo;</a><a href="javascript:nextDay()">&rsaquo;</a></div>
 
 <div style="display: none" id="progressbar"></div>
 
