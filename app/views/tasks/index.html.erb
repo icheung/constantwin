@@ -183,10 +183,17 @@
     });
   
 
+var firstDatePick = true;
 function datePickSelect() {
   y = this.date.getUTCFullYear();
   m = this.date.getUTCMonth() + 1;
-  d = this.date.getUTCDate();
+  // Funny bug where first time date picked results in
+  // date + 1 day being sent in date param
+  if (firstDatePick) {
+    d = this.date.getUTCDate() - 1;
+    firstDatePick = false;
+  }
+  else d = this.date.getUTCDate();
   dateParam = y*10000+m*100+d;
   jQuery("#table_container").load('/tasks/ondate/',  {'date': dateParam});
   Calendar.defaultSelectHandler(this);
