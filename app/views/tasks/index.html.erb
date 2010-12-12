@@ -15,7 +15,7 @@
     ajax_updater = new Ajax.PeriodicalUpdater(
       elementID,
       '/tasks/time_left/' + elementID.substring(5).toString(),
-      { method: 'get', frequency: 1, decay: 1 }
+      { method: 'get', frequency: 1, decay: 1, onCreate:hideTasks() }
 
     );
     check_time = setInterval('checkTime("' + elementID.substring(5).toString() + '")', 5000);
@@ -183,12 +183,22 @@
     });
   
 
+var firstDatePick = true;
 function datePickSelect() {
   y = this.date.getUTCFullYear();
   m = this.date.getUTCMonth() + 1;
-  d = this.date.getUTCDate();
+  // Funny bug where first time date picked results in
+  // date + 1 day being sent in date param
+  if (firstDatePick) {
+    d = this.date.getUTCDate() - 1;
+    firstDatePick = false;
+  }
+  else d = this.date.getUTCDate();
   dateParam = y*10000+m*100+d;
-  jQuery("#table_container").load('/tasks/ondate/',  {'date': dateParam});
+  jQuery("#taskListContainer").load('/tasks/ondate/',  {'date': dateParam});
+  weekDay = Calendar.DAY_NAMES[this.date.getDay()];
+  monthName = Calendar.MONTH_NAMES[m-1] 
+  jQuery('#pageHeading').text('Tasks for ' + weekDay + ', ' + monthName + ' ' + d + ', ' + y);
   Calendar.defaultSelectHandler(this);
 }
 
@@ -198,8 +208,7 @@ function datePickSelect() {
   .done { text-decoration: line-through; color: #999; }
 </style>
 
-<h1>
-</h1>
+<h1 id="pageHeading">Displaying All Tasks</h1>
 
 <div id="addTaskDiv">
 <% form_tag(:controller => "tasks", :action => "create") do %>
@@ -216,7 +225,7 @@ function datePickSelect() {
 
 <div id="table_container">
 
-  <%= render :partial => "task_list" %>
+  <div id="taskListContainer"><%= render :partial => "task_list" %></div>
 
   <br />
   <div id="other_tasks">Show other tasks</div><br/>
