@@ -12,59 +12,58 @@
     <th>Add time</th>
   </tr>-->
 
-<% @tasks.each do |task| %>
+  <% @tasks.each do |task| %>
 
-  <tr id="taskEntry<%= task.id %>" class="taskEntry">
+    <tr id="taskEntry<%= task.id %>" class="taskEntry">
 
-    <td><input id="checkbox<%= task.id %>" type="checkbox" onclick="checkOff(<%=task.id%>)" 
-	       <%= "checked" if task.is_finished %> <%= "disabled" if task.is_finished or task.started_at.nil? %>/></td>
+      <td><input id="checkbox<%= task.id %>" type="checkbox" onclick="checkOff(<%=task.id%>)" 
+        <%= "checked" if task.is_finished %> <%= "disabled" if task.is_finished or task.started_at.nil? %>/></td>
 
-    <!--<td><%= task.id %></td>-->
+      <!--<td><%= task.id %></td>-->
 
-    <td class="<%= task.is_finished ?  'task_description, done' : 'task_description' %>"><%=h task.description %></td>
+      <td class="<%= task.is_finished ?  'task_description, done' : 'task_description' %>"><%=h task.description %></td>
 
-    <!--<td><%=h task.user_id %></td>-->
+      <!--<td><%=h task.user_id %></td>-->
 
-    <td class="duration"><% if not task.started_at.nil? and not task.is_finished? %><%=h task.duration %> min<% end %></td>
+      <td class="duration"><% if not task.started_at.nil? and not task.is_finished? %><%=h task.duration %> min<% end %></td>
 
-    <!--<td>
-      <% if task.is_finished %>
-        <div class="task_done"><br/></div>
-      <% else %>
-        <div class="task_not_done"><br/></div>
-      <% end %>
-    </td>-->
+      <!--<td>
+        <% if task.is_finished %>
+          <div class="task_done"><br/></div>
+        <% else %>
+          <div class="task_not_done"><br/></div>
+        <% end %>
+      </td>-->
 
-    <td>
-      &nbsp;
-      <% if task.started_at.nil?%>
-        <%= link_to 'Start', {:action => "start", :task_id => task.id} %>
-      <% elsif task.is_finished? %>
-        
-      <% else %>
-        <span id="timer<%=h task.id %>"></span>
-        <script type="text/javascript">startTimer('<%=h "timer" + task.id.to_s %>');</script>
-      <% end %>
+      <td>
+        &nbsp;
+        <% if task.started_at.nil?%>
+          <%= link_to 'Start', {:action => "start", :task_id => task.id} %>
+        <% elsif task.is_finished? %>
+
+        <% else %>
+          <span id="timer<%=h task.id %>"></span>
+          <script type="text/javascript">startTimer('<%=h "timer" + task.id.to_s %>');</script>
+        <% end %>
+      </td>
+
+      <!-- Pause Timer for debugging>
+      <td>
+        <p>0:00</p>
+      </td>
+      -->
+      <td class="buttons" butt="taskEntry<%= task.id %>"><%= (task.started_at.nil? or task.is_finished?) ? '&nbsp;' : link_to( image_tag("clock.png", :border=>0, :alt=>'Adjust time', :title=>'Adjust time'), add_time_path(task)) %></td>
+      <td style="display:none"><%= link_to 'Add time', add_time_path(task) %></td>
+
+      <!-- Onclick goes to stopTask javascript function...  need to make it call "pause" task controller method -->
+      <td class="buttons" id="stopTask<%= task.id %>" butt="taskEntry<%= task.id %>"> 
+        <%= (task.started_at.nil? or task.is_finished?) ? '&nbsp;' : link_to_function(image_tag("circle-red-16.png", :border=>0), "stopTask(#{task.id})", :id => "imgStopTask#{task.id}") %>
+      </td>
+
+      <noscript><td><%= link_to 'Edit', edit_task_path(task) %></td></noscript>
+
+      <td class="buttons" butt="taskEntry<%= task.id %>"><%= link_to image_tag("cross.png", :border=>0, :alt=>'Delete task', :title=>'Delete task'), task, :confirm => 'Are you sure?', :method => :delete %></td>
     </td>
-
-		<!-- Pause Timer for debugging>
-		<td>
-			<p>0:00</p>
-		</td>
-		-->
-
-    <td><%= (task.started_at.nil? or task.is_finished?) ? '&nbsp;' : link_to( image_tag("clock.png", :border=>0, :alt=>'Adjust time', :title=>'Adjust time'), add_time_path(task)) %></td>
-    <td style="display:none"><%= link_to 'Add time', add_time_path(task) %></td>
-
-		<!-- Onclick goes to stopTask javascript function...  need to make it call "pause" task controller method -->
-		<td id="stopTask<%= task.id %>"> 
-		<%= (task.started_at.nil? or task.is_finished?) ? '&nbsp;' : link_to_function(image_tag("circle-red-16.png", :border=>0), "stopTask(#{task.id})", :id => "imgStopTask#{task.id}") %>
-		</td>
-
-    <noscript><td><%= link_to 'Edit', edit_task_path(task) %></td></noscript>
-
-    <td><%= link_to image_tag("cross.png", :border=>0, :alt=>'Delete task', :title=>'Delete task'), task, :confirm => 'Are you sure?', :method => :delete %></td>
-
   </tr>
-<% end %>
+  <% end %>
 </table>

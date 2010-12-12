@@ -176,10 +176,12 @@
 
   jQuery(document).ready( 
     function() {
+      jQuery(".buttons").hide();
       jQuery("#task_description").focus(function() { jQuery("#task_description").css('background-color','#f9f8e4'); });
       jQuery("#task_description").blur(function() { jQuery("#task_description").css('background-color', 'white');});
       jQuery("#other_tasks").click(function() { jQuery("#other_tasks").fadeTo('slow',0.0).delay(1000);jQuery(".taskEntry").delay(1000).show();});
       jQuery("#other_tasks").hide();
+      jQuery(".taskEntry,.buttons").hover( function() { var s = jQuery(this).attr('id');jQuery("[butt="+s+"]").show(); }).mouseleave(function() { var s = jQuery(this).attr('id');jQuery("[butt="+s+"]").hide();}, 100);
     });
   
 

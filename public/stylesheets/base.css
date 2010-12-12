@@ -24,7 +24,9 @@ a { color: green; }
 #popupDateField { display: inline; background-color: #cde; cursor: pointer; }
 input[type="submit"][value="+"],input[type="submit"][value="Add time"] { font-size:20px; -webkit-border-radius:6px; -moz-border-radius:6px; border:solid; border-width:0px;background-color:#abdd58}
 input[type="submit"][value="+"]:hover ,input[type="submit"][value="Add time"]:hover { background:#008000; }
-.taskEntry { font-family:verdana; font-size:12px; }
+.taskEntry { width:500px;font-family:verdana; font-size:12px; border:5px solid black;}
 #addTaskDiv {display: inline-block; }
 div.dateField, #addTaskButton { display: inline-block; padding: 3px 5px; border: 0; -webkit-border-radius: 6px; -moz-border-radius: 6px; color: #555; background-color: #cde; text-align: center; cursor: pointer}
 #other_tasks { text-align:center; -moz-border-radius:6px; -webkit-border-radius:6px; background:#ccddee; color:#555555; width:120px;padding:4px; }
+.duration { visibility:hidden; width:1px; position:absolute; }
+.buttons { margin:90px; }
