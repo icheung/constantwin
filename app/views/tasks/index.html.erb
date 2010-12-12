@@ -196,6 +196,9 @@ function datePickSelect() {
   else d = this.date.getUTCDate();
   dateParam = y*10000+m*100+d;
   jQuery("#table_container").load('/tasks/ondate/',  {'date': dateParam});
+  weekDay = Calendar.DAY_NAMES[this.date.getDay()];
+  monthName = Calendar.MONTH_NAMES[m-1] 
+  jQuery('#pageHeading').text('Tasks for ' + weekDay + ', ' + monthName + ' ' + d + ', ' + y);
   Calendar.defaultSelectHandler(this);
 }
 
@@ -205,8 +208,7 @@ function datePickSelect() {
   .done { text-decoration: line-through; color: #999; }
 </style>
 
-<h1>
-</h1>
+<h1 id="pageHeading">Displaying All Tasks</h1>
 
 <div id="addTaskDiv">
 <% form_tag(:controller => "tasks", :action => "create") do %>
