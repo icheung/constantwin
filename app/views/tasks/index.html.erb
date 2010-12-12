@@ -199,6 +199,7 @@ function datePickSelect() {
   weekDay = Calendar.DAY_NAMES[this.date.getDay()];
   monthName = Calendar.MONTH_NAMES[m-1] 
   jQuery('#pageHeading').text('Tasks for ' + weekDay + ', ' + monthName + ' ' + d + ', ' + y);
+  jQuery('#associatedDateField').val(this.date.toString());
   Calendar.defaultSelectHandler(this);
 }
 
@@ -213,6 +214,7 @@ function datePickSelect() {
 <div id="addTaskDiv">
 <% form_tag(:controller => "tasks", :action => "create") do %>
   <%= text_field_tag(:task_description, nil, :size => "30", :name => "task[description]") %>
+  <%= hidden_field_tag(:associated_date, Time.now(), :name => "task[associated_date]", :id => "associatedDateField") %>
   <%= submit_tag("+") %>
 <% end %>
 </div>
