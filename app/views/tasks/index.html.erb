@@ -15,7 +15,7 @@
     ajax_updater = new Ajax.PeriodicalUpdater(
       elementID,
       '/tasks/time_left/' + elementID.substring(5).toString(),
-      { method: 'get', frequency: 1, decay: 1 }
+      { method: 'get', frequency: 1, decay: 1, onCreate:hideTasks() }
 
     );
     check_time = setInterval('checkTime("' + elementID.substring(5).toString() + '")', 5000);
