@@ -88,7 +88,7 @@ describe Task do
       @dummy_task.duration = 10
       @dummy_task.added_time = 5
       @dummy_task.update_duration
-      @dummy_task.duration.should == 5
+      @dummy_task.duration.should == 15
     end
   end
 end
