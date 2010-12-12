@@ -30,3 +30,4 @@ div.dateField, #addTaskButton { display: inline-block; padding: 3px 5px; border:
 #other_tasks { text-align:center; -moz-border-radius:6px; -webkit-border-radius:6px; background:#ccddee; color:#555555; width:120px;padding:4px; }
 .duration { visibility:hidden; width:1px; position:absolute; }
 .buttons { margin:90px; }
+#dateNav a { text-decoration: none; color: #000; font: bold 25pt verdana; }

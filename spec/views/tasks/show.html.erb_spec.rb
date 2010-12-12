@@ -2,8 +2,14 @@ require 'spec_helper'
 
 describe "/tasks/show.html.erb" do
   include TasksHelper
+  
   before(:each) do
-    assigns[:task] = @task = stub_model(Task,
+    @user = stub_model(User,
+                       :id => 1,
+                       :login => "Dummy login"
+                       )
+                       
+    assigns[:task] = stub_model(Task,
       :description => "value for description",
       :user_id => 1,
       :is_finished => false

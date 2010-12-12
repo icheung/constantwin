@@ -197,8 +197,19 @@ function datePickSelect() {
   }
   else d = this.date.getUTCDate();
   dateParam = y*10000+m*100+d;
-  jQuery("#table_container").load('/tasks/ondate/',  {'date': dateParam});
+  jQuery("#taskListContainer").load('/tasks/ondate/',  {'date': dateParam});
+  weekDay = Calendar.DAY_NAMES[this.date.getDay()];
+  monthName = Calendar.MONTH_NAMES[m-1] 
+  jQuery('#pageHeading').text('Tasks for ' + weekDay + ', ' + monthName + ' ' + d + ', ' + y);
+  jQuery('#associatedDateField').val(this.date.toString());
   Calendar.defaultSelectHandler(this);
+}
+
+function nextDay() {
+  jQuery('td[class~="selected"]').last().next().click();
+}
+function previousDay() {
+  jQuery('td.selected').first().prev().click();
 }
 
 </script>
@@ -207,17 +218,18 @@ function datePickSelect() {
   .done { text-decoration: line-through; color: #999; }
 </style>
 
-<h1>
-</h1>
+<h1 id="pageHeading">Displaying All Tasks</h1>
 
 <div id="addTaskDiv">
 <% form_tag(:controller => "tasks", :action => "create") do %>
   <%= text_field_tag(:task_description, nil, :size => "30", :name => "task[description]") %>
+  <%= hidden_field_tag(:associated_date, Time.now(), :name => "task[associated_date]", :id => "associatedDateField") %>
   <%= submit_tag("+") %>
 <% end %>
 </div>
 
 <div id="popupDateField" class="dateField">Select Date</div>
+<div id="dateNav"><a href="javascript:previousDay()">&lsaquo;</a><a href="javascript:nextDay()">&rsaquo;</a></div>
 
 <div style="display: none" id="progressbar"></div>
 
@@ -225,7 +237,7 @@ function datePickSelect() {
 
 <div id="table_container">
 
-  <%= render :partial => "task_list" %>
+  <div id="taskListContainer"><%= render :partial => "task_list" %></div>
 
   <br />
   <div id="other_tasks">Show other tasks</div><br/>

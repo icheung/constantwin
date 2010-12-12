@@ -56,6 +56,11 @@ describe Task do
       @user.destroy
       lambda {Task.find(task_id)}.should raise_error(::ActiveRecord::RecordNotFound)
     end
+    
+    it "should be able to create a duplicate task" do
+      Task.create(@valid_task_attributes).should be_true
+      Task.create(@valid_task_attributes).should be_true
+    end
   end
 
   describe "when starting a task" do
@@ -83,7 +88,7 @@ describe Task do
       @dummy_task.duration = 10
       @dummy_task.added_time = 5
       @dummy_task.update_duration
-      @dummy_task.duration.should == 5
+      @dummy_task.duration.should == 15
     end
   end
 end

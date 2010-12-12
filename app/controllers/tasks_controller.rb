@@ -269,7 +269,7 @@ class TasksController < ApplicationController
     d = date-y*10000-m*100
     nextDay = Date.new(y,m,d) + 1
     task_list = @current_user.tasks
-    @tasks = task_list.find_all{|t| (t.created_at.to_date <= nextDay) and (t.created_at.to_date >= nextDay - 1)}
+    @tasks = task_list.find_all{|t| (t.associated_date.to_date <= nextDay) and (t.associated_date.to_date >= nextDay - 1)}
     if @tasks.length == 0
       render :text => 'No tasks found on ' + y.to_s + '-' + m.to_s + '-' + d.to_s
     else

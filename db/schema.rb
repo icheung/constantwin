@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101211210137) do
+ActiveRecord::Schema.define(:version => 20101212032150) do
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20101211210137) do
     t.time     "stopped_at"
     t.time     "stopped_duration"
     t.time     "paused_at"
+    t.datetime "associated_date"
   end
 
   create_table "users", :force => true do |t|
