@@ -20,9 +20,8 @@ Given /^I am logged in with username "([^"]*)" and password "([^"]*)"$/ do |user
 end
 
 When /^I log in as "([^"]*)" with password "([^"]*)"$/ do |user, pass|
-  puts "User: #{user} and Password: #{pass}"
-  fill_in "Login", :with => "foo"
-  fill_in "Password", :with => "foopassword"
+  fill_in "Login", :with => "#{user}"
+  fill_in "Password", :with => "#{pass}"
   click_button "Log in"
 end
 
