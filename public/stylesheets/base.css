@@ -15,11 +15,16 @@ html, body { margin: 0; padding: 0; background-color: #eee; font: 9pt verdana, s
 h1, h2, h3 { font-family: georgia, times; }
 a { color: green; }
 #progressbar { height:50px; }
-#task_description, #task_added_time, input#first, input#second, input#task_duration{ outline-width:0px ;width: 480px; padding: 7px; border: 1px solid #008000; font-size:28px; font-family:georgia; }
-input#first, input#second { margin-bottom:10px; }
+#task_description, #task_added_time, input#first, input#second, input#third, input#fourth, input#fifth, input#task_duration{ outline-width:0px ;width: 480px; padding: 7px; border: 1px solid #008000; font-size:28px; font-family:georgia; }
+input#first, input#second, input#third, input#fourth, input#fifth { margin-bottom:10px; }
 #task_added_time { width:100px; }
 #task_added_time_size { font-family:georgia; font-size:28px; }
 .task_description { padding-right: 50px; }
+.breakdownOptions { padding:0 20px; text-decoration:none; font-size:20px; -webkit-border-radius:6px; -moz-border-radius:6px; border:solid; border-width:0px; }
+#breakdownAdd { background-color: #D8FF95; }
+#breakdownAdd:hover { background-color: #AFFF56 } 
+#breakdownDel { background-color: #FF9C95; }
+#breakdownDel:hover { background-color: #FF6156 }
 /* calendarview */
 #addTaskDiv { display: inline-block; }
 #popupDateField { display: inline; background-color: #cde; cursor: pointer; }

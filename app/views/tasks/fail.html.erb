@@ -1,16 +1,68 @@
 <script type="text/javascript">
-  function breakDown() {
-    alert(1);
-  }
+  var numSubtasks = 2;
 
   jQuery(document).ready(
     function() {
-      jQuery("input#first,input#second").focus(function() { jQuery(this).css('background-color','#f9f8e4');});
-      jQuery("input#first,input#second").blur(function() { jQuery(this).css('background-color','white'); });
+      jQuery("input[type='text']").live("focus", function(){
+        jQuery(this).css('background-color','#f9f8e4');
       });
+      
+      jQuery("input[type='text']").live("blur", function(){
+        jQuery(this).css('background-color','white');
+      });
+      
+      jQuery("#breakdownAdd").click(function(){
+        if (numSubtasks < 5) {
+          addIthSubtask(++numSubtasks);
+        }
+      });
+      jQuery("#breakdownDel").click(function(){
+        if (numSubtasks > 2) {
+          delIthSubtask(numSubtasks--);
+        }
+      });
+    });
+    
+    function addIthSubtask(i){
+      switch(i){
+        case 3:
+          jQuery("#second").after("<br /><label for='third'>Subtask 3</label><br /><input id='third' type='text' placeholder='subtask3' name='third' />");
+          break;
+        case 4:
+          jQuery("#third").after("<br /><label for='fourth'>Subtask 4</label><br /><input id='fourth' type='text' placeholder='subtask4' name='fourth' />");
+          break;
+        case 5:
+          jQuery("#fourth").after("<br /><label for='fifth'>Subtask 5</label><br /><input id='fifth' type='text' placeholder='subtask5' name='fifth' />");
+          break;
+      }
+    }
+    
+    function delIthSubtask(i){
+      console.log(i);
+      switch(i){
+        case 3:
+          jQuery("label[for='third']").prev().remove();
+          jQuery("label[for='third']").next().remove();
+          jQuery("#third").remove();
+          jQuery("label[for='third']").remove();
+          break;
+        case 4:
+          jQuery("label[for='fourth']").prev().remove();
+          jQuery("label[for='fourth']").next().remove();
+          jQuery("#fourth").remove();
+          jQuery("label[for='fourth']").remove();
+          break;
+        case 5:
+          jQuery("label[for='fifth']").prev().remove();
+          jQuery("label[for='fifth']").next().remove();
+          jQuery("#fifth").remove();
+          jQuery("label[for='fifth']").remove();
+          break;
+      }
+    }
 </script>
 
-<h1><strong>You didn't complete the task...</strong></h1>
+<h1><strong>You ran out of time!</strong></h1>
 <div id="table_container">
 <p>
 
@@ -19,12 +71,17 @@
       <span id="errorExplanation"><%= flash[:error] %></span>
       <br /><br />
     <% end %>
+    <p>Perhaps you could like to split your original task into subtasks?  For instance, <em>clean the bedroom</em> would break down into <em>make the bed</em> and <em>vacuum the floor</em>.</p>
     <% form_tag :action => "add_tasks" do %>
       <%= hidden_field_tag "id", @task.id %>
-      <%= text_field_tag "first", nil, :placeholder => "Smaller subtask" %>
+      <%= label_tag 'first', 'Subtask 1' %><br />
+      <%= text_field_tag "first", nil, :placeholder => "subtask1" %>
       <br />
-      <%= text_field_tag "second", nil, :placeholder => "Another smaller subtask" %>
+      <%= label_tag 'second', 'Subtask 2' %><br />
+      <%= text_field_tag "second", nil, :placeholder => "subtask2" %>
       <br />
+      <span href="#" id="breakdownAdd" class="breakdownOptions">+</span>
+      <span href="#" id="breakdownDel" class="breakdownOptions">-</span>
       <%= submit_tag "Break it down!" %>
       <br /> <br />
     <% end %>

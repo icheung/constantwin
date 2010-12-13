@@ -227,21 +227,31 @@ class TasksController < ApplicationController
       @current_user.update_attribute(:is_tasking, false)
     end
 
-    # Generalize this later.
     id = params[:id]
-    subtask1 = params[:first]
-    subtask2 = params[:second]
-
-    task1 = @current_user.tasks.new(:description => subtask1)
-    task2 = @current_user.tasks.new(:description => subtask2)
+    subtasks = Array.new
+    subtasks << params[:first]
+    subtasks << params[:second]
+    params[:third] ? subtasks << params[:third] : nil
+    params[:fourth] ? subtasks << params[:fourth] : nil
+    params[:fifth] ? subtasks << params[:fifth] : nil
     
-    if task1.save and task2.save
+    created_tasks = Array.new
+    save_failed = false
+    subtasks.each { |subtask|
+      puts subtask
+      created_tasks << @current_user.tasks.new(:description => subtask)
+      if not created_tasks[-1].save
+        save_failed = true
+        created_tasks.each { |t| t.destroy }
+        break
+      end
+    }
+    if save_failed
+      flash[:error] = "You need to create at least two subtasks (and not leave fields blank) or add more time!"
+      redirect_to :action => "fail", :id => id
+    else
       Task.find(params[:id]).delete
       redirect_to(tasks_url)
-    else
-      [task1, task2].each {|t| t.destroy} # prevents accidental task creation
-      flash[:error] = "You need to create at least two subtasks or add more time!"
-      redirect_to :action => "fail", :id => id
     end
   end
   
