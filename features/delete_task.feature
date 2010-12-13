@@ -12,6 +12,7 @@ Feature: Delete a task
     And I add a new task called "Do laundry"
     And I go to the dashboard
     Then I should be on the dashboard
+    And I should see "Do laundry"
     
   Scenario: Delete a task
     Given I am on the dashboard

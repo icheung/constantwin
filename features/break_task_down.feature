@@ -4,12 +4,18 @@ Feature: Break task down
   So that I can finish tasks that are bite-sized chunks of what they used to be
 
   Background:
-    #Given I am logged in as "sample@email.com"
-    #And I am on the task breaking down page
-    And I have task with description "Do laundry"
-    And I started the task, "Do laundry"
-    And I am on the task timer page for "Do laundry"
-    And the time runs out
+    Given a user "foo" exists with email "foo@foo.com" and password "foopassword"
+    And I am on the login page
+    When I fill in "foo" for "Login"
+    And I fill in "foopassword" for "Password"
+    And I press "Log in"
+    And I add a new task called "Do laundry"
+    And I go to the dashboard
+    Then I should be on the dashboard
+    And I should see "Do laundry"
+    # AND I HAVE STARTED THE TASK "DO LAUNDRY"
+    # AND I AM ON THE ITEM VIEW FOR "DO LAUNDRY"
+    # AND TIME RUNS OUT
 
   Scenario: I click on Divide and Conquer     
     When I click on “Divide and Conquer”

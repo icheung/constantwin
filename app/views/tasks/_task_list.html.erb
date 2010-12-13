@@ -63,7 +63,6 @@
       <noscript><td><%= link_to 'Edit', edit_task_path(task) %></td></noscript>
 
       <td class="buttons" butt="taskEntry<%= task.id %>"><%= link_to image_tag("cross.png", :border=>0, :alt=>'Delete task', :title=>'Delete task'), task, :confirm => 'Are you sure?', :method => :delete %></td>
-    </td>
-  </tr>
+    </tr>
   <% end %>
 </table>
