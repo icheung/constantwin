@@ -53,8 +53,13 @@
     jQuery("#progressbar").progressbar({value: ((parseFloat(totalTime) - timeFloatLeft)/parseFloat(totalTime)) * 100.00});
       jQuery("#progressbar").show();
       jQuery("#progressbar").css("margin-top", "1em");
-    jQuery("#progressbar > div").css({ 'background': '#ABDD58' });
-    }
+
+		if (stopSwitch == true) {	
+				jQuery("#progressbar > div").css({ 'background': '#ABDD58'});
+			} else {
+				jQuery("#progressbar > div").css({ 'background': 'Red' });
+  		}
+		}
   }
 
   function checkTime(taskId) {
@@ -97,15 +102,13 @@
 			
 		// get current time
 		paused_time_stop = document.getElementById('timer' + taskId).innerHTML;
-		//console.debug("paused_time_stop" + paused_time_stop);
 		
 		// talk to the model pause
 		new Ajax.Request('/tasks/pause/' + taskId, { method: 'put' });
+		
 		// effectively pause the timer
 		ajax_updater.stop();
-		stopTimer();
-		 console.debug(check_time);
-		
+
 		// change progressbar and button colors
     jQuery("#progressbar > div").css({ 'background': 'Red' });
 		jQuery("#imgStopTask" + taskId).children("img").attr('src','/images/circle-green-16.png');
@@ -119,31 +122,20 @@
 		
 		// get the current time
 		paused_time_go = document.getElementById('timer' + taskId).innerHTML;
-		//paused_total_duration = paused_time_go - paused_time_stop;
 		
 		// talk to the model "resume"
 		new Ajax.Request('/tasks/resume/' + taskId, { method: 'put' });
 		
-		//console.debug("paused_time_go" + paused_time_stop);
-		//console.debug("paused_time_duration" + paused_time_stop);
-		
-		//console.debug(timeLeft);
-		//console.debug(timeLeft);
-		
 		// effectively start the timer
 		ajax_updater.start();
 		//startTimer();
-		
+			
 		// change the progressbar and button colors
 		jQuery("#progressbar > div").css({ 'background': '#ABDD58' });	
 		jQuery("#imgStopTask" + taskId).children("img").attr('src', '/images/circle-red-16.png');
 		
 		// set the stop button flag
 		stopSwitch = true;
-		
-		// clear the paused_time(s) , JUST to be sure
-		paused_time_stop = 0;
-		paused_time_go = 0;
 		}
 	}
 
