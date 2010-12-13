@@ -50,7 +50,7 @@ class Task < ActiveRecord::Base
   #end
 
   def update_duration()
-    #self.started_at = Time.now
+    self.started_at = Time.now
     self.duration += self.added_time.abs
     self.added_time = 0
     self.save

@@ -60,6 +60,11 @@
           break;
       }
     }
+
+  function checkOff(taskId) {
+    new Ajax.Request('/tasks/finish/' + taskId, { method: 'put' });
+      window.location.replace("http://localhost:3000");
+  }
 </script>
 
 <h1><strong>You ran out of time!</strong></h1>
@@ -89,6 +94,9 @@
 </p>
 <p>
   Or you could <%= link_to 'add more time.', add_time_path(@task) %>
+</p>
+<p>
+But wait! You say you finished the task? Check that box! <input type="checkbox" onclick="checkOff(<%= @task.id %>)">
 </p>
 
 <%= link_to 'Back', tasks_path %>
