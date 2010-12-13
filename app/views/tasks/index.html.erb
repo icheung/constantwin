@@ -222,7 +222,6 @@ function previousDay() {
 }
 
 function filterByDate(dateString) {
-  jQuery("#taskListContainer").load('/tasks/ondate/',  {'date': parseInt(dateString)});
   //displayObject(inst);
   var y = parseInt(dateString.substring(0, 4));
   var m = parseInt(dateString.substring(4, 6).replace(/^0+/g, ''));
@@ -230,6 +229,21 @@ function filterByDate(dateString) {
   //alert(y + ' ' + m + ' ' + d);
   newDate = new Date(y, m-1, d);
   jQuery('#pageHeading').text('Tasks for ' + jQuery.datepicker.formatDate('MM d, yy', newDate));
+  jQuery.ajax({url: '/tasks/ondate/',  type: 'POST', data: {'date': parseInt(dateString)}, success: function(data) {
+    if (data == '') {
+      jQuery('#noTasks').text('No tasks found.');
+      jQuery('#noTasks').show();
+      jQuery('.taskEntry').hide();
+    }
+    else {
+      jQuery('#noTasks').hide();
+      jQuery('.taskEntry').hide();
+      var entries = data.split(' ');
+      for (var i = 0; i < entries.length; i++) {
+        jQuery('#taskEntry'+entries[i]).show();
+      }
+    }
+  }});
   jQuery('#associatedDateField').val(newDate.toString());
 }
 
@@ -264,6 +278,8 @@ function displayObject(obj) {
 <br />
 
 <div id="table_container">
+
+  <p id="noTasks" style="display: hidden"></p>
 
   <div id="taskListContainer"><%= render :partial => "task_list" %></div>
 

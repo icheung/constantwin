@@ -228,6 +228,7 @@ class TasksController < ApplicationController
     end
 
     id = params[:id]
+    associated_date = params[:associated_date]
     subtasks = Array.new
     subtasks << params[:first]
     subtasks << params[:second]
@@ -239,7 +240,7 @@ class TasksController < ApplicationController
     save_failed = false
     subtasks.each { |subtask|
       puts subtask
-      created_tasks << @current_user.tasks.new(:description => subtask)
+      created_tasks << @current_user.tasks.new(:description => subtask, :associated_date => associated_date)
       if not created_tasks[-1].save
         save_failed = true
         created_tasks.each { |t| t.destroy }
@@ -279,12 +280,15 @@ class TasksController < ApplicationController
     d = date-y*10000-m*100
     nextDay = Date.new(y,m,d) + 1
     task_list = @current_user.tasks
-    @tasks = task_list.find_all{|t| (t.associated_date.to_date <= nextDay) and (t.associated_date.to_date >= nextDay - 1)}
-    if @tasks.length == 0
-      render :text => 'No tasks found on ' + y.to_s + '-' + m.to_s + '-' + d.to_s
-    else
-      render :partial => 'task_list'
-    end
+    tasks = task_list.find_all{|t| (t.associated_date.to_date <= nextDay) and (t.associated_date.to_date >= nextDay - 1)}
+    task_ids = []
+    tasks.each {|t| task_ids << t.id}
+    #if @tasks.length == 0
+    #  render :text => 'No tasks found on ' + y.to_s + '-' + m.to_s + '-' + d.to_s
+    #else
+    #  render :partial => 'task_list'
+    #end
+    render :text => task_ids.join(' ')
   end
     
 end
