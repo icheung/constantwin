@@ -158,11 +158,13 @@
       });
     });
     //Event.observe('signinForm', 'submit', checkForm);
+    /*
     Calendar.setup({
       dateField: 'popupDateField',
       triggerElement: 'popupDateField',
       selectHandler: datePickSelect
     })
+    */
 
   });
 
@@ -175,9 +177,16 @@
       jQuery("#hide").live('click',function() { jQuery("#hide").html("Show other tasks").attr("id","show");hideTasks();});
       jQuery("#show").hide();
       jQuery(".taskEntry,.buttons").hover( function() { var s = jQuery(this).attr('id');jQuery("[butt="+s+"]").show(); }).mouseleave(function() { var s = jQuery(this).attr('id');jQuery("[butt="+s+"]").hide();}, 100);
+      jQuery('#datepicker').datepicker({
+        showOn: 'button',
+        buttonText: 'Select Date',
+        dateFormat: 'yymmdd',
+        onSelect: function(dateText, inst) { filterByDate(dateText, inst); }
+      });
+      
     });
-  
 
+/*  
 var firstDatePick = true;
 function datePickSelect() {
   y = this.date.getUTCFullYear();
@@ -204,6 +213,23 @@ function nextDay() {
 function previousDay() {
   jQuery('td.selected').first().prev().click();
 }
+*/
+
+
+function filterByDate(dateString, inst) {
+  jQuery("#taskListContainer").load('/tasks/ondate/',  {'date': parseInt(dateString)});
+  //displayObject(inst);
+  newDate = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
+  jQuery('#pageHeading').text('Tasks for ' + jQuery.datepicker.formatDate('MM d, yy', newDate));
+  jQuery('#associatedDateField').val(newDate.toString());
+}
+
+
+function displayObject(obj) {
+  output = "";
+  for (key in obj) output += key + ': ' + obj[key] + '\n';
+  console.log(output);
+}
 
 </script>
 
@@ -221,7 +247,7 @@ function previousDay() {
 <% end %>
 </div>
 
-<div id="popupDateField" class="dateField">Select Date</div>
+<input type="text" style="visibility: hidden; width: 0; height: 0; border: 0;" id="datepicker" />
 <div id="dateNav"><a href="javascript:previousDay()">&lsaquo;</a><a href="javascript:nextDay()">&rsaquo;</a></div>
 
 <div style="display: none" id="progressbar"></div>
