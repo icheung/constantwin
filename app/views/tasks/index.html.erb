@@ -207,19 +207,28 @@ function datePickSelect() {
   Calendar.defaultSelectHandler(this);
 }
 
-function nextDay() {
-  jQuery('td[class~="selected"]').last().next().click();
-}
-function previousDay() {
-  jQuery('td.selected').first().prev().click();
-}
 */
 
 
-function filterByDate(dateString, inst) {
+function nextDay() {
+  var dp = jQuery('#datepicker');
+  jQuery('#datepicker').datepicker('setDate', 'c+1');
+  filterByDate(jQuery.datepicker.formatDate('yymmdd', dp.datepicker('getDate')));
+}
+function previousDay() {
+  var dp = jQuery('#datepicker');
+  jQuery('#datepicker').datepicker('setDate', 'c-1');
+  filterByDate(jQuery.datepicker.formatDate('yymmdd', dp.datepicker('getDate')));
+}
+
+function filterByDate(dateString) {
   jQuery("#taskListContainer").load('/tasks/ondate/',  {'date': parseInt(dateString)});
   //displayObject(inst);
-  newDate = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
+  var y = parseInt(dateString.substring(0, 4));
+  var m = parseInt(dateString.substring(4, 6).replace(/^0+/g, ''));
+  var d = parseInt(dateString.substring(6, 8).replace(/^0+/g, ''));
+  //alert(y + ' ' + m + ' ' + d);
+  newDate = new Date(y, m-1, d);
   jQuery('#pageHeading').text('Tasks for ' + jQuery.datepicker.formatDate('MM d, yy', newDate));
   jQuery('#associatedDateField').val(newDate.toString());
 }
