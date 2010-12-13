@@ -30,23 +30,23 @@
 
   </div>
 
-	<% if false%> 
-	<!-- comment out below -->
-	<%= render :partial => '/layouts/navigation' %>
-	<!-- end comment -->
-	<%end%>
+  <% if false %> 
+  <!-- comment out below -->
+  <%= render :partial => '/layouts/navigation' %>
+  <!-- end comment -->
+  <% end %>
   
-	<div id="content">
+  <div id="content">
 		
-    <% if flash[:notice] %>
-      <p id="flash_notice"><%= flash[:notice] %></p>
-    <% end %>
+  <% if flash[:notice] %>
+    <p id="flash_notice"><%= flash[:notice] %></p>
+  <% end %>
 
-    <% if flash[:error] %>
-      <p id="flash_error"><%= flash[:error] %></p>
-    <% end %>
+  <% if flash[:error] %>
+    <p id="flash_error"><%= flash[:error] %></p>
+  <% end %>
 
-    <%= yield %>
+  <%= yield %>
 
   </div>
 

@@ -157,15 +157,6 @@
         td.getElementsByTagName('input')[0].focus();
       });
     });
-    //Event.observe('signinForm', 'submit', checkForm);
-    /*
-    Calendar.setup({
-      dateField: 'popupDateField',
-      triggerElement: 'popupDateField',
-      selectHandler: datePickSelect
-    })
-    */
-
   });
 
   jQuery(document).ready( 
@@ -179,36 +170,12 @@
       jQuery(".taskEntry,.buttons").hover( function() { var s = jQuery(this).attr('id');jQuery("[butt="+s+"]").show(); }).mouseleave(function() { var s = jQuery(this).attr('id');jQuery("[butt="+s+"]").hide();}, 100);
       jQuery('#datepicker').datepicker({
         showOn: 'button',
-        buttonText: 'Select Date',
+        buttonText: 'All Tasks',
         dateFormat: 'yymmdd',
         onSelect: function(dateText, inst) { filterByDate(dateText, inst); }
       });
       
     });
-
-/*  
-var firstDatePick = true;
-function datePickSelect() {
-  y = this.date.getUTCFullYear();
-  m = this.date.getUTCMonth() + 1;
-  // Funny bug where first time date picked results in
-  // date + 1 day being sent in date param
-  if (firstDatePick) {
-    d = this.date.getUTCDate() - 1;
-    firstDatePick = false;
-  }
-  else d = this.date.getUTCDate();
-  dateParam = y*10000+m*100+d;
-  jQuery("#taskListContainer").load('/tasks/ondate/',  {'date': dateParam});
-  weekDay = Calendar.DAY_NAMES[this.date.getDay()];
-  monthName = Calendar.MONTH_NAMES[m-1] 
-  jQuery('#pageHeading').text('Tasks for ' + weekDay + ', ' + monthName + ' ' + d + ', ' + y);
-  jQuery('#associatedDateField').val(this.date.toString());
-  Calendar.defaultSelectHandler(this);
-}
-
-*/
-
 
 function nextDay() {
   var dp = jQuery('#datepicker');
@@ -222,11 +189,9 @@ function previousDay() {
 }
 
 function filterByDate(dateString) {
-  //displayObject(inst);
   var y = parseInt(dateString.substring(0, 4));
   var m = parseInt(dateString.substring(4, 6).replace(/^0+/g, ''));
   var d = parseInt(dateString.substring(6, 8).replace(/^0+/g, ''));
-  //alert(y + ' ' + m + ' ' + d);
   newDate = new Date(y, m-1, d);
   jQuery('#pageHeading').text('Tasks for ' + jQuery.datepicker.formatDate('MM d, yy', newDate));
   jQuery.ajax({url: '/tasks/ondate/',  type: 'POST', data: {'date': parseInt(dateString)}, success: function(data) {
@@ -244,6 +209,7 @@ function filterByDate(dateString) {
       }
     }
   }});
+  jQuery('#datepicker').datepicker('option', 'buttonText', m+'/'+d+'/'+y);
   jQuery('#associatedDateField').val(newDate.toString());
 }
 
@@ -270,8 +236,11 @@ function displayObject(obj) {
 <% end %>
 </div>
 
-<input type="text" style="visibility: hidden; width: 0; height: 0; border: 0;" id="datepicker" />
-<div id="dateNav"><a href="javascript:previousDay()">&lsaquo;</a><a href="javascript:nextDay()">&rsaquo;</a></div>
+<div id="dateNav">
+  <a href="javascript:previousDay()">&lsaquo;</a>
+  <input type="text" style="visibility: hidden; width: 0; height: 0; border: 0;" id="datepicker" />
+  <a href="javascript:nextDay()">&rsaquo;</a>
+</div>
 
 <div style="display: none" id="progressbar"></div>
 
@@ -290,4 +259,4 @@ function displayObject(obj) {
   <% if @active_task %>
   <% end %>
 
-
+</div>
