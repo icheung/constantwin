@@ -25,7 +25,7 @@
 
   function hideTasks() {
   jQuery(document).ready( function() {      
-      jQuery("#other_tasks").show();
+      jQuery("#show").show();
       jQuery(".taskEntry").has("input[disabled=\"\"]").hide();
       jQuery(".taskEntry").not(jQuery(".taskEntry").has("input[disabled=\"\"]")).css("font-size",20);
     });
@@ -179,8 +179,9 @@
       jQuery(".buttons").hide();
       jQuery("#task_description,input#first,input#second").focus(function() { jQuery("#task_description").css('background-color','#f9f8e4'); });
       jQuery("#task_description").blur(function() { jQuery("#task_description").css('background-color', 'white');});
-      jQuery("#other_tasks").click(function() { jQuery("#other_tasks").fadeTo('slow',0.0).delay(1000);jQuery(".taskEntry").delay(1000).show();});
-      jQuery("#other_tasks").hide();
+      jQuery("#show").live('click',function() { jQuery("#show").html("Hide other tasks").attr("id","hide");jQuery(".taskEntry").delay(1000).show();});
+      jQuery("#hide").live('click',function() { jQuery("#hide").html("Show other tasks").attr("id","show");hideTasks();});
+      jQuery("#show").hide();
       jQuery(".taskEntry,.buttons").hover( function() { var s = jQuery(this).attr('id');jQuery("[butt="+s+"]").show(); }).mouseleave(function() { var s = jQuery(this).attr('id');jQuery("[butt="+s+"]").hide();}, 100);
     });
   
@@ -240,7 +241,7 @@ function previousDay() {
   <div id="taskListContainer"><%= render :partial => "task_list" %></div>
 
   <br />
-  <div id="other_tasks">Show other tasks</div><br/>
+  <div id="show">Show other tasks</div><br/>
 
   <% @active_task = Task.find(:all, :conditions => {:active_task => true}) %>
   <% if @active_task %>
