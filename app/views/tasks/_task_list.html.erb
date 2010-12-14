@@ -15,7 +15,7 @@
   <% @tasks.each do |task| %>
 
     <% if not task.paused_at.nil? %>
-    <script type="text/javascript">stopSwitch=false;</script>
+    <script type="text/javascript">stopSwitch=true;</script>
     <% end %>
 
     <tr id="taskEntry<%= task.id %>" class="taskEntry">

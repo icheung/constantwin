@@ -18,7 +18,7 @@ html, body { margin: 0; padding: 0; background-color: #C0DEED; font: 9pt verdana
 h1, h2, h3 { font-family: georgia, times; }
 a { color: #38526B; }
 label { font: bold 12pt helvetica, 'sans-serif'; color: #49637C;}
-#progressbar { height:50px; }
+#progressbar { height:50px;}
 #task_description, #task_added_time, input#first, input#second, input#third, input#fourth, input#fifth, input#task_duration{ width: 480px; padding: 7px; border: 1px solid #97B5D2; font-size:26px; font-family:georgia; background: url('/images/input_bg.png') repeat-x scroll left top #F7FCFF; -moz-border-radius: 4px; -webkit-border-radius: 4px;}
 input#task_duration { width: 70px; display: inline-block; }
 input#first, input#second, input#third, input#fourth, input#fifth { margin-bottom:10px; }

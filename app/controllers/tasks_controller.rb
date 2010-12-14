@@ -184,7 +184,8 @@ class TasksController < ApplicationController
     logger.debug "ZOMG IT'S TIME TO RESUME TIME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!"    
     resumed_time = Time.now    
     logger.debug "resumed time: #{resumed_time}"
-    @task.resume_time(resumed_time)
+    # @task.resume_time(resumed_time)
+    @task.resume_time(Time.now)
   end
 
   def update_duration
