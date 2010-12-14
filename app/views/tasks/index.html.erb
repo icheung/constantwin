@@ -252,7 +252,7 @@ function displayObject(obj) {
 <% form_tag(:controller => "tasks", :action => "create") do %>
   <%= text_field_tag(:task_description, nil, :size => "30", :name => "task[description]",:placeholder => "Enter a new task!") %>
   <%= hidden_field_tag(:associated_date, Time.now(), :name => "task[associated_date]", :id => "associatedDateField") %>
-  <!--<%= submit_tag("+") %>-->
+  <span style="display:none"><%= submit_tag("+") %></span>
 <% end %>
 </div>
 
