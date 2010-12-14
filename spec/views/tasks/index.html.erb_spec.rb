@@ -8,12 +8,14 @@ describe "/tasks/index.html.erb" do
       stub_model(Task,
         :description => "value for description",
         :user_id => 1,
-        :is_finished => false
+        :is_finished => false,
+        :paused_at => nil
       ),
       stub_model(Task,
         :description => "value for description",
         :user_id => 1,
-        :is_finished => false
+        :is_finished => false,
+        :paused_at => nil
       )
     ]
   end
