@@ -198,48 +198,48 @@
       
     });
 
-function nextDay() {
-  var dp = jQuery('#datepicker');
-  jQuery('#datepicker').datepicker('setDate', 'c+1');
-  filterByDate(jQuery.datepicker.formatDate('yymmdd', dp.datepicker('getDate')));
-}
-function previousDay() {
-  var dp = jQuery('#datepicker');
-  jQuery('#datepicker').datepicker('setDate', 'c-1');
-  filterByDate(jQuery.datepicker.formatDate('yymmdd', dp.datepicker('getDate')));
-}
+  function nextDay() {
+    var dp = jQuery('#datepicker');
+    jQuery('#datepicker').datepicker('setDate', 'c+1');
+    filterByDate(jQuery.datepicker.formatDate('yymmdd', dp.datepicker('getDate')));
+  }
+  function previousDay() {
+    var dp = jQuery('#datepicker');
+    jQuery('#datepicker').datepicker('setDate', 'c-1');
+    filterByDate(jQuery.datepicker.formatDate('yymmdd', dp.datepicker('getDate')));
+  }
 
-function filterByDate(dateString) {
-  var y = parseInt(dateString.substring(0, 4));
-  var m = parseInt(dateString.substring(4, 6).replace(/^0+/g, ''));
-  var d = parseInt(dateString.substring(6, 8).replace(/^0+/g, ''));
-  newDate = new Date(y, m-1, d);
-  jQuery('#pageHeading').text('Tasks for ' + jQuery.datepicker.formatDate('MM d, yy', newDate));
-  jQuery.ajax({url: '/tasks/ondate/',  type: 'POST', data: {'date': parseInt(dateString)}, success: function(data) {
-    if (data == '') {
-      jQuery('#noTasks').text('No tasks found.');
-      jQuery('#noTasks').show();
-      jQuery('.taskEntry').hide();
-    }
-    else {
-      jQuery('#noTasks').hide();
-      jQuery('.taskEntry').hide();
-      var entries = data.split(' ');
-      for (var i = 0; i < entries.length; i++) {
-        jQuery('#taskEntry'+entries[i]).show();
+  function filterByDate(dateString) {
+    var y = parseInt(dateString.substring(0, 4));
+    var m = parseInt(dateString.substring(4, 6).replace(/^0+/g, ''));
+    var d = parseInt(dateString.substring(6, 8).replace(/^0+/g, ''));
+    newDate = new Date(y, m-1, d);
+    jQuery('#pageHeading').text('Tasks for ' + jQuery.datepicker.formatDate('MM d, yy', newDate));
+    jQuery.ajax({url: '/tasks/ondate/',  type: 'POST', data: {'date': parseInt(dateString)}, success: function(data) {
+      if (data == '') {
+        jQuery('#noTasks').text('No tasks found.');
+        jQuery('#noTasks').show();
+        jQuery('.taskEntry').hide();
       }
-    }
-  }});
-  jQuery('#datepicker').datepicker('option', 'buttonText', (m<10 ? '0'+m : m)+'/'+(d<10 ? '0'+d : d)+'/'+y);
-  jQuery('#associatedDateField').val(newDate.toString());
-}
+      else {
+        jQuery('#noTasks').hide();
+        jQuery('.taskEntry').hide();
+        var entries = data.split(' ');
+        for (var i = 0; i < entries.length; i++) {
+          jQuery('#taskEntry'+entries[i]).show();
+        }
+      }
+    }});
+    jQuery('#datepicker').datepicker('option', 'buttonText', (m < 10 ? '0'+m : m)+'/'+(d < 10 ? '0'+d : d)+'/'+y);
+    jQuery('#associatedDateField').val(newDate.toString());
+  }
 
 
-function displayObject(obj) {
-  output = "";
-  for (key in obj) output += key + ': ' + obj[key] + '\n';
-  console.log(output);
-}
+  function displayObject(obj) {
+    output = "";
+    for (key in obj) output += key + ': ' + obj[key] + '\n';
+    console.log(output);
+  }
 
 </script>
 

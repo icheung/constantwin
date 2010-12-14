@@ -32,24 +32,3 @@ Feature: Add new task
     And I go to the dashboard
     When I add a new task called "unoriginal task"
     Then I should see "unoriginal task"
-
-  #@wip
-  Scenario: Add more tasks than alotted for one day
-    Given I am on the dashboard
-    And I add a new task called "Task 1"
-    And I add a new task called "Task 2"
-    And I add a new task called "Task 3"
-    And I add a new task called "Task 4"
-    And I add a new task called "Task 5"
-    When I add a new task called "Do laundry"
-    Then I should see "Error: Too many tasks!"
-    And I should not see "Do laundry"
-
-  #Given there is a calendar with current date October 7, 2010
-  #And I am currently on this date
-  #When the clock hits October 8, 2010
-  #Then I should have a fresh todo list for the new day
-
-  #Given there is a calendar
-  #When I click on the day after the current
-  #Then I should be on the todo list for that day
