@@ -109,17 +109,13 @@ class TasksController < ApplicationController
     end
   end
 
-  def start_task
+  def start_task # Actually start the task
     @task = @current_user.tasks.find(params[:id])
     if @task.update_attributes(params[:task]) && @task.update_attribute(:started_at, Time.now) && @task.update_attribute(:active_task, true)
-      if @current_user.facebook_user?
-        @current_user.is_tasking = true
-        @current_user.save(false)
-      else
-        @current_user.update_attribute(:is_tasking, true)
-      end
+      set_user_tasking_mode_on      
       redirect_to(tasks_url)
     else
+      # "Redirect" to start page for the task
       format.html { render :action => 'start' }
     end
   end
@@ -202,29 +198,19 @@ class TasksController < ApplicationController
     @task.clear_duration
   end
   
-  def add_tasks   # Breaking it down.
-
-    # Because Facebook users don't have password and email in the user model,
-    # validations fail on save, so this is a workaround
-    if @current_user.facebook_user?
-      @current_user.is_tasking = false
-      @current_user.save(false)
-    else
-      @current_user.update_attribute(:is_tasking, false)
-    end
-
-    id = params[:id]
+  def add_tasks   # Breaking tasks down.
+    # First set user to non-tasking mode, since we just finished failing task
+    set_user_tasking_mode_off
+    
     associated_date = params[:associated_date]
-    subtasks = Array.new
-    subtasks << params[:first]
-    subtasks << params[:second]
+    subtasks = [ params[:first], params[:second] ]
     params[:third] ? subtasks << params[:third] : nil
     params[:fourth] ? subtasks << params[:fourth] : nil
     params[:fifth] ? subtasks << params[:fifth] : nil
     
     created_tasks = Array.new
     save_failed = false
-    subtasks.each { |subtask|
+    subtasks.each do |subtask|
       puts subtask
       created_tasks << @current_user.tasks.new(:description => subtask, :associated_date => associated_date)
       if not created_tasks[-1].save
@@ -232,10 +218,11 @@ class TasksController < ApplicationController
         created_tasks.each { |t| t.destroy }
         break
       end
-    }
+    end
+    
     if save_failed
       flash[:error] = "You need to create at least two subtasks (and not leave fields blank) or add more time!"
-      redirect_to :action => "fail", :id => id
+      redirect_to :action => "fail", :id => params[:id]
     else
       Task.find(params[:id]).delete
       redirect_to(tasks_url)
@@ -246,19 +233,11 @@ class TasksController < ApplicationController
     @task = @current_user.tasks.find(params[:id])
     @task.update_attribute(:is_finished, true)
 
-    # Because Facebook users don't have password and email in the user model,
-    # validations fail on save, so this is a workaround
-    if @current_user.facebook_user?
-      @current_user.is_tasking = false
-      @current_user.save(false)
-    else
-      @current_user.update_attribute(:is_tasking, false)
-    end
+    set_user_tasking_mode_off
     
     render :text => 'Task updated'
   end
-
-
+  
   def ondate
     date = params[:date].to_i
     y = date/10000
@@ -281,5 +260,25 @@ class TasksController < ApplicationController
     @tasks = get_sorted_list_of_tasks
     render :partial => 'task_list'
   end
-    
+
+  # Because Facebook users don't have password and email in the user model,
+  # validations fail on save, so this is a workaround
+  def set_user_tasking_mode_on
+    if @current_user.facebook_user?
+      @current_user.is_tasking = true
+      @current_user.save(false)
+    else
+      @current_user.update_attribute(:is_tasking, true)
+    end
+  end
+
+  def set_user_tasking_mode_off
+    if @current_user.facebook_user?
+      @current_user.is_tasking = false
+      @current_user.save(false)
+    else
+      @current_user.update_attribute(:is_tasking, false)
+    end
+  end
+  
 end

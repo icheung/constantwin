@@ -5,10 +5,11 @@ describe TasksController do
 
   # COPIED THIS CODE FROM ONLINE, SUPPOSED TO SET UP USER SESSION FOR ACCESSING TASKS ACTIONS, NOT SURE IF IT ACTUALLY DOES THAT
   before (:each) do
+    @current_user = stub_model(User, :id => 1)
+
     target = controller rescue template
     target.instance_variable_set '@current_user', @current_user
 
-    @current_user = stub_model(User, :id => 1)
     @task_stubs = {:is_finished => false,
       :started_at => nil,
       :description => "Sample Description",
@@ -27,8 +28,7 @@ describe TasksController do
   
   describe "GET index" do
     it "assigns all tasks as @tasks" do
-      @task = mock_task
-      controller.stub(:get_sorted_list_of_tasks).and_return([@task])
+      controller.stub!(:get_sorted_list_of_tasks).and_return([@task])
       get :index
       assigns[:tasks].should == [@task]
     end
@@ -168,6 +168,10 @@ describe TasksController do
   end
   
   describe "when starting a task" do
+    it "should update attributes" do
+
+    end
+    
     it "should take the user to the start task page" do
       @current_user.stub!(:is_tasking).and_return(false)
       get :start, :task_id => "1"
