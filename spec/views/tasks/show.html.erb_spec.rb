@@ -14,6 +14,7 @@ describe "/tasks/show.html.erb" do
       :user_id => 1,
       :is_finished => false
     )
+    Task.stub!(:user).and_return(@user)
   end
 
   it "renders attributes in <p>" do

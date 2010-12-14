@@ -30,15 +30,15 @@
             <td class="left_align"><a href="app-controllers-users_controller_rb.html">app/controllers/users_controller.rb</a></td>
             <td class='right_align'><tt>56</tt></td>
             <td class='right_align'><tt>46</tt></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>26.79%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>83.93%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:27px"></div>
-            <div class="uncovered" style="width:73px"></div>
+            <div class="covered" style="width:84px"></div>
+            <div class="uncovered" style="width:16px"></div>
           </div></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>15.22%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>84.78%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:15px"></div>
-            <div class="uncovered" style="width:85px"></div>
+            <div class="covered" style="width:85px"></div>
+            <div class="uncovered" style="width:15px"></div>
           </div></td>
           </tr>
         </tbody>
@@ -176,13 +176,13 @@
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line21">21</a>     @user = User.new</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line22">22</a>   end</pre></td>
           </tr>
         
@@ -200,73 +200,73 @@
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line25">25</a>     logout_keeping_session!</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line26">26</a>     @user = User.new(params[:user])</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line27">27</a>     success = @user &amp;&amp; @user.save</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line28">28</a>     if success &amp;&amp; @user.errors.empty?</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line29">29</a>       flash[:notice] = &quot;Thanks for signing up!  We're sending you an email with your activation code.&quot;</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line30">30</a>       redirect_back_or_default('/')</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line31">31</a>       UserMailer.deliver_signup_notification(@user)</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line32">32</a>     else</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line33">33</a>       flash[:error]  = &quot;We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above).&quot;</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line34">34</a>       render :action =&gt; 'new'</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line35">35</a>     end</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line36">36</a>   end</pre></td>
           </tr>
         
@@ -284,116 +284,116 @@
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line39">39</a>     logout_keeping_session!</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line40">40</a>     user = User.find_by_activation_code(params[:activation_code]) unless params[:activation_code].blank?</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line41">41</a>     case</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line42">42</a>     when (!params[:activation_code].blank?) &amp;&amp; user &amp;&amp; !user.active?</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line43">43</a>       user.activate!</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line44">44</a>       flash[:notice] = &quot;Signup complete! Please sign in to continue.&quot;</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line45">45</a>       redirect_to '/login'</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line46">46</a>       UserMailer.deliver_activation(user)</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line47">47</a>       UserMailer.deliver_welcome_email(user)</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line48">48</a>     when params[:activation_code].blank?</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line49">49</a>       flash[:error] = &quot;The activation code was missing.  Please follow the URL from your email.&quot;</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line50">50</a>       redirect_back_or_default('/')</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line51">51</a>     else </pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line52">52</a>       flash[:error]  = &quot;We couldn't find a user with that activation code -- check your email? Or maybe you've already activated -- try signing in.&quot;</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line53">53</a>       redirect_back_or_default('/')</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line54">54</a>     end</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line55">55</a>   end</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line56">56</a> end</pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on Tue Nov 23 01:49:15 -0800 2010 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
+    <p>Generated on Mon Dec 13 22:11:19 -0800 2010 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
 
   </body>
 </html>

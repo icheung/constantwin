@@ -28,17 +28,17 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="app-controllers-tasks_controller_rb.html">app/controllers/tasks_controller.rb</a></td>
-            <td class='right_align'><tt>236</tt></td>
-            <td class='right_align'><tt>179</tt></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>24.15%</tt></div>
+            <td class='right_align'><tt>285</tt></td>
+            <td class='right_align'><tt>215</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>50.18%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:24px"></div>
-            <div class="uncovered" style="width:76px"></div>
+            <div class="covered" style="width:50px"></div>
+            <div class="uncovered" style="width:50px"></div>
           </div></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>11.17%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>42.79%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:11px"></div>
-            <div class="uncovered" style="width:89px"></div>
+            <div class="covered" style="width:43px"></div>
+            <div class="uncovered" style="width:57px"></div>
           </div></td>
           </tr>
         </tbody>
@@ -128,956 +128,956 @@
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line13">13</a>     @tasks = @current_user.tasks.find(:all, :conditions =&gt; {:is_finished =&gt; false, :active_task =&gt; true})</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line14">14</a>     @unstarted_tasks = @current_user.tasks.find(:all, :conditions =&gt; {:is_finished =&gt; false, :started_at =&gt; nil}).sort_by {|t| t.created_at}</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line15">15</a>     @finished_tasks = @current_user.tasks.find(:all, :conditions =&gt; {:is_finished =&gt; true}).sort_by {|t| t.created_at}</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line16">16</a>     @tasks.concat(@unstarted_tasks).concat(@finished_tasks)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line17">17</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line18">18</a>     respond_to do |format|</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line19">19</a>       format.html # index.html.erb</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line20">20</a>       format.xml  { render :xml =&gt; @tasks }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line21">21</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line22">22</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line23">23</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line24">24</a>   # GET /tasks/1</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line25">25</a>   # GET /tasks/1.xml</pre></td>
+          <tr class="marked">
+            <td><pre><a name="line13">13</a>     @tasks = get_sorted_list_of_tasks</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line26">26</a>   def show</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line27">27</a>     @task = @current_user.tasks.find(params[:id])</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line28">28</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line29">29</a>     respond_to do |format|</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line30">30</a>       format.html # show.html.erb</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line31">31</a>       format.xml  { render :xml =&gt; @task }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line32">32</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line33">33</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line34">34</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line35">35</a>   # GET /tasks/new</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line36">36</a>   # GET /tasks/new.xml</pre></td>
+            <td><pre><a name="line14">14</a>     respond_to do |format|</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line37">37</a>   def new</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line38">38</a>     @task = @current_user.tasks.new</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line39">39</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line40">40</a>     respond_to do |format|</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line41">41</a>       format.html # new.html.erb</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line42">42</a>       format.xml  { render :xml =&gt; @task }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line43">43</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line44">44</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line45">45</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line46">46</a>   # GET /tasks/1/edit</pre></td>
+            <td><pre><a name="line15">15</a>       format.html # index.html.erb</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line47">47</a>   def edit</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line48">48</a>     @task = @current_user.tasks.find(params[:id])</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line49">49</a>   end</pre></td>
+            <td><pre><a name="line16">16</a>       format.xml  { render :xml =&gt; @tasks }</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line50">50</a> </pre></td>
+            <td><pre><a name="line17">17</a>     end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line51">51</a>   # POST /tasks</pre></td>
+            <td><pre><a name="line18">18</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line52">52</a>   # POST /tasks.xml</pre></td>
+            <td><pre><a name="line19">19</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line20">20</a>   # easier for rspec testing</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line53">53</a>   def create</pre></td>
+            <td><pre><a name="line21">21</a>   def get_sorted_list_of_tasks</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line54">54</a>     @task = @current_user.tasks.new(params[:task])</pre></td>
+            <td><pre><a name="line22">22</a>     tasks = @current_user.tasks.find(:all, :conditions =&gt; {:is_finished =&gt; false, :active_task =&gt; true})</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line55">55</a> </pre></td>
+            <td><pre><a name="line23">23</a>     unstarted_tasks = @current_user.tasks.find(:all, :conditions =&gt; {:is_finished =&gt; false, :started_at =&gt; nil}).sort_by {|t| t.created_at}</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line56">56</a>     respond_to do |format|</pre></td>
+            <td><pre><a name="line24">24</a>     finished_tasks = @current_user.tasks.find(:all, :conditions =&gt; {:is_finished =&gt; true}).sort_by {|t| t.created_at}</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line57">57</a>       if @task.save</pre></td>
+            <td><pre><a name="line25">25</a> </pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line58">58</a>         format.html {</pre></td>
+            <td><pre><a name="line26">26</a>     tasks.concat(unstarted_tasks).concat(finished_tasks)</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line59">59</a>           flash[:notice] = &quot;Task successfully added&quot;</pre></td>
+            <td><pre><a name="line27">27</a>     return tasks</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line60">60</a>           redirect_to :action =&gt; &quot;index&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line61">61</a>         }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line62">62</a>         format.xml  { render :xml =&gt; @task, :status =&gt; :created, :location =&gt; @task }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line63">63</a>         format.js</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line64">64</a>       else</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line65">65</a>         format.html { render :action =&gt; &quot;new&quot; }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line66">66</a>         format.xml  { render :xml =&gt; @task.errors, :status =&gt; :unprocessable_entity }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line67">67</a>       end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line68">68</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line69">69</a>   end</pre></td>
+            <td><pre><a name="line28">28</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line70">70</a> </pre></td>
+            <td><pre><a name="line29">29</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line71">71</a>   # PUT /tasks/1</pre></td>
+            <td><pre><a name="line30">30</a>   </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line72">72</a>   # PUT /tasks/1.xml</pre></td>
+            <td><pre><a name="line31">31</a>   # GET /tasks/1</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line32">32</a>   # GET /tasks/1.xml</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line73">73</a>   def update</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line74">74</a>     @task = @current_user.tasks.find(params[:id])</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line75">75</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line76">76</a>     respond_to do |format|</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line77">77</a>       if @task.update_attributes(params[:task])</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line78">78</a>         format.html { redirect_to(@task) }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line79">79</a>         format.xml  { head :ok }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line80">80</a>         format.js {</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line81">81</a>           #flash[:notice] = 'Task updated'</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line82">82</a>           render :text =&gt; 'Task successfully updated'</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line83">83</a>         }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line84">84</a>       else</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line85">85</a>         format.html { render :action =&gt; &quot;edit&quot; }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line86">86</a>         format.xml  { render :xml =&gt; @task.errors, :status =&gt; :unprocessable_entity }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line87">87</a>       end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line88">88</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line89">89</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line90">90</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line91">91</a>   # DELETE /tasks/1</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line92">92</a>   # DELETE /tasks/1.xml</pre></td>
+            <td><pre><a name="line33">33</a>   def show</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line93">93</a>   def destroy</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line94">94</a>     @task = @current_user.tasks.find(params[:id])</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line95">95</a>     if @task.active_task</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line96">96</a>       current_user.update_attribute(:is_tasking, false)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line97">97</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line98">98</a>     @task.destroy</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line99">99</a>     respond_to do |format|</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line100">100</a>       format.html { redirect_to(tasks_url) }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line101">101</a>       format.xml  { head :ok }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line102">102</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line103">103</a>   end</pre></td>
+            <td><pre><a name="line34">34</a>     @task = @current_user.tasks.find(params[:id])</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line104">104</a> </pre></td>
+            <td><pre><a name="line35">35</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line105">105</a>   def start_task</pre></td>
+            <td><pre><a name="line36">36</a>     respond_to do |format|</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line106">106</a>     @task = @current_user.tasks.find(params[:id])</pre></td>
+          <tr class="marked">
+            <td><pre><a name="line37">37</a>       format.html # show.html.erb</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line107">107</a>     if @task.update_attributes(params[:task]) &amp;&amp; @task.update_attribute(:started_at, Time.now) &amp;&amp; @task.update_attribute(:active_task, true)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line108">108</a>       if @current_user.facebook_user?</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line109">109</a>         @current_user.is_tasking = true</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line110">110</a>         @current_user.save(false)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line111">111</a>       else</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line112">112</a>         @current_user.update_attribute(:is_tasking, true)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line113">113</a>       end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line114">114</a>       redirect_to(tasks_url)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line115">115</a>     else</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line116">116</a>       format.html { render :action =&gt; 'start' }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line117">117</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line118">118</a>   end</pre></td>
+          <tr class="marked">
+            <td><pre><a name="line38">38</a>       format.xml  { render :xml =&gt; @task }</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line119">119</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line120">120</a>   def time_left</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line121">121</a>     @task = @current_user.tasks.find(params[:id])</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line122">122</a>     if @task.started_at.nil? or @task.is_finished: render :text =&gt; '-'</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line123">123</a>     else</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line124">124</a>       time_remaining = Time.at(Time.now - @task.started_at.to_time)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line125">125</a>       remaining = @task.duration - time_remaining.min</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line126">126</a>       seconds = 59 - time_remaining.sec</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line127">127</a>       seconds = seconds &gt;= 10 ? seconds.to_s : &quot;0#{seconds.to_s}&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line128">128</a>       time = &quot;#{remaining-1}:#{seconds}&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line129">129</a>       if remaining &gt; 0: render :text =&gt; time</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line130">130</a>       else render :text =&gt; &quot;0:00&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line131">131</a>       end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line132">132</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line133">133</a>   end</pre></td>
+            <td><pre><a name="line39">39</a>     end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line134">134</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line135">135</a>   def add_time</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line136">136</a>     @task = @current_user.tasks.find(params[:id])</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line137">137</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line138">138</a>     respond_to do |format|</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line139">139</a>       format.html</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line140">140</a>       format.xml { render :xml =&gt; task }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line141">141</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line142">142</a>   end</pre></td>
+            <td><pre><a name="line40">40</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line143">143</a>   </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line144">144</a>   def start</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line145">145</a>     if @current_user.is_tasking</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line146">146</a>       flash[:error] = &quot;You should be completing only one task at a time!&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line147">147</a>       redirect_to(tasks_url)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line148">148</a>       </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line149">149</a>     else</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line150">150</a>       @task = @current_user.tasks.find(params[:task_id])</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line151">151</a>       </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line152">152</a>       respond_to do |format|</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line153">153</a>         format.html # start.html.erb</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line154">154</a>         format.xml  { render :xml =&gt; @task }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line155">155</a>       end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line156">156</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line157">157</a>   end</pre></td>
+            <td><pre><a name="line41">41</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line158">158</a>   </pre></td>
+            <td><pre><a name="line42">42</a>   # GET /tasks/new</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line43">43</a>   # GET /tasks/new.xml</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line159">159</a>   def stop_time</pre></td>
+            <td><pre><a name="line44">44</a>   def new</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line45">45</a>     @task = @current_user.tasks.new</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line46">46</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line47">47</a>     respond_to do |format|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line48">48</a>       format.html # new.html.erb</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line49">49</a>       format.xml  { render :xml =&gt; @task }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line50">50</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line51">51</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line52">52</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line53">53</a>   # GET /tasks/1/edit</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line54">54</a>   def edit</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line55">55</a>     @task = @current_user.tasks.find(params[:id])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line56">56</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line57">57</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line58">58</a>   # POST /tasks</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line59">59</a>   # POST /tasks.xml</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line60">60</a>   def create</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line61">61</a>     @task = @current_user.tasks.new(params[:task])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line62">62</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line63">63</a>     respond_to do |format|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line64">64</a>       if @task.save</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line65">65</a>         format.html {</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line66">66</a>           flash[:notice] = &quot;Task successfully added&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line67">67</a>           redirect_to :action =&gt; &quot;index&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line68">68</a>         }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line69">69</a>         format.xml  { render :xml =&gt; @task, :status =&gt; :created, :location =&gt; @task }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line70">70</a>         format.js</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line71">71</a>       else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line72">72</a>         format.html { render :action =&gt; &quot;new&quot; }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line73">73</a>         format.xml  { render :xml =&gt; @task.errors, :status =&gt; :unprocessable_entity }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line74">74</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line75">75</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line76">76</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line77">77</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line78">78</a>   # PUT /tasks/1</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line79">79</a>   # PUT /tasks/1.xml</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line80">80</a>   def update</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line81">81</a>     @task = @current_user.tasks.find(params[:id])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line82">82</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line83">83</a>     respond_to do |format|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line84">84</a>       if @task.update_attributes(params[:task])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line85">85</a>         format.html { redirect_to(@task) }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line86">86</a>         format.xml  { head :ok }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line87">87</a>         format.js {</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line88">88</a>           #flash[:notice] = 'Task updated'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line89">89</a>           render :text =&gt; 'Task successfully updated'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line90">90</a>         }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line91">91</a>       else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line92">92</a>         format.html { render :action =&gt; &quot;edit&quot; }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line93">93</a>         format.xml  { render :xml =&gt; @task.errors, :status =&gt; :unprocessable_entity }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line94">94</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line95">95</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line96">96</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line97">97</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line98">98</a>   # DELETE /tasks/1</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line99">99</a>   # DELETE /tasks/1.xml</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line100">100</a>   def destroy</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line101">101</a>     @task = @current_user.tasks.find(params[:id])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line102">102</a>     if @task.active_task</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line160">160</a>     if @current_user.is_tasking</pre></td>
+            <td><pre><a name="line103">103</a>       current_user.update_attribute(:is_tasking, false)</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line161">161</a>       flash[:error] = &quot;You should be completing only one task at a time!&quot;</pre></td>
+            <td><pre><a name="line104">104</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line105">105</a>     @task.destroy</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line106">106</a>     respond_to do |format|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line107">107</a>       format.html { redirect_to(tasks_url) }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line108">108</a>       format.xml  { head :ok }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line109">109</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line110">110</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line111">111</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line112">112</a>   def start_task</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line162">162</a>       redirect_to(tasks_url)</pre></td>
+            <td><pre><a name="line113">113</a>     @task = @current_user.tasks.find(params[:id])</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line163">163</a>       </pre></td>
+            <td><pre><a name="line114">114</a>     if @task.update_attributes(params[:task]) &amp;&amp; @task.update_attribute(:started_at, Time.now) &amp;&amp; @task.update_attribute(:active_task, true)</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line164">164</a>     else</pre></td>
+            <td><pre><a name="line115">115</a>       if @current_user.facebook_user?</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line165">165</a>       @task = @current_user.tasks.find(params[:task_id])</pre></td>
+            <td><pre><a name="line116">116</a>         @current_user.is_tasking = true</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line166">166</a>       </pre></td>
+            <td><pre><a name="line117">117</a>         @current_user.save(false)</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line167">167</a>       respond_to do |format|</pre></td>
+            <td><pre><a name="line118">118</a>       else</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line168">168</a>         format.html # start.html.erb</pre></td>
+            <td><pre><a name="line119">119</a>         @current_user.update_attribute(:is_tasking, true)</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line169">169</a>         format.xml  { render :xml =&gt; @task }</pre></td>
+            <td><pre><a name="line120">120</a>       end</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line170">170</a>       end</pre></td>
+            <td><pre><a name="line121">121</a>       redirect_to(tasks_url)</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line171">171</a>     end</pre></td>
+            <td><pre><a name="line122">122</a>     else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line123">123</a>       format.html { render :action =&gt; 'start' }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line124">124</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line125">125</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line126">126</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line127">127</a>   def time_left</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line128">128</a>     @task = @current_user.tasks.find(params[:id])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line129">129</a>     if @task.started_at.nil? or @task.is_finished: render :text =&gt; '-'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line130">130</a>     else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line131">131</a>       time_remaining = Time.at(Time.now - @task.started_at.to_time)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line132">132</a>       remaining = @task.duration - time_remaining.min</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line133">133</a>       seconds = 59 - time_remaining.sec</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line134">134</a>       seconds = seconds &gt;= 10 ? seconds.to_s : &quot;0#{seconds.to_s}&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line135">135</a>       time = &quot;#{remaining-1}:#{seconds}&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line136">136</a>       if remaining &gt; 0: render :text =&gt; time</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line137">137</a>       else render :text =&gt; &quot;0:00&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line138">138</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line139">139</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line140">140</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line141">141</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line142">142</a>   def add_time</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line143">143</a>     @task = @current_user.tasks.find(params[:id])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line144">144</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line145">145</a>     respond_to do |format|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line146">146</a>       format.html</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line147">147</a>       format.xml { render :xml =&gt; task }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line148">148</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line149">149</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line150">150</a>   </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line151">151</a>   def start</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line152">152</a>     if @current_user.is_tasking</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line153">153</a>       flash[:error] = &quot;You should be completing only one task at a time!&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line154">154</a>       redirect_to(tasks_url)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line155">155</a>       </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line156">156</a>     else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line157">157</a>       @task = @current_user.tasks.find(params[:task_id])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line158">158</a>       </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line159">159</a>       respond_to do |format|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line160">160</a>         format.html # start.html.erb</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line161">161</a>         format.xml  { render :xml =&gt; @task }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line162">162</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line163">163</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line164">164</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line165">165</a>   </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line166">166</a>   def pause</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line167">167</a>     @task = @current_user.tasks.find(params[:id])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line168">168</a>     logger.debug &quot;ZOMG WE HAVE STOPPED TIME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line169">169</a>     paused_time = Time.now</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line170">170</a>     logger.debug &quot;paused time: #{paused_time}&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line171">171</a>     @task.update_paused_time(paused_time)    </pre></td>
           </tr>
         
           
@@ -1089,73 +1089,73 @@
           
           
           <tr class="inferred">
-            <td><pre><a name="line173">173</a> </pre></td>
+            <td><pre><a name="line173">173</a>   </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line174">174</a>   def update_duration</pre></td>
+            <td><pre><a name="line174">174</a>   def resume</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line175">175</a>     @task = @current_user.tasks.find(params[:id])</pre></td>
+            <td><pre><a name="line175">175</a>     # get the time task was paused</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line176">176</a>     @task.update_attributes(params[:task])</pre></td>
+            <td><pre><a name="line176">176</a>     # get the current time and take the difference</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line177">177</a>     if @task.validate_added_duration</pre></td>
+            <td><pre><a name="line177">177</a>     # total_paused_duration = Time.at(Time.now - @task.paused_at.to_time)</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line178">178</a>       @task.update_duration</pre></td>
+            <td><pre><a name="line178">178</a>     # add the difference to the task</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line179">179</a>       flash[:notice] = &quot;Successfully added more time!&quot;</pre></td>
+            <td><pre><a name="line179">179</a>     # @task.update_added_duration(paused_time)</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line180">180</a>       redirect_to :action =&gt; &quot;index&quot;</pre></td>
+            <td><pre><a name="line180">180</a>     @task = @current_user.tasks.find(params[:id])    </pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line181">181</a>     else</pre></td>
+            <td><pre><a name="line181">181</a>     logger.debug &quot;ZOMG IT'S TIME TO RESUME TIME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!&quot;    </pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line182">182</a>       flash[:error] = &quot;Added time needs to be a valid number between 5 and 60!&quot;</pre></td>
+            <td><pre><a name="line182">182</a>     resumed_time = Time.now    </pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line183">183</a>       redirect_to :action =&gt; &quot;add_time&quot;, :id =&gt; params[:id]</pre></td>
+            <td><pre><a name="line183">183</a>     logger.debug &quot;resumed time: #{resumed_time}&quot;</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line184">184</a>     end</pre></td>
+            <td><pre><a name="line184">184</a>     @task.resume_time(resumed_time)</pre></td>
           </tr>
         
           
@@ -1167,13 +1167,13 @@
           
           
           <tr class="inferred">
-            <td><pre><a name="line186">186</a>   </pre></td>
+            <td><pre><a name="line186">186</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line187">187</a>   def fail</pre></td>
+            <td><pre><a name="line187">187</a>   def update_duration</pre></td>
           </tr>
         
           
@@ -1185,295 +1185,589 @@
           
           
           <tr class="uncovered">
-            <td><pre><a name="line189">189</a>   end</pre></td>
+            <td><pre><a name="line189">189</a>     @task.update_attributes(params[:task])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line190">190</a>     if @task.validate_added_duration</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line191">191</a>       @task.update_duration</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line192">192</a>       flash[:notice] = &quot;Successfully added more time!&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line193">193</a>       redirect_to :action =&gt; &quot;index&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line194">194</a>     else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line195">195</a>       flash[:error] = &quot;Added time needs to be a valid number between 5 and 60!&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line196">196</a>       redirect_to :action =&gt; &quot;add_time&quot;, :id =&gt; params[:id]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line197">197</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line198">198</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line190">190</a>   </pre></td>
+            <td><pre><a name="line199">199</a>   </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line191">191</a>   def add_tasks   # Breaking it down.</pre></td>
+            <td><pre><a name="line200">200</a>   def fail</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line201">201</a>     @task = @current_user.tasks.find(params[:id])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line202">202</a>     @task.clear_duration</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line203">203</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line192">192</a> </pre></td>
+            <td><pre><a name="line204">204</a>   </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line205">205</a>   def add_tasks   # Breaking it down.</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line193">193</a>     # Because Facebook users don't have password and email in the user model,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line194">194</a>     # validations fail on save, so this is a workaround</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line195">195</a>     if @current_user.facebook_user?</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line196">196</a>       @current_user.is_tasking = false</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line197">197</a>       @current_user.save(false)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line198">198</a>     else</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line199">199</a>       @current_user.update_attribute(:is_tasking, false)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line200">200</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line201">201</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line202">202</a>     # Generalize this later.</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line203">203</a>     id = params[:id]</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line204">204</a>     subtask1 = params[:first]</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line205">205</a>     subtask2 = params[:second]</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
             <td><pre><a name="line206">206</a> </pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line207">207</a>     task1 = @current_user.tasks.new(:description =&gt; subtask1)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line208">208</a>     task2 = @current_user.tasks.new(:description =&gt; subtask2)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line209">209</a>     </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line210">210</a>     if task1.save and task2.save</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line211">211</a>       Task.find(params[:id]).delete</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line212">212</a>       redirect_to(tasks_url)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line213">213</a>     else</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line214">214</a>       [task1, task2].each {|t| t.destroy} # prevents accidental task creation</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line215">215</a>       flash[:error] = &quot;You need to create at least two subtasks or add more time!&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line216">216</a>       redirect_to :action =&gt; &quot;fail&quot;, :id =&gt; id</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line217">217</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line218">218</a>   end</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line207">207</a>     # Because Facebook users don't have password and email in the user model,</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line219">219</a>   </pre></td>
+            <td><pre><a name="line208">208</a>     # validations fail on save, so this is a workaround</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line209">209</a>     if @current_user.facebook_user?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line210">210</a>       @current_user.is_tasking = false</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line211">211</a>       @current_user.save(false)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line212">212</a>     else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line213">213</a>       @current_user.update_attribute(:is_tasking, false)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line214">214</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line215">215</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line216">216</a>     id = params[:id]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line217">217</a>     associated_date = params[:associated_date]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line218">218</a>     subtasks = Array.new</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line219">219</a>     subtasks &lt;&lt; params[:first]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line220">220</a>     subtasks &lt;&lt; params[:second]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line221">221</a>     params[:third] ? subtasks &lt;&lt; params[:third] : nil</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line222">222</a>     params[:fourth] ? subtasks &lt;&lt; params[:fourth] : nil</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line223">223</a>     params[:fifth] ? subtasks &lt;&lt; params[:fifth] : nil</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line224">224</a>     </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line225">225</a>     created_tasks = Array.new</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line226">226</a>     save_failed = false</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line227">227</a>     subtasks.each { |subtask|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line228">228</a>       puts subtask</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line229">229</a>       created_tasks &lt;&lt; @current_user.tasks.new(:description =&gt; subtask, :associated_date =&gt; associated_date)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line230">230</a>       if not created_tasks[-1].save</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line231">231</a>         save_failed = true</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line232">232</a>         created_tasks.each { |t| t.destroy }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line233">233</a>         break</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line234">234</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line235">235</a>     }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line236">236</a>     if save_failed</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line237">237</a>       flash[:error] = &quot;You need to create at least two subtasks (and not leave fields blank) or add more time!&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line238">238</a>       redirect_to :action =&gt; &quot;fail&quot;, :id =&gt; id</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line239">239</a>     else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line240">240</a>       Task.find(params[:id]).delete</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line241">241</a>       redirect_to(tasks_url)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line242">242</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line243">243</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line244">244</a>   </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line220">220</a>   def finish</pre></td>
+            <td><pre><a name="line245">245</a>   def finish</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line221">221</a>     @task = @current_user.tasks.find(params[:id])</pre></td>
+            <td><pre><a name="line246">246</a>     @task = @current_user.tasks.find(params[:id])</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line222">222</a>     @task.update_attribute(:is_finished, true)</pre></td>
+            <td><pre><a name="line247">247</a>     @task.update_attribute(:is_finished, true)</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line223">223</a> </pre></td>
+            <td><pre><a name="line248">248</a> </pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line224">224</a>     # Because Facebook users don't have password and email in the user model,</pre></td>
+            <td><pre><a name="line249">249</a>     # Because Facebook users don't have password and email in the user model,</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line225">225</a>     # validations fail on save, so this is a workaround</pre></td>
+            <td><pre><a name="line250">250</a>     # validations fail on save, so this is a workaround</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line226">226</a>     if @current_user.facebook_user?</pre></td>
+            <td><pre><a name="line251">251</a>     if @current_user.facebook_user?</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line227">227</a>       @current_user.is_tasking = false</pre></td>
+            <td><pre><a name="line252">252</a>       @current_user.is_tasking = false</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line228">228</a>       @current_user.save(false)</pre></td>
+            <td><pre><a name="line253">253</a>       @current_user.save(false)</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line229">229</a>     else</pre></td>
+            <td><pre><a name="line254">254</a>     else</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line230">230</a>       @current_user.update_attribute(:is_tasking, false)</pre></td>
+            <td><pre><a name="line255">255</a>       @current_user.update_attribute(:is_tasking, false)</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line231">231</a>     end</pre></td>
+            <td><pre><a name="line256">256</a>     end</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line232">232</a>     </pre></td>
+            <td><pre><a name="line257">257</a>     </pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line233">233</a>     render :text =&gt; 'Task updated'</pre></td>
+            <td><pre><a name="line258">258</a>     render :text =&gt; 'Task updated'</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line234">234</a>   end</pre></td>
+            <td><pre><a name="line259">259</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line260">260</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line261">261</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line262">262</a>   def ondate</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line235">235</a>   </pre></td>
+            <td><pre><a name="line263">263</a>     date = params[:date].to_i</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line236">236</a> end</pre></td>
+            <td><pre><a name="line264">264</a>     y = date/10000</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line265">265</a>     m = (date-y*10000)/100</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line266">266</a>     d = date-y*10000-m*100</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line267">267</a>     nextDay = Date.new(y,m,d) + 1</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line268">268</a>     task_list = @current_user.tasks</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line269">269</a>     tasks = task_list.find_all{|t| (t.associated_date.to_date &lt;= nextDay) and (t.associated_date.to_date &gt;= nextDay - 1)}</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line270">270</a>     task_ids = []</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line271">271</a>     tasks.each {|t| task_ids &lt;&lt; t.id}</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line272">272</a>     #if @tasks.length == 0</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line273">273</a>     #  render :text =&gt; 'No tasks found on ' + y.to_s + '-' + m.to_s + '-' + d.to_s</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line274">274</a>     #else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line275">275</a>     #  render :partial =&gt; 'task_list'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line276">276</a>     #end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line277">277</a>     render :text =&gt; task_ids.join(' ')</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line278">278</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line279">279</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line280">280</a>   def task_list_partial</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line281">281</a>     @tasks = get_sorted_list_of_tasks</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line282">282</a>     render :partial =&gt; 'task_list'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line283">283</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line284">284</a>     </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line285">285</a> end</pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on Tue Nov 23 01:49:15 -0800 2010 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
+    <p>Generated on Mon Dec 13 22:11:19 -0800 2010 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
 
   </body>
 </html>
