@@ -31,9 +31,10 @@
   function stopTimer() {
     clearInterval(check_time);
     clearInterval(update_progress);
-    // jQuery("#progressbar").hide();
-    jQuery("#progressbar").css('margin-top', '1em');
-  jQuery("#progressbar > div").css({ 'background': '#ABDD58' });
+    jQuery("#progressbar").hide();
+    // jQuery("#progressbar").css('margin-top', '1em');
+    // jQuery("#progressbar > div").css({ 'background': '#ABDD58' });
+    location.reload(true);
   }
 
   function updateProgressBar(taskId) {
@@ -152,13 +153,13 @@
 
   jQuery(document).ready( 
     function() {
-      jQuery(".buttons").hide();
+      //jQuery(".buttons").hide();
       //jQuery("#task_description,input#first,input#second").focus(function() { jQuery("#task_description").css('background-color','#'); });
       //jQuery("#task_description").blur(function() { jQuery("#task_description").css('background-color', 'white');});
       jQuery("#show").live('click',function() { jQuery("#show").html("Hide other tasks").attr("id","hide");jQuery(".taskEntry").delay(1000).show();});
       jQuery("#hide").live('click',function() { jQuery("#hide").html("Show other tasks").attr("id","show");hideTasks();});
       jQuery("#show").hide();
-      jQuery(".taskEntry,.buttons").hover( function() { var s = jQuery(this).attr('id');jQuery("[butt="+s+"]").show(); }).mouseleave(function() { var s = jQuery(this).attr('id');jQuery("[butt="+s+"]").hide();}, 100);
+      //jQuery(".taskEntry").hover( function() { var s = jQuery(this).attr('id');jQuery("[butt="+s+"]").show(); }).mouseleave(function() { var s = jQuery(this).attr('id');jQuery("[butt="+s+"]").hide();}, 100);
       jQuery('#datepicker').datepicker({
         showOn: 'button',
         buttonText: 'Select Date',
@@ -186,8 +187,9 @@
               var dp = jQuery('#datepicker');
               filterByDate(jQuery.datepicker.formatDate('yymmdd', dp.datepicker('getDate')));
             }
+            jQuery('#task_description').val('');
           },
-          failure: function() { alert('failed'); return false; }
+          failure: function() { alert('Adding task failed'); return false; }
         });
         return false;
       });
@@ -257,14 +259,11 @@ function displayObject(obj) {
   <a href="javascript:previousDay()">&lsaquo;</a><input type="hidden" id="datepicker" /><a href="javascript:nextDay()">&rsaquo;</a>
 </div>
 
-
-<div style="display: none" id="progressbar"></div>
-
-<br />
+<div style="display: none; margin-right: 13px;" id="progressbar"></div>
 
 <div id="table_container">
 
-  <p id="noTasks" style="display: hidden"></p>
+  <p id="noTasks" style="display:none;"></p>
 
   <div id="taskListContainer"><%= render :partial => "task_list" %></div>
 
