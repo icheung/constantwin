@@ -209,7 +209,7 @@ function filterByDate(dateString) {
       }
     }
   }});
-  jQuery('#datepicker').datepicker('option', 'buttonText', m+'/'+d+'/'+y);
+  jQuery('#datepicker').datepicker('option', 'buttonText', (m<10 ? '0'+m : m)+'/'+(d<10 ? '0'+d : d)+'/'+y);
   jQuery('#associatedDateField').val(newDate.toString());
 }
 
