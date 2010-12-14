@@ -120,11 +120,17 @@ class TasksController < ApplicationController
     end
   end
 
+
+
   def time_left
     @task = @current_user.tasks.find(params[:id])
     if @task.started_at.nil? or @task.is_finished: render :text => '-'
     else
-      time_remaining = Time.at(Time.now - @task.started_at.to_time)
+      if @task.paused_at.nil?
+        time_remaining = Time.at(Time.now - @task.started_at.to_time)
+      else
+        time_remaining = Time.at(@task.paused_at.to_time - @task.started_at.to_time)
+      end
       remaining = @task.duration - time_remaining.min
       seconds = 59 - time_remaining.sec
       seconds = seconds >= 10 ? seconds.to_s : "0#{seconds.to_s}"
@@ -134,6 +140,7 @@ class TasksController < ApplicationController
       end
     end
   end
+
 
   def add_time
     @task = @current_user.tasks.find(params[:id])
@@ -196,6 +203,7 @@ class TasksController < ApplicationController
   def fail
     @task = @current_user.tasks.find(params[:id])
     @task.clear_duration
+    @task.paused_at = nil
   end
   
   def add_tasks   # Breaking tasks down.

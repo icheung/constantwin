@@ -13,7 +13,7 @@
     <!-- <span id="user-bar-action">(<%= link_to "Log out", logout_path, { :title => "Log out" } %>)</span> -->
     
   <% else %>
-    <span id="user-bar-greeting">Hi <%= link_to_current_user :content_method => :name %>!</span>
+    <span id="user-bar-greeting">Hi <%= @current_user.name %>!</span>
     <span id="user-bar-action">(<%= link_to "Log out", logout_path, { :title => "Log out" } %>)</span>
 
   <% end %>
