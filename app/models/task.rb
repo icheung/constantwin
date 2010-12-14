@@ -53,6 +53,8 @@ class Task < ActiveRecord::Base
     self.started_at = Time.now
     self.duration += self.added_time.abs
     self.added_time = 0
+    self.active_task = true
+    self.is_finished = false
     self.save
   end
   
