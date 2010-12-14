@@ -1,6 +1,6 @@
 html, body { margin: 0; padding: 0; background-color: #C0DEED; font: 9pt verdana, sans-serif, arial; color: #333; }
 /* layout divs */
-#wrapper { width: 745px; margin: -1px auto; background-color: #fff; -webkit-box-shadow: 0 1px 10px rgba(0,0,0,.3); -moz-box-shadow: 0 1px 10px rgba(0,0,0,.3); box-shadow: 0 1px 10px rgba(0,0,0,.3);}
+#wrapper { width: 750px; margin: -1px auto; background-color: #fff; -webkit-box-shadow: 0 1px 10px rgba(0,0,0,.3); -moz-box-shadow: 0 1px 10px rgba(0,0,0,.3); box-shadow: 0 1px 10px rgba(0,0,0,.3);}
 #header { padding: 1px 20px 1px 20px; background-color: #38526b; color: #eee;}
 #header a { color: #DEEBF7; }
 #masthead h1, #masthead a { font: bold 18pt verdana, 'sans-serif'; text-decoration: none; }
