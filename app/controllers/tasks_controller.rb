@@ -100,7 +100,7 @@ class TasksController < ApplicationController
   def destroy
     @task = @current_user.tasks.find(params[:id])
     if @task.active_task
-      current_user.update_attribute(:is_tasking, false)
+      set_user_tasking_mode_off
     end
     @task.destroy
     respond_to do |format|
