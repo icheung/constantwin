@@ -31,7 +31,7 @@ input#first, input#second, input#third, input#fourth, input#fifth { margin-botto
 #breakdownDel { background-color: #FF9C95; }
 #breakdownDel:hover { background-color: #FF6156 }
 /* calendarview */
-#taskListContainer { padding-top: 1em;  }
+#taskListContainer { padding-top: 1.5em;  }
 #addTaskDiv { display: inline-block; }
 input[type="submit"][value="+"],input[type="submit"][value="Add time"], input[value="Break it down!"], input#task_submit { font-size:25px; -webkit-border-radius:6px; -moz-border-radius:6px; border:solid; border-width:0px;background-color:#abdd58; padding: 7px; }
 input[type="submit"][value="+"]:hover ,input[type="submit"][value="Add time"]:hover, input[value="Break it down!"]:hover { background:#008000; }
@@ -45,7 +45,7 @@ input#task_submit { display: inline-block; }
 .taskEntry:nth-child(even) { background-color: #FFFFEE; }
 .task_description { min-width: 350px; }
 #addTaskDiv {display: inline-block; }
-#hide, #show { text-align:center; background:#ccddee; color:#555555; width:120px;padding:4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; }
+#hide, #show { text-align:center; background:#ccddee; color:#555555; width:120px;padding:8px; -moz-border-radius: 4px; -webkit-border-radius: 4px; }
 .duration { visibility:hidden; width:1px; position:absolute; }
 .buttons { margin:90px; }
 a.buttons { margin: 0; }
@@ -53,4 +53,4 @@ a.buttons { margin: 0; }
 #dateNav a { display: inline-block; margin: 0; text-decoration: none; color: #000; font-size: 30px; font-weight: bold; padding: 1px 5px 7px 5px; color:#666;}
 .ui-datepicker-trigger { display: inline-block; margin: 0; font-size: 25px; display: inline-block; padding: 7px; border: 0; color: #555; background-color: #cde; text-align: center; cursor: pointer; }
 #minutes { font-family:georgia; font-size:28px; }
-#noTasks { font-size: 13pt; }
+#noTasks { font-size: 13pt; background-color: pink; padding: 5px; }
