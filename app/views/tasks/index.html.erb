@@ -5,8 +5,7 @@
   var update_progress;
 
   var check_time; // actually should be named start_time
-	var stopSwitch = true;
-	
+	//var stopSwitch = true; // no need this b/c the partial _task_list sets this
 
   function startTimer(elementID) {
     ajax_updater = new Ajax.PeriodicalUpdater(
@@ -47,6 +46,7 @@
       var minutes = parsed_time[1];
       var seconds = parsed_time[2] / 60;
       var timeFloatLeft = parseFloat(seconds) + parseFloat(minutes);
+
       var totalTime = parseInt(jQuery("#taskEntry"+taskId+">.duration").html());
     jQuery("#progressbar").progressbar({value: ((parseFloat(totalTime) - timeFloatLeft)/parseFloat(totalTime)) * 100.00});
       jQuery("#progressbar").show();
@@ -68,8 +68,9 @@
     {
       var minutes = parsed_time[1];
       var seconds = parsed_time[2] / 60;
-      var timeFloatLeft = parseFloat(seconds) + parseFloat(minutes);
-      if (timeFloatLeft <= 0) fail(taskId);
+      var timeFloatLeft = parseFloat(seconds) + parseFloat(minutes);      
+      
+	if (timeFloatLeft <= 0) fail(taskId);
     }
     return timeLeftInt;
   }

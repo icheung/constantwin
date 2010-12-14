@@ -11,12 +11,17 @@
     <th>Time left</th>
     <th>Add time</th>
   </tr>-->
-
+  <% i = 0 %>
   <% @tasks.each do |task| %>
 
-    <% if not task.paused_at.nil? %>
+    <% if i == 0 %> 
+    <% if task.paused_at.nil? %>
     <script type="text/javascript">stopSwitch=true;</script>
+    <% else %>
+    <script type="text/javascript">stopSwitch=false;</script>
     <% end %>
+    <% end %>
+    <% i += 1%>
 
     <tr id="taskEntry<%= task.id %>" class="taskEntry">
 
@@ -68,7 +73,7 @@
         <% end %>
       </td>
 
-      <noscript><td><%= link_to 'Edit', edit_task_path(task) %></td></noscript>
+      <!-- <noscript><td><%= link_to 'Edit', edit_task_path(task) %></td></noscript> -->
 
       <td class="buttons" butt="taskEntry<%= task.id %>"><%= link_to image_tag("cross.png", :border=>0, :alt=>'Delete task', :title=>'Delete task'), task, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
