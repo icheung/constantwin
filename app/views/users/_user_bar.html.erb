@@ -1,7 +1,7 @@
 <div id="userStatus">
 <% if logged_in? -%>
 
-  <% if @current_user and @current_user.facebook_user? %>
+  <% if @current_user and @current_user.fb_user_id? %>
     <!-- FACEBOOK PROFILE PICTURE -->
     <fb:profile-pic uid="<%= current_user.fb_user_id%>" facebook-logo="true" size="thumb" ></fb:profile-pic>
   

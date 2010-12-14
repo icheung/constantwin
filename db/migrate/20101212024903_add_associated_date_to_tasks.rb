@@ -1,6 +1,6 @@
 class AddAssociatedDateToTasks < ActiveRecord::Migration
   def self.up
-    add_column :tasks, :associated_date, :time
+    add_column :tasks, :associated_date, :datetime
   end
 
   def self.down
