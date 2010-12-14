@@ -38,7 +38,7 @@
       <td>
         &nbsp;
         <% if task.started_at.nil?%>
-          <%= link_to 'Start', {:action => "start", :task_id => task.id} %>
+          <%= link_to 'Start', {:action => "start", :task_id => task.id}, :class => 'buttons' %>
         <% elsif task.is_finished? %>
 
         <% else %>
