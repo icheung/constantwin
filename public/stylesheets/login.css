@@ -18,7 +18,6 @@ border-radius: 5px;
 }
 
 div#content{float:left;background-color: #fff;border: 1px solid #ccc; width: 760px; height: 500px;margin: -1px auto;position: relative;left: -1px;}
-div#footer{float:left;}
 div#rightColumn{float:left;}
 div#login{}
 
