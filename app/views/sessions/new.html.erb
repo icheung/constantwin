@@ -6,8 +6,9 @@
 
 <%=image_tag("constant_win_banner_small.png")%>
 
-<h1> Win Constantly!</h1>
+
 <div id="loginPageDescription">
+	<h1> Win Constantly!</h1>
 	<p>
 		Never feel overwhelmed with <br />
 		your to-do lists again!
@@ -36,9 +37,9 @@
 			<p><%= label_tag 'password' %><br/>
 			<%= password_field_tag 'password', nil, :size=>40 %></p>
 			<p><%= submit_tag 'Log in' %></p>
-
-			<p>or login with Facebook connect</p>
+			
 			<%= fb_login_button('window.location = "/users/link_user_accounts";')%>
+			<p>or login with Facebook connect</p>
 		</fieldset>
         </div>
 
