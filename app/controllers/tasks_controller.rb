@@ -290,5 +290,10 @@ class TasksController < ApplicationController
     #end
     render :text => task_ids.join(' ')
   end
+
+  def task_list_partial
+    @tasks = get_sorted_list_of_tasks
+    render :partial => 'task_list'
+  end
     
 end
