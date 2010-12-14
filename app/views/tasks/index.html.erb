@@ -6,9 +6,6 @@
 
   var check_time; // actually should be named start_time
 	var stopSwitch = true;
-	var paused_time_stop;
-	var paused_time_go;
-	var paused_total_duration;
 	
 
   function startTimer(elementID) {
@@ -99,9 +96,6 @@
 		if (stopSwitch == true) {
 		
 		/*	STOPPING THE TIMER	*/	
-			
-		// get current time
-		paused_time_stop = document.getElementById('timer' + taskId).innerHTML;
 		
 		// talk to the model pause
 		new Ajax.Request('/tasks/pause/' + taskId, { method: 'put' });
@@ -119,9 +113,6 @@
 		else {
 			
 		/*	RE-STARTING THE TIMER	*/
-		
-		// get the current time
-		paused_time_go = document.getElementById('timer' + taskId).innerHTML;
 		
 		// talk to the model "resume"
 		new Ajax.Request('/tasks/resume/' + taskId, { method: 'put' });
