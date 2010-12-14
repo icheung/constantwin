@@ -76,7 +76,7 @@
       <span id="errorExplanation"><%= flash[:error] %></span>
       <br /><br />
     <% end %>
-    <p>Perhaps you could like to split your original task into subtasks?  For instance, <em>clean the bedroom</em> would break down into <em>make the bed</em> and <em>vacuum the floor</em>.</p>
+    <p>Perhaps you could like to split your original task into subtasks?  For instance, <em>clean the bedroom</em> would break down into <em>make the bed</em> and <em>vacuum the floor</em>.  Note that you may only have 2-5 subtasks.</p>
     <% form_tag :action => "add_tasks" do %>
       <%= hidden_field_tag "id", @task.id %>
       <%= hidden_field_tag(:associated_date, Time.now(), :name => "associated_date", :id => "associatedDateField") %>
