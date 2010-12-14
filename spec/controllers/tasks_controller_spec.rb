@@ -15,7 +15,9 @@ describe TasksController do
       :description => "Sample Description",
       :user_id => 1,
       :associated_date => 2.days.ago,
-      :duration => 5}
+      :duration => 5,
+      :paused_at => nil
+    }
     @task = mock_task
 
     Task.stub!(:find).and_return(@task)

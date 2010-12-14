@@ -240,7 +240,7 @@ class TasksController < ApplicationController
   def finish
     @task = @current_user.tasks.find(params[:id])
     @task.update_attribute(:is_finished, true)
-
+    @task.update_attribute(:paused_at, nil)
     set_user_tasking_mode_off
     
     render :text => 'Task updated'
