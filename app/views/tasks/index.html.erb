@@ -188,6 +188,7 @@
               filterByDate(jQuery.datepicker.formatDate('yymmdd', dp.datepicker('getDate')));
             }
             jQuery('#task_description').val('');
+            jQuery("#hide").html("Show other tasks").attr("id","show");
           },
           failure: function() { alert('Adding task failed'); return false; }
         });

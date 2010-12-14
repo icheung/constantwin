@@ -40,17 +40,17 @@ input#task_submit { display: inline-block; }
 #tasksTable { border-collapse: collapse; width: 700px; border-top: 1px solid #ccc; margin-top: 0; }
 .taskEntry { font-family:verdana; font-size:12px; font-size: 13pt; border-bottom: 1px solid #ccc; display: table-row; }
 .taskEntry .buttons img, .taskEntry a.buttons { visibility: hidden; margin: 0 5px; }
-.taskEntry:hover .buttons img, .taskEntry a.buttons { visibility: visible; }
+.taskEntry:hover .buttons img, .taskEntry:hover a.buttons { visibility: visible; }
 .taskEntry td { padding: 8px 0; }
 .taskEntry:nth-child(even) { background-color: #FFFFEE; }
 .task_description { min-width: 350px; }
 #addTaskDiv {display: inline-block; }
-#hide, #show { text-align:center; background:#ccddee; color:#555555; width:120px;padding:8px; -moz-border-radius: 4px; -webkit-border-radius: 4px; }
+#hide, #show { text-align:center; background:#ccddee; color:#555555; width:120px;padding:8px; -moz-border-radius: 4px; -webkit-border-radius: 4px; cursor: pointer; font-weight: bold;}
 .duration { visibility:hidden; width:1px; position:absolute; }
 .buttons { margin:90px; }
-a.buttons { margin: 0; }
+a.buttons { margin: 0; visibility: hidden; text-decoration: none; }
 #dateNav { display: inline-block; -moz-border-radius:6px; -webkit-border-radius:6px; background-color: #cde; font-family: georgia; padding: 0; }
 #dateNav a { display: inline-block; margin: 0; text-decoration: none; color: #000; font-size: 30px; font-weight: bold; padding: 1px 5px 7px 5px; color:#666;}
 .ui-datepicker-trigger { display: inline-block; margin: 0; font-size: 25px; display: inline-block; padding: 7px; border: 0; color: #555; background-color: #cde; text-align: center; cursor: pointer; }
 #minutes { font-family:georgia; font-size:28px; }
-#noTasks { font-size: 13pt; background-color: pink; padding: 5px; }
+#noTasks { font-size: 13pt; background-color: #eee; padding: 5px; margin-right: 10px;}

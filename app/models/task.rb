@@ -30,6 +30,7 @@ class Task < ActiveRecord::Base
     total_paused_time = Time.at(resumed_time.to_time - self.paused_at.to_time)
     #total_paused_time_mins = total_paused_time.min
     self.started_at += (total_paused_time.min * 60 + total_paused_time.sec)
+    self.paused_at = nil
     self.save
     
     logger.debug "***** IN THE TASK MODEL ***** total_paused_time: #{total_paused_time}"
