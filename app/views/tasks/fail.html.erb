@@ -86,8 +86,8 @@
       <%= label_tag 'second', 'Subtask 2' %><br />
       <%= text_field_tag "second", nil, :placeholder => "subtask2" %>
       <br />
-      <span href="#" id="breakdownAdd" class="breakdownOptions">+</span>
-      <span href="#" id="breakdownDel" class="breakdownOptions">-</span>
+      <span id="breakdownAdd" class="breakdownOptions">+</span>
+      <span id="breakdownDel" class="breakdownOptions">-</span>
       <%= submit_tag "Break it down!" %>
       <br /> <br />
     <% end %>
@@ -97,7 +97,8 @@
   Or you could <%= link_to 'add more time.', add_time_path(@task) %>
 </p>
 <p>
-But wait! You say you finished the task? Check that box! <input type="checkbox" onclick="checkOff(<%= @task.id %>)">
+  <input type="checkbox" onclick="checkOff(<%= @task.id %>)" />
+  <em>Check this box if you actually finished the task on time!</em>
 </p>
 
 <%= link_to 'Back', tasks_path %>
